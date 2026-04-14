@@ -52,7 +52,7 @@ export const OVERVIEW = {
   officeHoursNote: "Office hours are [TBA].",
 };
 
-/** MTThF lecture days, May 26–July 31, 2026 (inclusive). */
+/** MTThF lecture days, May 26–July 17, 2026 (inclusive). */
 export const LECTURE_DATES_ISO = [
   "2026-05-26",
   "2026-05-28",
@@ -85,19 +85,14 @@ export const LECTURE_DATES_ISO = [
   "2026-07-14",
   "2026-07-16",
   "2026-07-17",
-  "2026-07-20",
-  "2026-07-21",
-  "2026-07-23",
-  "2026-07-24",
-  "2026-07-27",
-  "2026-07-28",
-  "2026-07-30",
-  "2026-07-31",
 ];
 
 /** Shared lecture topic by date (both sections unless overridden in LECTURE_LINKS). */
 export const LECTURE_TOPICS = {
   // e.g. "2026-05-26": "Introduction & logistics",
+  "2026-06-22": "Midterm exam",
+  "2026-06-19": "No class (Juneteenth)",
+  "2026-07-03": "No class (Independence Day)",
 };
 
 /**
@@ -107,7 +102,7 @@ export const LECTURE_TOPICS = {
 export const LECTURE_LINKS = { zach: {}, amanda: {} };
 
 export const LECTURES = {
-  panelSub: "M · T · Th · F · May 26 – July 31, 2026 · slides & recordings by section",
+  panelSub: "M · T · Th · F · May 26 – July 17, 2026 · slides & recordings by section",
   /** Section 300 first */
   tracks: [
     { id: "zach", label: "Section 300 — Zach" },
@@ -115,19 +110,17 @@ export const LECTURES = {
   ],
 };
 
-/** Part B due dates (Fridays 5:00 pm MT, unless noted). */
+/** Part B due dates (Fridays 11:59PM MT, unless noted). */
 export const ASSIGNMENT_SCHEDULE = [
   { name: "Homework 0", dueIso: "2026-05-29" },
   { name: "Homework 1", dueIso: "2026-06-05" },
   { name: "Homework 2", dueIso: "2026-06-12" },
   { name: "Homework 3", dueIso: "2026-06-19" },
   { name: "Homework 4", dueIso: "2026-06-26" },
-  { name: "Homework 5", dueIso: "2026-07-03" },
-  { name: "Homework 6", dueIso: "2026-07-10" },
-  { name: "Homework 7", dueIso: "2026-07-17" },
-  { name: "Homework 8", dueIso: "2026-07-24" },
-  { name: "Midterm exam", dueIso: null, note: "In class; date announced on the course calendar." },
-  { name: "Final project (Part B)", dueIso: "2026-07-31", note: "Includes interview sign-up after submission." },
+  { name: "Midterm exam", dueIso: "2026-06-22", note: "In class during the regular class period." },
+  { name: "Final project checkpoint 1", dueIso: "2026-07-03" },
+  { name: "Final project checkpoint 2", dueIso: "2026-07-10" },
+  { name: "Final project", dueIso: "2026-07-17", note: "Includes interview sign-up after submission." },
 ];
 
 export const ASSIGNMENTS = {
@@ -136,7 +129,7 @@ export const ASSIGNMENTS = {
   deadlinesIntroLine: [
     "Each homework has two parts: Part A, which you complete in recitation, and Part B, which you submit through Gradescope. ",
     "For most assignments, ",
-    { strong: "Part B is due on Friday at 5:00 pm Mountain Time" },
+    { strong: "Part B is due on Friday at 11:59PM Mountain Time" },
     ". If a different due date applies, or if the date is still to be announced, that will be shown in the assignment schedule table below so you can plan ahead.",
   ],
   /**
@@ -159,7 +152,7 @@ export const ASSIGNMENTS = {
       parts: [
         "Please submit Part B through Gradescope. ",
         "Unless the assignment schedule below lists another due date or marks the assignment as TBA, the deadline is ",
-        { strong: "Friday at 5:00 pm Mountain Time" },
+        { strong: "Friday at 11:59PM Mountain Time" },
         " for that week. ",
         "Most exercises are graded with an autograder. Some assignments may also include a short follow-up with course staff.",
       ],
@@ -168,8 +161,8 @@ export const ASSIGNMENTS = {
       id: "midterm-changes",
       title: "Midterm and other important dates",
       parts: [
-        "The midterm exam and the final project Part B due date appear in the assignment schedule when those dates are set. ",
-        "The midterm is held during the normal class period unless we announce otherwise. ",
+        "The midterm exam and the final project due date appear in the assignment schedule when those dates are set. ",
+        "The midterm is held during the normal class period unless we announce otherwise. Final project checkpoints are also listed in the assignment schedule. ",
         "If we need to change any deadline, we will announce it clearly in lecture and update this page so that all sections receive the same information.",
       ],
     },
@@ -186,17 +179,19 @@ export const GRADE_BREAKDOWN = [
     component: "Homeworks",
     weight: "45%",
     notes:
-      "Part A in recitation. Part B on Gradescope; autograder + possible grading interviews.",
+      "Part A is completed in recitation. Part B is submitted on Gradescope.",
   },
   {
     component: "Project + exams",
     weight: "50%",
-    notes: "Midterm; final project + interview; checkpoints toward the project.",
+    notes:
+      "This category includes your midterm exam and final project. Project checkpoints also count toward this category.",
   },
   {
     component: "Attendance",
     weight: "5%",
-    notes: "Lecture attendance required; in-class quizzes can only help.",
+    notes:
+      "Attendance is required and makes up 5% of your final grade. Occasional in-class quizzes can only improve your overall course grade.",
   },
 ];
 
@@ -229,9 +224,11 @@ export const EXTRA_CREDIT_NOTE = "Extra credit may be offered during the term.";
 export const TOPICS = {
   panelSub: "Shared curriculum",
   workloadParts: [
-    "Four credits ≈ four hours in class weekly plus roughly ",
-    { strong: "twelve hours" },
-    " for readings, videos, homework, and interviews. Weekly timing differs by section.",
+    "This 4-credit course meets for about ",
+    { strong: "six hours" },
+    " each week in lecture and recitation, plus roughly ",
+    { strong: "ten hours" },
+    " for readings, homework, project work, and interview preparation. Weekly timing differs by section.",
   ],
   syllabusTopics: [
     "Computer architecture and environment",

@@ -26,12 +26,15 @@
   isolation: isolate;
   display: flex;
   flex-direction: column;
+  height: 100dvh;
+  height: 100vh;
   min-height: 100dvh;
   min-height: 100vh;
   width: 100%;
   margin: 0;
   padding: clamp(0.75rem, 2vw, 1.25rem);
   box-sizing: border-box;
+  overflow: hidden;
   background-color: #5a9fd4;
   background-image: url("/csci1300-theme/bg.webp");
   background-size: cover;
@@ -129,6 +132,7 @@
   position: relative;
   z-index: 1;
   flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -137,6 +141,7 @@
   max-width: 1100px;
   margin: 0 auto;
   min-height: 0;
+  overflow: hidden;
 }
 
 .csci1300-course .menu__tabs__container {
@@ -187,6 +192,7 @@
   max-height: calc(100dvh - 2.5rem);
   max-height: calc(100vh - 2.5rem);
   overflow: auto;
+  overscroll-behavior: contain;
   text-align: left;
   padding: 1em;
   border-style: solid;
@@ -521,13 +527,33 @@
 }
 
 .csci1300-course .c1300-staff-schedule {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 0 0.55rem;
+  padding: 0.2rem 0.1rem;
+  background: transparent;
+  border-radius: 8px;
+  border-left: none;
+}
+
+.csci1300-course .c1300-staff-schedule-item {
+  margin: 0;
   font-size: 0.82em;
   line-height: 1.4;
-  margin: 0 0 0.5rem;
-  padding: 0.45rem 0.55rem;
-  background: var(--c1300-surface-warm-soft);
-  border-radius: 8px;
-  border-left: 3px solid #c17a2d;
+  padding-left: 0.9rem;
+  position: relative;
+}
+
+.csci1300-course .c1300-staff-schedule-item::before {
+  content: "•";
+  position: absolute;
+  left: 0.2rem;
+  top: 0;
+  color: rgba(74, 48, 32, 0.8);
+}
+
+.csci1300-course .c1300-staff-schedule-text {
+  display: inline;
 }
 
 .csci1300-course .c1300-staff-section-heading {
@@ -1388,6 +1414,78 @@
   color: #4a3530;
 }
 
+.csci1300-course .c1300-classmates__mode-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
+  margin: 0 0 0.55rem;
+}
+
+.csci1300-course .c1300-classmates__playback-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.45rem 0.65rem;
+  margin: 0 0 0.45rem;
+}
+
+.csci1300-course .c1300-classmates__playback-controls--compact {
+  margin: 0.35rem 0 0.2rem;
+}
+
+.csci1300-course .c1300-classmates__playback-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: SVBoldHu, "Stardew Valley", serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #4a3020;
+}
+
+.csci1300-course .c1300-classmates__playback-label select {
+  min-width: 6.4rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 7px;
+  border: 2px solid #5c3a1e;
+  background: var(--c1300-surface-warm-soft);
+  color: #1a1210;
+}
+
+.csci1300-course .c1300-classmates__playback-controls--compact .c1300-classmates__playback-label select {
+  min-width: 4.4rem;
+}
+
+.csci1300-course .c1300-classmates__playback-btn {
+  white-space: nowrap;
+}
+
+.csci1300-course .c1300-classmates__mode-btn {
+  font-family: SVBoldHu, "Stardew Valley", serif;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 2px solid rgba(92, 58, 30, 0.45);
+  background: var(--c1300-surface-warm-soft);
+  color: #3d2820;
+  cursor: url("/csci1300-theme/cursor.webp"), pointer;
+}
+
+.csci1300-course .c1300-classmates__mode-btn:hover {
+  border-color: #ad520b;
+}
+
+.csci1300-course .c1300-classmates__mode-btn.is-selected {
+  border-color: #ad520b;
+  background: var(--c1300-surface-warm-hover);
+  box-shadow: 0 0 0 2px rgba(173, 81, 11, 0.22);
+}
+
 .csci1300-course .c1300-classmates__mono {
   font-family: ui-monospace, monospace;
 }
@@ -1654,15 +1752,11 @@
 /* Class board: framed “bulletin” panel + posted cards as portrait tiles */
 .csci1300-course .c1300-classmates__board {
   margin-top: 2.25rem;
-  padding: 1.35rem 1.25rem 1.5rem;
-  border-radius: 16px;
-  border: 3px solid #7a5c2e;
-  background: var(--c1300-surface-warm);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 235, 210, 0.45),
-    inset 0 -2px 0 rgba(122, 92, 46, 0.12),
-    0 3px 0 rgba(90, 62, 28, 0.18),
-    0 8px 24px rgba(62, 42, 24, 0.08);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .csci1300-course .c1300-classmates__board-head {
@@ -1736,7 +1830,7 @@
   margin-top: 1.75rem;
   padding-top: 1.25rem;
   border-top: 2px dashed rgba(122, 92, 46, 0.28);
-  max-width: 36rem;
+  width: 100%;
 }
 
 .csci1300-course .c1300-classmates__board-delete-title {
@@ -1796,13 +1890,13 @@
   gap: 0.9rem;
   padding: 1.15rem 1.2rem 1.3rem;
   text-align: left;
-  background: var(--c1300-surface-warm);
-  border: 3px solid #a67c2c;
+  background: rgba(255, 220, 178, 0.5);
+  border: 2px solid rgba(166, 124, 44, 0.58);
   border-radius: 14px;
   box-shadow:
-    0 1px 0 rgba(255, 235, 210, 0.55) inset,
-    0 2px 0 rgba(166, 124, 44, 0.35),
-    0 6px 16px rgba(58, 38, 22, 0.1);
+    0 1px 0 rgba(255, 235, 210, 0.35) inset,
+    0 1px 0 rgba(166, 124, 44, 0.24),
+    0 5px 14px rgba(58, 38, 22, 0.08);
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
@@ -1811,9 +1905,9 @@
 .csci1300-course .c1300-classmates__card--posted:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 1px 0 rgba(255, 235, 210, 0.55) inset,
-    0 2px 0 rgba(166, 124, 44, 0.45),
-    0 10px 22px rgba(58, 38, 22, 0.14);
+    0 1px 0 rgba(255, 235, 210, 0.42) inset,
+    0 2px 0 rgba(166, 124, 44, 0.32),
+    0 9px 20px rgba(58, 38, 22, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {

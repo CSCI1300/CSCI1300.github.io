@@ -60,6 +60,9 @@ const SAT_MIN = 0;
 const SAT_MAX = 200;
 const BRIGHT_MIN = 60;
 const BRIGHT_MAX = 140;
+const LOOP_FRAME_COUNT = 4;
+const DEFAULT_PLAY_LOOPS = 3;
+const PLAY_STEP_MS = 240;
 
 const OUTFIT_COLOR_DEFAULTS = {
   pantsHue: 0,
@@ -93,6 +96,15 @@ const DEFAULT_PROFILE = {
   frameCol: 0,
   frameRow: 0,
 };
+
+function computeAnimatedCol(baseCol, tick, animSet, sheetCols) {
+  const cols = Math.max(1, Number(sheetCols) || 1);
+  const cycleCols = animSet === "walk" ? Math.min(4, cols) : Math.min(2, cols);
+  const count = Math.max(1, cycleCols);
+  const base = ((Number(baseCol) || 0) % count + count) % count;
+  const step = Math.max(0, Number(tick) || 0);
+  return (base + (step % count)) % count;
+}
 
 function clampHueDeg(v) {
   const n = Number(v);
@@ -269,6 +281,9 @@ function ChoiceTile({ selected, onClick, label, children, compact }) {
 
 function PostedClassmateCard({ profile: raw }) {
   const p = mergeStoredProfile(raw);
+  const [cardAnimTick, setCardAnimTick] = useState(0);
+  const [cardAnimStepsRemaining, setCardAnimStepsRemaining] = useState(0);
+  const isCardAnimating = cardAnimStepsRemaining > 0;
   const backdropStyle = useMemo(
     () => ({ background: backdropGradientForId(p.backdropId) }),
     [p.backdropId],
@@ -297,6 +312,24 @@ function PostedClassmateCard({ profile: raw }) {
       p.hairBright,
     ],
   );
+  const animatedCol = useMemo(() => {
+    const cols = Math.max(1, composition.gridCols || Math.floor(composition.sheetW / CELL) || 1);
+    return computeAnimatedCol(p.frameCol, cardAnimTick, p.animSet, cols);
+  }, [composition.gridCols, composition.sheetW, p.frameCol, p.animSet, cardAnimTick]);
+
+  useEffect(() => {
+    if (!isCardAnimating) return undefined;
+    const t = window.setTimeout(() => {
+      setCardAnimTick((n) => n + 1);
+      setCardAnimStepsRemaining((n) => Math.max(0, n - 1));
+    }, PLAY_STEP_MS);
+    return () => window.clearTimeout(t);
+  }, [isCardAnimating, cardAnimStepsRemaining]);
+
+  const playCardMotionLoop = useCallback(() => {
+    setCardAnimTick(0);
+    setCardAnimStepsRemaining(DEFAULT_PLAY_LOOPS * LOOP_FRAME_COUNT);
+  }, []);
 
   return (
     <article className="c1300-classmates__card c1300-classmates__card--posted">
@@ -312,7 +345,7 @@ function PostedClassmateCard({ profile: raw }) {
             layers={displayLayers}
             sheetW={composition.sheetW}
             sheetH={composition.sheetH}
-            col={p.frameCol}
+            col={animatedCol}
             row={p.frameRow}
             scale={BOARD_SPRITE_SCALE}
           />
@@ -327,6 +360,16 @@ function PostedClassmateCard({ profile: raw }) {
           </p>
         ) : null}
         {p.section ? <p className="c1300-classmates__card-meta">Section {p.section}</p> : null}
+        <div className="c1300-classmates__playback-controls c1300-classmates__playback-controls--compact">
+          <button
+            type="button"
+            className="c1300-classmates__playback-btn c1300-classmates__btn-secondary"
+            onClick={playCardMotionLoop}
+            disabled={isCardAnimating}
+          >
+            {isCardAnimating ? "Playing..." : "Play"}
+          </button>
+        </div>
         {p.bio.trim() ? <p className="c1300-classmates__card-bio">{p.bio.trim()}</p> : null}
         {p.studyGroup.trim() ? (
           <div className="c1300-classmates__card-study">
@@ -343,6 +386,9 @@ function PostedClassmateCard({ profile: raw }) {
 export default function MeetTheClassPanel() {
   const [profile, setProfile] = useState(DEFAULT_PROFILE);
   const [builderStep, setBuilderStep] = useState(0);
+  const [builderAnimTick, setBuilderAnimTick] = useState(0);
+  const [previewAnimTick, setPreviewAnimTick] = useState(0);
+  const [previewAnimStepsRemaining, setPreviewAnimStepsRemaining] = useState(0);
   const [hydrated, setHydrated] = useState(false);
   const [copyMsg, setCopyMsg] = useState("");
   const [boardRows, setBoardRows] = useState([]);
@@ -421,6 +467,14 @@ export default function MeetTheClassPanel() {
       profile.hairBright,
     ],
   );
+  const animatedBuilderCol = useMemo(() => {
+    const cols = Math.max(1, composition.gridCols || Math.floor(composition.sheetW / CELL) || 1);
+    return computeAnimatedCol(profile.frameCol, builderAnimTick, profile.animSet, cols);
+  }, [composition.gridCols, composition.sheetW, profile.frameCol, profile.animSet, builderAnimTick]);
+  const animatedCardPreviewCol = useMemo(() => {
+    const cols = Math.max(1, composition.gridCols || Math.floor(composition.sheetW / CELL) || 1);
+    return computeAnimatedCol(profile.frameCol, previewAnimTick, profile.animSet, cols);
+  }, [composition.gridCols, composition.sheetW, profile.frameCol, profile.animSet, previewAnimTick]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -611,17 +665,19 @@ export default function MeetTheClassPanel() {
     return out;
   }, [gridCols, gridRows]);
 
-  const thumbStack = (overrides) => {
+  const thumbStack = (overrides, frameOverride = null) => {
     const pick = { ...portraitPick, ...overrides };
     const comp = buildBaseComposition(pick);
     const layers = layersWithFilters(comp.layers, pick);
+    const col = frameOverride?.col ?? profile.frameCol;
+    const row = frameOverride?.row ?? profile.frameRow;
     return (
       <BaseCharacterStack
         layers={layers}
         sheetW={comp.sheetW}
         sheetH={comp.sheetH}
-        col={profile.frameCol}
-        row={profile.frameRow}
+        col={col}
+        row={row}
         scale={THUMB_SCALE}
       />
     );
@@ -629,25 +685,62 @@ export default function MeetTheClassPanel() {
 
   const builderStepMax = BUILDER_STEPS.length - 1;
   const builderStepId = BUILDER_STEPS[builderStep].id;
+  const isPreviewAnimating = previewAnimStepsRemaining > 0;
+
+  useEffect(() => {
+    const t = window.setInterval(() => {
+      setBuilderAnimTick((n) => n + 1);
+    }, PLAY_STEP_MS);
+    return () => window.clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    if (!isPreviewAnimating) return undefined;
+    const t = window.setTimeout(() => {
+      setPreviewAnimTick((n) => n + 1);
+      setPreviewAnimStepsRemaining((n) => Math.max(0, n - 1));
+    }, PLAY_STEP_MS);
+    return () => window.clearTimeout(t);
+  }, [isPreviewAnimating, previewAnimStepsRemaining]);
+
+  const playPreviewMotionLoop = useCallback(() => {
+    setPreviewAnimTick(0);
+    setPreviewAnimStepsRemaining(DEFAULT_PLAY_LOOPS * LOOP_FRAME_COUNT);
+  }, []);
 
   function renderWizardStep() {
     switch (builderStepId) {
       case "sheet":
         return (
-          <div className="c1300-classmates__choice-row">
-            {ANIM_SET_OPTIONS.map((opt) => (
-              <ChoiceTile
-                key={opt.id}
-                selected={profile.animSet === opt.id}
-                onClick={() => setProfile((p) => ({ ...p, animSet: opt.id }))}
-                label={opt.label}
-              >
-                <div className="c1300-classmates__thumb-clip c1300-classmates__thumb-clip--portrait" style={backdropStyle}>
-                  {thumbStack({ animSet: opt.id })}
-                </div>
-              </ChoiceTile>
-            ))}
-          </div>
+          <>
+            <div className="c1300-classmates__choice-row">
+              {ANIM_SET_OPTIONS.map((opt) => (
+                <ChoiceTile
+                  key={opt.id}
+                  selected={profile.animSet === opt.id}
+                  onClick={() =>
+                    setProfile((p) => ({
+                      ...p,
+                      animSet: opt.id,
+                      frameCol: 0,
+                      frameRow: 0,
+                    }))
+                  }
+                  label={opt.label}
+                >
+                  <div className="c1300-classmates__thumb-clip c1300-classmates__thumb-clip--portrait" style={backdropStyle}>
+                    {thumbStack(
+                      { animSet: opt.id },
+                      {
+                        col: computeAnimatedCol(0, builderAnimTick, opt.id, opt.id === "walk" ? 4 : 2),
+                        row: 0,
+                      },
+                    )}
+                  </div>
+                </ChoiceTile>
+              ))}
+            </div>
+          </>
         );
       case "skin":
         return (
@@ -886,8 +979,28 @@ export default function MeetTheClassPanel() {
       case "pose":
         return (
           <>
+            <div className="c1300-classmates__mode-toggle" role="group" aria-label="Motion mode">
+              {ANIM_SET_OPTIONS.map((opt) => (
+                <button
+                  key={opt.id}
+                  type="button"
+                  className={`c1300-classmates__mode-btn${profile.animSet === opt.id ? " is-selected" : ""}`}
+                  onClick={() =>
+                    setProfile((p) => ({
+                      ...p,
+                      animSet: opt.id,
+                      frameCol: 0,
+                      frameRow: 0,
+                    }))
+                  }
+                  aria-pressed={profile.animSet === opt.id}
+                >
+                  {opt.id === "walk" ? "Walk motion" : "Idle motion"}
+                </button>
+              ))}
+            </div>
             <p className="c1300-classmates__wizard-hint">
-              {profile.animSet === "walk" ? "Walk" : "Idle"} · pose{" "}
+              Current mode: <strong>{profile.animSet === "walk" ? "Walk" : "Idle"}</strong> · pose{" "}
               <span className="c1300-classmates__mono">{profile.frameCol},{profile.frameRow}</span>
             </p>
             <div className="c1300-classmates__pose-strip" role="group" aria-label="Pose">
@@ -971,7 +1084,7 @@ export default function MeetTheClassPanel() {
                       layers={displayLayers}
                       sheetW={composition.sheetW}
                       sheetH={composition.sheetH}
-                      col={profile.frameCol}
+                      col={animatedCardPreviewCol}
                       row={profile.frameRow}
                       scale={HERO_CARD_SPRITE_SCALE}
                     />
@@ -992,6 +1105,16 @@ export default function MeetTheClassPanel() {
                   {profile.section ? (
                     <p className="c1300-classmates__card-meta">Section {profile.section}</p>
                   ) : null}
+                  <div className="c1300-classmates__playback-controls c1300-classmates__playback-controls--compact">
+                    <button
+                      type="button"
+                      className="c1300-classmates__playback-btn c1300-classmates__btn-secondary"
+                      onClick={playPreviewMotionLoop}
+                      disabled={isPreviewAnimating}
+                    >
+                      {isPreviewAnimating ? "Playing..." : "Play"}
+                    </button>
+                  </div>
                   {profile.bio.trim() ? (
                     <p className="c1300-classmates__card-bio">{profile.bio.trim()}</p>
                   ) : (
@@ -1031,7 +1154,7 @@ export default function MeetTheClassPanel() {
                   layers={displayLayers}
                   sheetW={composition.sheetW}
                   sheetH={composition.sheetH}
-                  col={profile.frameCol}
+                  col={animatedBuilderCol}
                   row={profile.frameRow}
                   scale={WIZARD_PREVIEW_SCALE}
                 />
