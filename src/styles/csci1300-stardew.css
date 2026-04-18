@@ -136,7 +136,7 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  gap: 0.35rem;
+  gap: 0;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
@@ -152,13 +152,14 @@
   gap: 6px;
   flex-shrink: 0;
   width: 78px;
-  padding: 0 2px 0 0;
+  padding: 0;
 }
 
 .csci1300-course .menu__tab {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   background-color: var(--c1300-container_color);
   border: none;
   border-radius: 12px;
@@ -182,6 +183,9 @@
 .csci1300-course .menu__tab .menu__img {
   height: 36px;
   width: auto;
+  opacity: 1;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 
 /* Main panel — Stardew border frame (tabs dock to this card; matches theme .main) */
@@ -2039,7 +2043,7 @@
     align-items: flex-end;
     justify-content: flex-start;
     width: 100%;
-    padding: 0 0 6px 0;
+    padding: 0;
   }
 
   .csci1300-course .menu__tab {
@@ -2055,6 +2059,7 @@
 
   .csci1300-course .menu__tab .menu__img {
     height: 28px;
+    opacity: 1;
   }
 
   .csci1300-course .main {
