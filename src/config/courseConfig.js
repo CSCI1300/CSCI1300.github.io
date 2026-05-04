@@ -89,8 +89,7 @@ export const LECTURE_DATES_ISO = [
 
 /** Shared lecture topic by date (both sections unless overridden in LECTURE_LINKS). */
 export const LECTURE_TOPICS = {
-  // e.g. "2026-05-26": "Introduction & logistics",
-  "2026-06-22": "Midterm exam",
+  // Keep regular lecture topics blank; only show exceptions.
   "2026-06-19": "No class (Juneteenth)",
   "2026-07-03": "No class (Independence Day)",
 };
@@ -110,16 +109,24 @@ export const LECTURES = {
   ],
 };
 
-/** Part B due dates (Fridays 11:59PM MT, unless noted). */
 export const ASSIGNMENT_SCHEDULE = [
-  { name: "Homework 0", dueIso: "2026-05-29" },
-  { name: "Homework 1", dueIso: "2026-06-05" },
-  { name: "Homework 2", dueIso: "2026-06-12" },
-  { name: "Homework 3", dueIso: "2026-06-19" },
-  { name: "Homework 4", dueIso: "2026-06-26" },
-  { name: "Midterm exam", dueIso: "2026-06-22", note: "In class during the regular class period." },
-  { name: "Final project checkpoint 1", dueIso: "2026-07-03" },
-  { name: "Final project checkpoint 2", dueIso: "2026-07-10" },
+  { name: "Homework 1 (Part A)", dueIso: "2026-05-27", note: "Due in Wednesday recitation." },
+  { name: "Homework 1 (Part B)", dueIso: "2026-06-02", note: "Due Tuesday at 11:59PM MT on Gradescope." },
+  { name: "Homework 2 (Part A)", dueIso: "2026-06-03", note: "Due in Wednesday recitation." },
+  { name: "Homework 2 (Part B)", dueIso: "2026-06-09", note: "Due Tuesday at 11:59PM MT on Gradescope." },
+  { name: "Homework 3 (Part A)", dueIso: "2026-06-10", note: "Due in Wednesday recitation." },
+  { name: "Homework 3 (Part B)", dueIso: "2026-06-16", note: "Due Tuesday at 11:59PM MT on Gradescope." },
+  { name: "Homework 4 (Part A)", dueIso: "2026-06-17", note: "Due in Wednesday recitation." },
+  { name: "Homework 4 (Part B)", dueIso: "2026-06-23", note: "Due Tuesday at 11:59PM MT on Gradescope." },
+  { name: "Homework 5 (Part A)", dueIso: "2026-06-24", note: "Due in Wednesday recitation." },
+  { name: "Homework 5 (Part B)", dueIso: "2026-06-30", note: "Due Tuesday at 11:59PM MT on Gradescope." },
+  { name: "Final project checkpoint 1", dueIso: "2026-07-01" },
+  { name: "Homework 6 (Part A)", dueIso: "2026-07-01", note: "Due in Wednesday recitation." },
+  { name: "Homework 6 (Part B)", dueIso: "2026-07-07", note: "Due Tuesday at 11:59PM MT on Gradescope." },
+  { name: "Final project checkpoint 2", dueIso: "2026-07-08" },
+  { name: "Homework 7 (Part A)", dueIso: "2026-07-08", note: "Due in Wednesday recitation." },
+  { name: "Final project checkpoint 3", dueIso: "2026-07-12" },
+  { name: "Homework 7 (Part B)", dueIso: "2026-07-14", note: "Due Tuesday at 11:59PM MT on Gradescope." },
   { name: "Final project", dueIso: "2026-07-17", note: "Includes interview sign-up after submission." },
 ];
 
@@ -129,8 +136,8 @@ export const ASSIGNMENTS = {
   deadlinesIntroLine: [
     "Each homework has two parts: Part A, which you complete in recitation, and Part B, which you submit through Gradescope. ",
     "For most assignments, ",
-    { strong: "Part B is due on Friday at 11:59PM Mountain Time" },
-    ". If a different due date applies, or if the date is still to be announced, that will be shown in the assignment schedule table below so you can plan ahead.",
+    { strong: "Part B is due on Tuesday at 11:59PM Mountain Time" },
+    ".",
   ],
   /**
    * Scannable items for “Deadlines & structure” (title + body with optional { strong }).
@@ -152,17 +159,17 @@ export const ASSIGNMENTS = {
       parts: [
         "Please submit Part B through Gradescope. ",
         "Unless the assignment schedule below lists another due date or marks the assignment as TBA, the deadline is ",
-        { strong: "Friday at 11:59PM Mountain Time" },
+        { strong: "Tuesday at 11:59PM Mountain Time" },
         " for that week. ",
         "Most exercises are graded with an autograder. Some assignments may also include a short follow-up with course staff.",
       ],
     },
     {
-      id: "midterm-changes",
-      title: "Midterm and other important dates",
+      id: "project-dates",
+      title: "Project and other important dates",
       parts: [
-        "The midterm exam and the final project due date appear in the assignment schedule when those dates are set. ",
-        "The midterm is held during the normal class period unless we announce otherwise. Final project checkpoints are also listed in the assignment schedule. ",
+        "Final project checkpoints and the final project due date appear in the assignment schedule when those dates are set. ",
+        "Project checkpoints are listed in the assignment schedule so you can track progress through the term. ",
         "If we need to change any deadline, we will announce it clearly in lecture and update this page so that all sections receive the same information.",
       ],
     },
@@ -185,7 +192,7 @@ export const GRADE_BREAKDOWN = [
     component: "Project + exams",
     weight: "50%",
     notes:
-      "This category includes your midterm exam and final project. Project checkpoints also count toward this category.",
+      "This category includes your final project, project checkpoints, and any major assessments announced for the term.",
   },
   {
     component: "Attendance",
@@ -196,21 +203,21 @@ export const GRADE_BREAKDOWN = [
 ];
 
 export const LETTER_CUTOFFS = [
-  { letter: "A", range: "93-100" },
-  { letter: "A-", range: "90-92" },
-  { letter: "B+", range: "88-89" },
-  { letter: "B", range: "83-87" },
-  { letter: "B-", range: "80-82" },
-  { letter: "C+", range: "78-79" },
-  { letter: "C", range: "73-77" },
-  { letter: "C-", range: "70-72" },
-  { letter: "D", range: "60-69" },
+  { letter: "A", range: "100-93" },
+  { letter: "A-", range: "92-90" },
+  { letter: "B+", range: "89-88" },
+  { letter: "B", range: "87-83" },
+  { letter: "B-", range: "82-80" },
+  { letter: "C+", range: "79-78" },
+  { letter: "C", range: "77-73" },
+  { letter: "C-", range: "72-70" },
+  { letter: "D", range: "69-60" },
   { letter: "F", range: "<60" },
 ];
 
 /** String | { strong: string } segments for inline emphasis */
 export const LATE_POLICY_SEGMENTS = [
-  "Except Homework 0, work may be submitted up to ",
+  "Homework assignments may be submitted up to ",
   { strong: "2 days" },
   " late for ",
   { strong: "80%" },
@@ -224,11 +231,7 @@ export const EXTRA_CREDIT_NOTE = "Extra credit may be offered during the term.";
 export const TOPICS = {
   panelSub: "Shared curriculum",
   workloadParts: [
-    "This 4-credit course meets for about ",
-    { strong: "six hours" },
-    " each week in lecture and recitation, plus roughly ",
-    { strong: "ten hours" },
-    " for readings, homework, project work, and interview preparation. Weekly timing differs by section.",
+    "This is a 4-credit-hour course. Students are expected to attend lectures and recitations, stay current with course materials, complete assignments on time, and participate in other course-related activities.",
   ],
   syllabusTopics: [
     "Computer architecture and environment",
@@ -248,7 +251,7 @@ export const TOPICS = {
     { strong: "No required textbook." },
     " ",
     { strong: "VS Code" },
-    " is the main IDE.",
+    " is the required IDE for this course. To keep support and grading consistent across sections, no other IDEs are allowed.",
   ],
 };
 
@@ -279,18 +282,17 @@ export const RESOURCE_GROUPS = [
         label: "Gradescope",
         desc: "Submit assignments",
       },
-      { kind: "link", href: "https://edstem.org/", label: "Ed", desc: "Q&A" },
       {
         kind: "link",
-        href: "/CSCI1300-Syllabus-Summer26.pdf",
-        label: "Syllabus PDF",
-        desc: "Summer 2026",
+        href: "https://discord.gg/PdrDeVHbRY",
+        label: "Discord",
+        desc: "Q&A and course discussion",
       },
       {
         kind: "link",
-        href: "mailto:csci1300@colorado.edu",
-        label: "csci1300@colorado.edu",
-        desc: "Course inbox",
+        href: "/Summer26_1300_Syllabus.pdf",
+        label: "Syllabus PDF",
+        desc: "Summer 2026",
       },
     ],
   },
@@ -332,7 +334,7 @@ export const RESOURCE_GROUPS = [
         joiner: " · ",
         links: [
           {
-            href: "https://www.colorado.edu/studentconduct/honor-code",
+            href: "https://www.colorado.edu/sccr/students/honor-code-and-student-code-conduct",
             label: "Honor Code",
           },
           { href: "https://www.colorado.edu/oiec/", label: "OIEC" },
@@ -348,7 +350,7 @@ export const RESOURCE_GROUPS = [
 
 export const POLICIES = {
   panelSub: "Summary — full syllabus PDF for detail",
-  syllabusPdfHref: "/CSCI1300-Syllabus-Summer26.pdf",
+  syllabusPdfHref: "/Summer26_1300_Syllabus.pdf",
   syllabusPdfLabel: "CSCI 1300 syllabus (PDF)",
   sections: [
     {

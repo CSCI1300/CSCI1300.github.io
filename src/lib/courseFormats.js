@@ -16,3 +16,11 @@ export function formatAssignmentDue(iso) {
   const rest = d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   return `${day}, ${rest}, 11:59PM MT`;
 }
+
+/** @param {string} iso YYYY-MM-DD */
+export function formatAssignmentDate(iso) {
+  const d = new Date(`${iso}T12:00:00`);
+  const day = d.toLocaleDateString("en-US", { weekday: "long" });
+  const rest = d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  return `${day}, ${rest}`;
+}

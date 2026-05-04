@@ -8,10 +8,35 @@ import {
   LATE_POLICY_SEGMENTS,
   LETTER_CUTOFFS,
 } from "../../config/courseConfig.js";
-import { formatAssignmentDue } from "../../lib/courseFormats.js";
+import { formatAssignmentDate, formatAssignmentDue } from "../../lib/courseFormats.js";
 import { renderInlineParts } from "./renderInlineParts.jsx";
 
+function getHomeworkNumber(name) {
+  const match = name.match(/^Homework\s+(\d+)/i);
+  return match ? Number(match[1]) : null;
+}
+
+function buildHomeworkRows(schedule) {
+  const byHomework = new Map();
+  schedule.forEach((row) => {
+    const hwNum = getHomeworkNumber(row.name);
+    if (!hwNum) return;
+    const existing = byHomework.get(hwNum) || { number: hwNum, partA: null, partB: null };
+    if (row.name.includes("Part A")) existing.partA = row;
+    if (row.name.includes("Part B")) existing.partB = row;
+    byHomework.set(hwNum, existing);
+  });
+  return [...byHomework.values()].sort((a, b) => a.number - b.number);
+}
+
+function buildMajorDateRows(schedule) {
+  return schedule.filter((row) => !/^Homework\s+\d+\s+\(Part [AB]\)$/i.test(row.name));
+}
+
 export default function AssignmentsPanel() {
+  const homeworkRows = buildHomeworkRows(ASSIGNMENT_SCHEDULE);
+  const majorDateRows = buildMajorDateRows(ASSIGNMENT_SCHEDULE);
+
   return (
     <div className="content-panel">
       <header className="c1300-panel-header">
@@ -37,29 +62,51 @@ export default function AssignmentsPanel() {
       </section>
 
       <section className="c1300-section">
-        <h2>Assignment schedule</h2>
+        <h2>Homework weekly rhythm</h2>
         <p className="c1300-lede">{renderInlineParts(ASSIGNMENTS.scheduleIntroParts)}</p>
+        <p className="c1300-fineprint">
+          Part A is due during your section's recitation. Part B is due Tuesday at 11:59PM MT on
+          Gradescope.
+        </p>
         <div className="c1300-table-wrap">
           <table className="c1300-table-compact">
             <thead>
               <tr>
-                <th>Assignment</th>
+                <th>Homework</th>
+                <th>Part A</th>
+                <th>Part B</th>
+              </tr>
+            </thead>
+            <tbody>
+              {homeworkRows.map((row) => (
+                <tr key={`hw-${row.number}`}>
+                  <td>{`Homework ${row.number}`}</td>
+                  <td>{row.partA?.dueIso ? formatAssignmentDate(row.partA.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
+                  <td>{row.partB?.dueIso ? formatAssignmentDate(row.partB.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="c1300-section">
+        <h2>Project dates</h2>
+        <div className="c1300-table-wrap">
+          <table className="c1300-table-compact">
+            <thead>
+              <tr>
+                <th>Item</th>
                 <th>Due</th>
                 <th>Notes</th>
               </tr>
             </thead>
             <tbody>
-              {ASSIGNMENT_SCHEDULE.map((row) => (
+              {majorDateRows.map((row) => (
                 <tr key={row.name}>
                   <td>{row.name}</td>
-                  <td>
-                    {row.dueIso ? (
-                      formatAssignmentDue(row.dueIso)
-                    ) : (
-                      <span className="c1300-lecture-tba">TBA</span>
-                    )}
-                  </td>
-                  <td>{row.note ?? "—"}</td>
+                  <td>{row.dueIso ? formatAssignmentDue(row.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
+                  <td className="c1300-assign-note">{row.note ?? "—"}</td>
                 </tr>
               ))}
             </tbody>

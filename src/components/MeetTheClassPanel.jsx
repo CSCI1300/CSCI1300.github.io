@@ -1411,7 +1411,6 @@ export default function MeetTheClassPanel() {
         <a href="https://cozy-fae.itch.io/" target="_blank" rel="noopener noreferrer">
           CozyFae
         </a>{" "}
-        (sample) — credit the artist.
       </p>
     </div>
   );

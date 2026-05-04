@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function StaffCard({ role, section, name, email, scheduleLine, bioPlaceholder }) {
+export default function StaffCard({ id, role, section, name, email, scheduleLine, bioPlaceholder }) {
+  const customPhoto = {
+    zach: { defaultSrc: "/zach/ZachSDV.png", hoverSrc: "/zach/ZachImage.png" },
+    amanda: { defaultSrc: "/amanda/AmandaSVD.png", hoverSrc: "/amanda/amandaImage.jpg" },
+  }[id];
+
   const scheduleItems = String(scheduleLine ?? "")
     .split(/\.\s+/)
     .map((item) => item.trim().replace(/\.$/, ""))
@@ -17,16 +22,36 @@ export default function StaffCard({ role, section, name, email, scheduleLine, bi
   return (
     <article className="c1300-staff-card">
       <figure className="c1300-staff-photo-wrap">
-        <div className="c1300-staff-photo-placeholder" aria-hidden="true">
-          <img
-            className="c1300-staff-photo-icon"
-            src="/csci1300-theme/avatar.svg"
-            alt=""
-            width="72"
-            height="72"
-          />
-          <span className="c1300-staff-photo-label">Photo placeholder</span>
-        </div>
+        {customPhoto ? (
+          <div className="c1300-staff-photo c1300-staff-photo--swap">
+            <img
+              className="c1300-staff-photo-img c1300-staff-photo-img--default"
+              src={customPhoto.defaultSrc}
+              alt={`${name} avatar`}
+              width="128"
+              height="128"
+            />
+            <img
+              className="c1300-staff-photo-img c1300-staff-photo-img--hover"
+              src={customPhoto.hoverSrc}
+              alt=""
+              aria-hidden="true"
+              width="128"
+              height="128"
+            />
+          </div>
+        ) : (
+          <div className="c1300-staff-photo-placeholder" aria-hidden="true">
+            <img
+              className="c1300-staff-photo-icon"
+              src="/csci1300-theme/avatar.svg"
+              alt=""
+              width="72"
+              height="72"
+            />
+            <span className="c1300-staff-photo-label">Photo placeholder</span>
+          </div>
+        )}
       </figure>
       <div className="c1300-staff-body">
         <p className="c1300-staff-role">
