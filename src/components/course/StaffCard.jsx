@@ -4,6 +4,7 @@ export default function StaffCard({ id, role, section, name, email, scheduleLine
   const customPhoto = {
     zach: { defaultSrc: "/zach/ZachSDV.png", hoverSrc: "/zach/ZachImage.png" },
     amanda: { defaultSrc: "/amanda/AmandaSVD.png", hoverSrc: "/amanda/amandaImage.jpg" },
+    sashi: { defaultSrc: "/sashi/SashiImage.jpeg" },
   }[id];
 
   const scheduleItems = String(scheduleLine ?? "")
@@ -23,23 +24,35 @@ export default function StaffCard({ id, role, section, name, email, scheduleLine
     <article className="c1300-staff-card">
       <figure className="c1300-staff-photo-wrap">
         {customPhoto ? (
-          <div className="c1300-staff-photo c1300-staff-photo--swap">
-            <img
-              className="c1300-staff-photo-img c1300-staff-photo-img--default"
-              src={customPhoto.defaultSrc}
-              alt={`${name} avatar`}
-              width="128"
-              height="128"
-            />
-            <img
-              className="c1300-staff-photo-img c1300-staff-photo-img--hover"
-              src={customPhoto.hoverSrc}
-              alt=""
-              aria-hidden="true"
-              width="128"
-              height="128"
-            />
-          </div>
+          customPhoto.hoverSrc ? (
+            <div className="c1300-staff-photo c1300-staff-photo--swap">
+              <img
+                className="c1300-staff-photo-img c1300-staff-photo-img--default"
+                src={customPhoto.defaultSrc}
+                alt={`${name} avatar`}
+                width="128"
+                height="128"
+              />
+              <img
+                className="c1300-staff-photo-img c1300-staff-photo-img--hover"
+                src={customPhoto.hoverSrc}
+                alt=""
+                aria-hidden="true"
+                width="128"
+                height="128"
+              />
+            </div>
+          ) : (
+            <div className="c1300-staff-photo">
+              <img
+                className="c1300-staff-photo-img c1300-staff-photo-img--default"
+                src={customPhoto.defaultSrc}
+                alt={`${name} photo`}
+                width="128"
+                height="128"
+              />
+            </div>
+          )
         ) : (
           <div className="c1300-staff-photo-placeholder" aria-hidden="true">
             <img

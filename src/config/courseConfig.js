@@ -424,8 +424,21 @@ export const GRADUATE_TAS = [
   },
 ];
 
+export const UNDERGRADUATE_COURSE_ASSISTANTS = [
+  {
+    id: "sashi",
+    role: "Undergraduate Course Assistant",
+    section: "Sections 300 & 830",
+    name: "Sashi Wolf",
+    email: "Sashi.Wolf@colorado.edu",
+    scheduleLine: "Office hours: [TBA]",
+    bioPlaceholder: "[Bio placeholder]",
+  },
+];
+
 export const STAFF = {
   panelSub: "Summer 2026",
   instructorsHeading: "Instructors",
   tasHeading: "Graduate teaching assistants",
+  ucaHeading: "Undergraduate course assistants",
 };

@@ -1,5 +1,10 @@
 import React from "react";
-import { GRADUATE_TAS, INSTRUCTORS, STAFF } from "../../config/courseConfig.js";
+import {
+  GRADUATE_TAS,
+  INSTRUCTORS,
+  STAFF,
+  UNDERGRADUATE_COURSE_ASSISTANTS,
+} from "../../config/courseConfig.js";
 import StaffCard from "./StaffCard.jsx";
 
 export default function StaffPanel() {
@@ -20,6 +25,13 @@ export default function StaffPanel() {
       <h2 className="c1300-staff-section-heading">{STAFF.tasHeading}</h2>
       <div className="c1300-staff-grid">
         {GRADUATE_TAS.map((person) => (
+          <StaffCard key={person.id} {...person} />
+        ))}
+      </div>
+
+      <h2 className="c1300-staff-section-heading">{STAFF.ucaHeading}</h2>
+      <div className="c1300-staff-grid">
+        {UNDERGRADUATE_COURSE_ASSISTANTS.map((person) => (
           <StaffCard key={person.id} {...person} />
         ))}
       </div>
