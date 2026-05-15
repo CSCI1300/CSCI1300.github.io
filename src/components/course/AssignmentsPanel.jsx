@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ASSIGNMENT_SCHEDULE,
   ASSIGNMENTS,
   EXTRA_CREDIT_NOTE,
   GRADE_BREAKDOWN,
   GRADING_INTERVIEWS_PLACEHOLDER,
+  HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS,
   LATE_POLICY_SEGMENTS,
   LETTER_CUTOFFS,
 } from "../../config/courseConfig.js";
@@ -36,6 +38,7 @@ function buildMajorDateRows(schedule) {
 export default function AssignmentsPanel() {
   const homeworkRows = buildHomeworkRows(ASSIGNMENT_SCHEDULE);
   const majorDateRows = buildMajorDateRows(ASSIGNMENT_SCHEDULE);
+  const handoutLinkEnabled = new Set(HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS);
 
   return (
     <div className="content-panel">
@@ -80,7 +83,20 @@ export default function AssignmentsPanel() {
             <tbody>
               {homeworkRows.map((row) => (
                 <tr key={`hw-${row.number}`}>
-                  <td>{`Homework ${row.number}`}</td>
+                  <td>
+                    {handoutLinkEnabled.has(row.number) ? (
+                      <Link className="c1300-lecture-link" to={`/hw/${row.number}`}>
+                        {`Homework ${row.number}`}
+                      </Link>
+                    ) : (
+                      <span
+                        className="c1300-hw-handout-muted"
+                        title="Handout not linked on Assignments (preview may still exist via direct URL)"
+                      >
+                        {`Homework ${row.number}`}
+                      </span>
+                    )}
+                  </td>
                   <td>{row.partA?.dueIso ? formatAssignmentDate(row.partA.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
                   <td>{row.partB?.dueIso ? formatAssignmentDate(row.partB.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
                 </tr>

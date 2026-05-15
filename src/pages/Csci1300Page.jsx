@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import MeetTheClassPanel from "../components/MeetTheClassPanel.jsx";
 import AssignmentsPanel from "../components/course/AssignmentsPanel.jsx";
 import LecturesPanel from "../components/course/LecturesPanel.jsx";
@@ -10,9 +11,20 @@ import TopicsPanel from "../components/course/TopicsPanel.jsx";
 import { TABS } from "../config/courseConfig.js";
 import "../styles/csci1300-stardew.css";
 
+function tabFromSearchParams(searchParams) {
+  const raw = searchParams.get("tab");
+  return raw && TABS.some((t) => t.id === raw) ? raw : null;
+}
+
 export default function Csci1300Page() {
-  const [active, setActive] = useState("overview");
+  const [searchParams] = useSearchParams();
+  const tabFromUrl = useMemo(() => tabFromSearchParams(searchParams), [searchParams]);
+  const [active, setActive] = useState(() => tabFromUrl ?? "overview");
   const [lectureTrack, setLectureTrack] = useState("zach");
+
+  useEffect(() => {
+    if (tabFromUrl) setActive(tabFromUrl);
+  }, [tabFromUrl]);
 
   return (
     <div className="csci1300-course">

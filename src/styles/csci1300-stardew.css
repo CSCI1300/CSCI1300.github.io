@@ -914,6 +914,12 @@
   color: #5c463a;
 }
 
+.csci1300-course .c1300-hw-handout-muted {
+  color: #6e584c;
+  cursor: default;
+  font-family: SVBoldHu, "Stardew Valley", serif;
+}
+
 /* Tooltips to the right of left-docked tabs */
 .csci1300-course [data-tooltip] {
   position: relative;

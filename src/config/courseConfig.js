@@ -1,5 +1,5 @@
 /**
- * Course content and structure — edit here to update the public site without
+ * Course content and structure. edit here to update the public site without
  * touching panel components. (Dates, links, copy, staff, resources, etc.)
  */
 
@@ -20,7 +20,7 @@ export const SCHEDULE_DAY_TOKENS = {
   recitation: ["W"],
 };
 
-/** Rows for “Sections at a glance” (Section 300 first). */
+/** Rows for “Sections at a glance” */
 export const SECTIONS_AT_GLANCE = [
   {
     section: "300",
@@ -89,26 +89,41 @@ export const LECTURE_DATES_ISO = [
 
 /** Shared lecture topic by date (both sections unless overridden in LECTURE_LINKS). */
 export const LECTURE_TOPICS = {
-  // Keep regular lecture topics blank; only show exceptions.
   "2026-06-19": "No class (Juneteenth)",
   "2026-07-03": "No class (Independence Day)",
 };
 
 /**
- * Per-day: { slides?, recording?, topic? } — topic overrides LECTURE_TOPICS[iso] for that track.
+ * Per-day: { slides?, recording?, topic? } 
  * Keys must match LECTURES.tracks[].id (e.g. zach, amanda).
  */
 export const LECTURE_LINKS = { zach: {}, amanda: {} };
 
 export const LECTURES = {
-  panelSub: "M · T · Th · F · May 26 – July 17, 2026 · slides & recordings by section",
-  /** Section 300 first */
+  panelSub: "M · T · Th · F · May 26 - July 17, 2026 · slides & recordings by section",
   tracks: [
     { id: "zach", label: "Section 300 — Zach" },
     { id: "amanda", label: "Section 830 — Amanda" },
   ],
 };
 
+/**
+ * Homework numbers that show a clickable handout link on the Assignments tab. Others show plain
+ * “Homework n” (not a link). Add numbers here to publish each handout.
+ */
+export const HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS = [];
+
+/**
+ * Soft preview gate (client-side only): if homework N is **not** in `HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS`
+ * but this map has a non-empty string for N, then `/hw/N?access=<that-string>` loads the handout.
+ * Set `VITE_HW1_HANDOUT_ACCESS` in `.env` / CI before `npm run build` (value is baked into the bundle).
+ * Leave empty (`""`) to disable URL preview for that homework entirely.
+ */
+export const HOMEWORK_HANDOUT_PREVIEW_ACCESS = {
+  1: import.meta.env.VITE_HW1_HANDOUT_ACCESS ?? "",
+};
+
+/** Each homework N in this list should have a handout file `public/hw/hw{N}/hw{N}.md` (same N as in "Homework N (Part …)"). */
 export const ASSIGNMENT_SCHEDULE = [
   { name: "Homework 1 (Part A)", dueIso: "2026-05-27", note: "Due in Wednesday recitation." },
   { name: "Homework 1 (Part B)", dueIso: "2026-06-02", note: "Due Tuesday at 11:59PM MT on Gradescope." },
@@ -141,7 +156,7 @@ export const ASSIGNMENTS = {
   ],
   /**
    * Scannable items for “Deadlines & structure” (title + body with optional { strong }).
-   * Use { strong: "..." } sparingly — mainly for the standard Part B deadline.
+   * Use { strong: "..." } 
    */
   deadlinesStructure: [
     {
