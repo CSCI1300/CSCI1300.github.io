@@ -818,3 +818,9 @@ Submit one file:
 ```text
 hw1b.cpp
 ```
+
+<<<HW_ACTION>>>
+
+Submit **Part B** on **[Gradescope](https://www.gradescope.com/courses/1314704)** by **Tuesday, June 2, 2026 at 11:59 PM Mountain Time**. Upload **one** file named **`hw1b.cpp`** 
+
+<<<END_HW_ACTION>>>
