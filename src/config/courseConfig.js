@@ -443,7 +443,6 @@ export const UNDERGRADUATE_COURSE_ASSISTANTS = [
     name: "Sashi Wolf",
     email: "Sashi.Wolf@colorado.edu",
     scheduleLine: "Office hours: [TBA]",
-    bioPlaceholder: "[Bio placeholder]",
   },
 ];
 
