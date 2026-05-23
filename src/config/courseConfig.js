@@ -402,7 +402,6 @@ export const INSTRUCTORS = [
     email: "Zachary.Kaufman@colorado.edu",
     scheduleLine:
       "Lecture: Mon · Tue · Thu · Fri · 11:10 am-12:30 pm · ECES 112. Recitation: Wed · 11:10 am-12:30 pm · ECES 112.",
-    bioPlaceholder: "[Bio placeholder]",
   },
   {
     id: "amanda",
@@ -412,7 +411,6 @@ export const INSTRUCTORS = [
     email: "Amanda.HernandezSandate@colorado.edu",
     scheduleLine:
       "Lecture: Mon · Tue · Thu · Fri · 2:50-4:10 pm · Meets remotely. Recitation: Wed · 2:50-4:10 pm · Meets remotely.",
-    bioPlaceholder: "[Bio placeholder]",
   },
 ];
 
@@ -425,17 +423,15 @@ export const GRADUATE_TAS = [
     email: "Ishneet.Chadha@colorado.edu",
     scheduleLine:
       "Recitation with Section 300 (Wed · 11:10 am-12:30 pm · ECES 112). Office hours: [TBA]",
-    bioPlaceholder: "[Bio placeholder]",
   },
   {
     id: "cornelius",
     role: "Graduate TA",
     section: "Section 830",
-    name: "Cornelius Adejoro",
-    email: "Cornelius.Adejoro@colorado.edu",
+    name: "Nolan Brady",
+    email: "Nolan.Brady@colorado.edu",
     scheduleLine:
       "Recitation with Section 830 (Wed · 2:50-4:10 pm · remote). Office hours: [TBA]",
-    bioPlaceholder: "[Bio placeholder]",
   },
 ];
 
