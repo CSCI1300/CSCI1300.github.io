@@ -425,7 +425,7 @@ export const GRADUATE_TAS = [
       "Recitation with Section 300 (Wed · 11:10 am-12:30 pm · ECES 112). Office hours: [TBA]",
   },
   {
-    id: "cornelius",
+    id: "nolan",
     role: "Graduate TA",
     section: "Section 830",
     name: "Nolan Brady",

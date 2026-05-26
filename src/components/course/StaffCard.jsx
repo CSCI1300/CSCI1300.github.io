@@ -5,7 +5,7 @@ export default function StaffCard({ id, role, section, name, email, scheduleLine
     zach: { defaultSrc: "/zach/ZachSDV.png", hoverSrc: "/zach/ZachImage.png" },
     amanda: { defaultSrc: "/amanda/AmandaSVD.png", hoverSrc: "/amanda/amandaImage.jpg" },
     sashi: { defaultSrc: "/sashi/SashiImage.jpeg" },
-    ishneet: { defaultSrc: "/ishneet/Ishneet.jpeg" },
+    ishneet: { defaultSrc: "/ishneet/ishneet.jpeg" },
     nolan: { defaultSrc: "/nolan/nolan.jpeg" },
   }[id];
 
