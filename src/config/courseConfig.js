@@ -125,7 +125,7 @@ export const HOMEWORK_HANDOUT_PREVIEW_ACCESS = {
 
 /** Each homework N in this list should have a handout file `public/hw/hw{N}/hw{N}.md` (same N as in "Homework N (Part …)"). */
 export const ASSIGNMENT_SCHEDULE = [
-  { name: "Homework 1 (Part A)", dueIso: "2026-05-27", note: "Due in Wednesday recitation." },
+  { name: "Homework 1 (Part A)", dueIso: "2026-06-02", note: "Due Tuesday at 11:59PM MT on Gradescope." },
   { name: "Homework 1 (Part B)", dueIso: "2026-06-02", note: "Due Tuesday at 11:59PM MT on Gradescope." },
   { name: "Homework 2 (Part A)", dueIso: "2026-06-03", note: "Due in Wednesday recitation." },
   { name: "Homework 2 (Part B)", dueIso: "2026-06-09", note: "Due Tuesday at 11:59PM MT on Gradescope." },
