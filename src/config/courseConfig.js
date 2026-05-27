@@ -32,7 +32,7 @@ export const SECTIONS_AT_GLANCE = [
   {
     section: "830",
     instructor: "Amanda Hernandez Sandate",
-    gradTa: "Cornelius Adejoro",
+    gradTa: "Nolan Brady",
     lecture: { time: "2:50 - 4:10 pm", place: "Remote" },
     recitation: { time: "2:50 - 4:10 pm", place: "Remote" },
   },
