@@ -33,7 +33,13 @@ export const SECTIONS_AT_GLANCE = [
     section: "830",
     instructor: "Amanda Hernandez Sandate",
     gradTa: "Nolan Brady",
-    lecture: { time: "2:50 - 4:10 pm", place: "Remote" },
+    lecture: {
+      time: "2:50 - 4:10 pm",
+      place: {
+        label: "Zoom",
+        url: "https://cuboulder.zoom.us/s/4365597488?omn=4365597488",
+      },
+    },
     recitation: { time: "2:50 - 4:10 pm", place: "Remote" },
   },
 ];
