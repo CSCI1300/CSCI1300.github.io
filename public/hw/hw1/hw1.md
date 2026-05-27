@@ -343,7 +343,7 @@ int main() {
 
 Save (**Command+S** on Mac or **Ctrl+S** on Windows), then compile and run this file. You can review the debugger sections above if you need a refresher on compiling from the terminal. When it runs correctly, leave this file as-is and continue.
 
-#### Version 2 — `hw1V2.cpp.cpp`
+#### Version 2 — `hw1V2.cpp`
 
 Create a **new** file named **`hw1V2.cpp`** (do not overwrite your Version 1 file). Explore the program a little more: add `using namespace std;` so you can remove the `std::` prefixes. Your code should look like this:
 
@@ -664,67 +664,7 @@ Remaining Energy: 35
 
 ---
 
-# Problem 5: Opening the Farm Stand
-
-As the sun starts to set over Pelican Town, your farmer imagines the future farm stand they might open one day. To get started, they make a simple sign for the featured crop.
-
-Use this exact crop:
-
-- Featured Crop: Strawberry
-
-Print:
-
-- A welcome message
-- The featured crop
-- The length of the crop name
-- The first letter of the crop name
-- The last letter of the crop name
-
-Print this exact section header:
-
-```text
---- Farm Market Sign ---
-```
-
-Your output for this section must include these exact labels:
-
-```text
-Featured Crop:
-Crop Name Length:
-First Letter:
-Last Letter:
-```
-
-Expected calculated values:
-
-```text
-Crop Name Length: 10
-First Letter: S
-Last Letter: y
-```
-
-Example output:
-
-```text
---- Farm Market Sign ---
-Featured Crop: Strawberry
-Crop Name Length: 10
-First Letter: S
-Last Letter: y
-```
-
-<<<HINT>>>
-
-- Use `.length()` to get the length of a string.
-- String indexing starts at `0`.
-- The first character is at index `0`.
-- The last character is at index `crop.length() - 1`.
-
-<<<END_HINT>>>
-
----
-
-# Problem 6: Fixing Pierre's Receipt
+# Problem 5: Fixing Pierre's Receipt
 
 Just before heading home for the night, Pierre realizes his receipt-printing program is broken. Since your farmer is learning C++, they offer to help fix it.
 
