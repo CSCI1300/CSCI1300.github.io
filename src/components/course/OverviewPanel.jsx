@@ -59,7 +59,25 @@ export default function OverviewPanel() {
             </tbody>
           </table>
         </div>
-        <p className="c1300-fineprint">{OVERVIEW.officeHoursNote}</p>
+
+        <div className="c1300-office-hours" aria-labelledby="overview-office-hours">
+          <h3 id="overview-office-hours" className="c1300-office-hours__heading">
+            Office hours
+          </h3>
+          <div className="c1300-office-hours__embed-wrap">
+            <iframe
+              className="c1300-office-hours__embed"
+              src={OVERVIEW.officeHoursCalendarEmbedSrc}
+              title="CSCI 1300 office hours calendar"
+              loading="lazy"
+            />
+          </div>
+          <p className="c1300-fineprint">
+            <a href={OVERVIEW.officeHoursCalendarLink} target="_blank" rel="noopener noreferrer">
+              Open in Google Calendar
+            </a>
+          </p>
+        </div>
       </section>
 
       <section className="c1300-section" aria-labelledby="overview-desc">

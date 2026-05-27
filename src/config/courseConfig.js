@@ -61,7 +61,10 @@ export const OVERVIEW = {
     { strong: "C++" },
     " and cover variables, control flow, functions, arrays, I/O, classes, and related topics — see the Topics tab.",
   ],
-  officeHoursNote: "Office hours are [TBA].",
+  officeHoursCalendarEmbedSrc:
+    "https://calendar.google.com/calendar/embed?height=800&mode=WEEK&showTitle=0&showNav=1&showDate=1&showPrint=0&src=c_a883dab1a6cc8cc23bb2e399caf310213ada244c687b7a0e8fc1e279a17fc3bc%40group.calendar.google.com&ctz=America%2FDenver",
+  officeHoursCalendarLink:
+    "https://calendar.google.com/calendar/u/0?cid=Y19hODgzZGFiMWE2Y2M4Y2MyM2JiMmUzOTljYWYzMTAyMTNhZGEyNDRjNjg3YjdhMGU4ZmMxZTI3OWExN2ZjM2JjQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20",
 };
 
 /** MTThF lecture days, May 26–July 17, 2026 (inclusive). */

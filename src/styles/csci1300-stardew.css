@@ -648,6 +648,31 @@
   vertical-align: top;
 }
 
+.csci1300-course .c1300-office-hours {
+  margin-top: 1.25rem;
+}
+
+.csci1300-course .c1300-office-hours__heading {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.05rem, 2.35vw, 1.42rem);
+}
+
+.csci1300-course .c1300-office-hours__embed-wrap {
+  overflow: hidden;
+  border: 2px solid rgba(173, 81, 11, 0.35);
+  border-radius: 12px;
+  background: var(--c1300-surface-warm-soft);
+}
+
+.csci1300-course .c1300-office-hours__embed {
+  display: block;
+  width: 100%;
+  min-height: 640px;
+  height: 75vh;
+  max-height: 900px;
+  border: 0;
+}
+
 .csci1300-course .c1300-schedule-block {
   display: flex;
   flex-direction: column;
