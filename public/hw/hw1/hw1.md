@@ -744,12 +744,20 @@ Your program must print all of the following section headers exactly:
 
 ```text
 --- Farmer Profile ---
+[Problem Answer Output]
 --- Buying Seeds ---
+[Problem Answer Output]
 --- Crop Profit Calculator ---
+[Problem Answer Output]
 --- Energy Tracker ---
+[Problem Answer Output]
 --- Farm Market Sign ---
+[Problem Answer Output]
 --- Debugging at Pierre's ---
+[Problem Answer Output]
 ```
+
+and under 
 
 Your program must compile and run without errors.
 
