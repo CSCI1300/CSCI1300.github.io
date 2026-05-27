@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function StaffCard({ id, role, section, name, email, scheduleLine, bioPlaceholder }) {
+export default function StaffCard({ id, role, section, name, email, scheduleLine }) {
   const customPhoto = {
-    zach: { defaultSrc: "/zach/ZachSDV.png", hoverSrc: "/zach/ZachImage.png" },
-    amanda: { defaultSrc: "/amanda/AmandaSVD.png", hoverSrc: "/amanda/amandaImage.jpg" },
+    zach: { defaultSrc: "/zach/ZachImage.png", hoverSrc: "/zach/ZachSDV.png" },
+    amanda: { defaultSrc: "/amanda/amandaImage.jpg", hoverSrc: "/amanda/AmandaSVD.png" },
     sashi: { defaultSrc: "/sashi/SashiImage.jpeg" },
     ishneet: { defaultSrc: "/ishneet/ishneet.jpeg" },
     nolan: { defaultSrc: "/nolan/nolan.jpeg" },
@@ -87,7 +87,6 @@ export default function StaffCard({ id, role, section, name, email, scheduleLine
             ))}
           </div>
         ) : null}
-        <p className="c1300-staff-bio-line">{bioPlaceholder}</p>
       </div>
     </article>
   );

@@ -91,7 +91,7 @@ export default function AssignmentsPanel() {
                     ) : (
                       <span
                         className="c1300-hw-handout-muted"
-                        title="Handout not linked on Assignments (preview may still exist via direct URL)"
+                        title="Assignment not released yet"
                       >
                         {`Homework ${row.number}`}
                       </span>

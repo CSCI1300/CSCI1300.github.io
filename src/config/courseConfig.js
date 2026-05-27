@@ -97,7 +97,15 @@ export const LECTURE_TOPICS = {
  * Per-day: { slides?, recording?, topic? } 
  * Keys must match LECTURES.tracks[].id (e.g. zach, amanda).
  */
-export const LECTURE_LINKS = { zach: {}, amanda: {} };
+export const LECTURE_LINKS = {
+  zach: {},
+  amanda: {
+    "2026-05-26": {
+      topic: "Intro to CSCI 1300 + Syllabus",
+      slides: "/amanda/slides/05-26-26-%20Introduction.pdf",
+    },
+  },
+};
 
 export const LECTURES = {
   panelSub: "M · T · Th · F · May 26 - July 17, 2026 · slides & recordings by section",
@@ -384,7 +392,7 @@ export const POLICIES = {
     {
       title: "Netiquette",
       body:
-        'On Ed and in live sessions: write clearly, avoid all-caps "shouting," stay on topic, and treat everyone with respect.',
+        'On Discord and in live sessions: write clearly, avoid all-caps "shouting," stay on topic, and treat everyone with respect.',
     },
     {
       title: "Names & pronouns",
