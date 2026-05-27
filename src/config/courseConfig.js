@@ -415,7 +415,7 @@ export const INSTRUCTORS = [
     name: "Zachary Kaufman",
     email: "Zachary.Kaufman@colorado.edu",
     scheduleLine:
-      "Lecture: Mon · Tue · Thu · Fri · 11:10 am-12:30 pm · ECES 112. Recitation: Wed · 11:10 am-12:30 pm · ECES 112.",
+      "Lecture: Mon · Tue · Thu · Fri · 11:10 am-12:30 pm · ECES 112. Recitation: Wed · 11:10 am-12:30 pm · ECES 112. Office hours: Monday · 9:30-11:00 AM | Tuesday · 10:00-11:00 AM | Friday · 9:30-11:00 AM. Office hours location: CSEL (ECCS 114A).",
   },
   {
     id: "amanda",
@@ -424,7 +424,7 @@ export const INSTRUCTORS = [
     name: "Amanda Hernandez Sandate",
     email: "Amanda.HernandezSandate@colorado.edu",
     scheduleLine:
-      "Lecture: Mon · Tue · Thu · Fri · 2:50-4:10 pm · Meets remotely. Recitation: Wed · 2:50-4:10 pm · Meets remotely.",
+      "Lecture: Mon · Tue · Thu · Fri · 2:50-4:10 pm · Meets remotely. Recitation: Wed · 2:50-4:10 pm · Meets remotely. Office hours: Tuesday · 5:00-7:00 PM MT (https://cuboulder.zoom.us/s/4365597488) | Wednesday · 5:00-7:00 PM MT (https://cuboulder.zoom.us/s/4365597488).",
   },
 ];
 
@@ -436,7 +436,7 @@ export const GRADUATE_TAS = [
     name: "Ishneet Chadha",
     email: "Ishneet.Chadha@colorado.edu",
     scheduleLine:
-      "Recitation with Section 300 (Wed · 11:10 am-12:30 pm · ECES 112). Office hours: [TBA]",
+      "Recitation with Section 300 (Wed · 11:10 am-12:30 pm · ECES 112). Office hours: Monday · 11:00 AM-12:00 PM MT (Zoom, link coming soon) | Tuesday · 11:15 AM-12:15 PM MT (Zoom, link coming soon) | Friday · 2:15-4:15 PM MT (Zoom, link coming soon).",
   },
   {
     id: "nolan",
@@ -445,7 +445,7 @@ export const GRADUATE_TAS = [
     name: "Nolan Brady",
     email: "Nolan.Brady@colorado.edu",
     scheduleLine:
-      "Recitation with Section 830 (Wed · 2:50-4:10 pm · remote). Office hours: [TBA]",
+      "Recitation: Wed · 2:50-4:10 pm · Remote. Office hours: Tuesday · 12:00-2:00 PM MT (https://cuboulder.zoom.us/j/2980052323) | Thursday · 12:00-2:00 PM MT (https://cuboulder.zoom.us/j/2980052323).",
   },
 ];
 

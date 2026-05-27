@@ -22,6 +22,28 @@ export default function StaffCard({ id, role, section, name, email, scheduleLine
       };
     });
 
+  const renderTextWithLinks = (text) => {
+    const urlPattern = /(https?:\/\/[^\s)]+)/g;
+    const parts = String(text).split(urlPattern);
+    return parts.map((part, idx) => {
+      if (/^https?:\/\//.test(part)) {
+        let label = "Link";
+        try {
+          const parsed = new URL(part);
+          label = parsed.hostname.includes("zoom.us") ? "Zoom" : parsed.hostname.replace(/^www\./, "");
+        } catch {
+          label = "Link";
+        }
+        return (
+          <a key={`${name}-schedule-link-${idx}`} href={part} target="_blank" rel="noopener noreferrer">
+            {label}
+          </a>
+        );
+      }
+      return <React.Fragment key={`${name}-schedule-text-${idx}`}>{part}</React.Fragment>;
+    });
+  };
+
   return (
     <article className="c1300-staff-card">
       <figure className="c1300-staff-photo-wrap">
@@ -81,7 +103,24 @@ export default function StaffCard({ id, role, section, name, email, scheduleLine
             {scheduleItems.map((item) => (
               <p className="c1300-staff-schedule-item" key={item.id}>
                 <span className="c1300-staff-schedule-text">
-                  {item.label ? `${item.label}: ${item.text}` : item.text}
+                  {item.label === "Office hours" && item.text.includes("|") ? (
+                    <>
+                      {item.label}
+                      <span className="c1300-staff-sublist">
+                        {item.text.split("|").map((slot, slotIdx) => (
+                          <span className="c1300-staff-subitem" key={`${item.id}-slot-${slotIdx}`}>
+                            {renderTextWithLinks(slot.trim())}
+                          </span>
+                        ))}
+                      </span>
+                    </>
+                  ) : item.label ? (
+                    <>
+                      {item.label}: {renderTextWithLinks(item.text)}
+                    </>
+                  ) : (
+                    renderTextWithLinks(item.text)
+                  )}
                 </span>
               </p>
             ))}

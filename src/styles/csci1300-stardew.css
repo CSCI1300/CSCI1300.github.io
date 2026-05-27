@@ -597,6 +597,27 @@
   display: inline;
 }
 
+.csci1300-course .c1300-staff-sublist {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.2rem;
+  margin-left: 0.9rem;
+}
+
+.csci1300-course .c1300-staff-subitem {
+  display: block;
+  position: relative;
+  padding-left: 0.8rem;
+}
+
+.csci1300-course .c1300-staff-subitem::before {
+  content: "◦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(74, 48, 32, 0.8);
+}
+
 .csci1300-course .c1300-staff-section-heading {
   font-family: SVBoldHu, "Stardew Valley", serif;
   font-size: clamp(1.28rem, 2.95vw, 1.76rem);
