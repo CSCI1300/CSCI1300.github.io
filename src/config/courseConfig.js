@@ -105,6 +105,7 @@ export const LECTURE_DATES_ISO = [
 /** Lecture topic by date (optional; blank dates show —). */
 export const LECTURE_TOPICS = {
   "2026-05-26": "Intro to CSCI 1300 + Syllabus",
+  "2026-05-28": "Variables, Data Types, and Basic Operations",
   "2026-06-19": "No class (Juneteenth)",
   "2026-07-03": "No class (Independence Day)",
 };
