@@ -432,7 +432,7 @@ export const GRADUATE_TAS = [
     name: "Ishneet Chadha",
     email: "Ishneet.Chadha@colorado.edu",
     scheduleLine:
-      "Recitation with Section 300 (Wed · 11:10 am-12:30 pm · ECES 112). Office hours: Monday · 11:00 AM-12:00 PM MT (Zoom, link coming soon) | Tuesday · 11:15 AM-12:15 PM MT (Zoom, link coming soon) | Friday · 2:15-4:15 PM MT (Zoom, link coming soon).",
+      "Recitation with Section 300 (Wed · 11:10 am-12:30 pm · ECES 112). Office hours: Monday · 11:00 AM-12:00 PM MT (https://cuboulder.zoom.us/j/2388648622) | Tuesday · 11:15 AM-12:15 PM MT (https://cuboulder.zoom.us/j/2388648622) | Friday · 2:15-4:15 PM MT (https://cuboulder.zoom.us/j/2388648622).",
   },
   {
     id: "nolan",
