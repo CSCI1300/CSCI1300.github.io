@@ -20,7 +20,6 @@ export default function Csci1300Page() {
   const [searchParams] = useSearchParams();
   const tabFromUrl = useMemo(() => tabFromSearchParams(searchParams), [searchParams]);
   const [active, setActive] = useState(() => tabFromUrl ?? "overview");
-  const [lectureTrack, setLectureTrack] = useState("zach");
 
   useEffect(() => {
     if (tabFromUrl) setActive(tabFromUrl);
@@ -60,9 +59,7 @@ export default function Csci1300Page() {
           {active === "overview" && <OverviewPanel />}
           {active === "assignments" && <AssignmentsPanel />}
           {active === "topics" && <TopicsPanel />}
-          {active === "lectures" && (
-            <LecturesPanel lectureTrack={lectureTrack} setLectureTrack={setLectureTrack} />
-          )}
+          {active === "lectures" && <LecturesPanel />}
           {active === "resources" && <ResourcesPanel />}
           {active === "meet" && <MeetTheClassPanel />}
           {active === "policies" && <PoliciesPanel />}

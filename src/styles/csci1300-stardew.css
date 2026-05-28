@@ -847,33 +847,28 @@
   font-family: SVBoldHu, serif;
 }
 
-.csci1300-course .c1300-lecture-toggle {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.csci1300-course .c1300-lecture-materials {
   margin: 0 0 1rem;
 }
 
-.csci1300-course .c1300-lecture-toggle-btn {
+.csci1300-course .c1300-lecture-materials-btn {
+  display: inline-block;
   font-family: SVBoldHu, "Stardew Valley", serif;
   font-size: clamp(0.75rem, 1.8vw, 0.95rem);
   padding: 0.5rem 1rem;
   border-radius: 10px;
   border: 2px solid #8a4a18;
-  background: var(--c1300-surface-warm);
-  color: #2a1810;
-  cursor: url("/csci1300-theme/cursor.webp"), pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-
-.csci1300-course .c1300-lecture-toggle-btn:hover {
-  background: var(--c1300-surface-warm-hover);
-  border-color: #6a3a12;
-}
-
-.csci1300-course .c1300-lecture-toggle-btn.is-active {
   background: #7a4218;
   border-color: #5c3010;
+  color: #fff8ec;
+  text-decoration: none;
+  cursor: url("/csci1300-theme/cursor.webp"), pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.csci1300-course .c1300-lecture-materials-btn:hover {
+  background: #6a3814;
+  border-color: #4c280c;
   color: #fff8ec;
 }
 
@@ -899,7 +894,6 @@
 
 .csci1300-course .c1300-lecture-table .c1300-col-topic {
   min-width: 7.5rem;
-  max-width: 18rem;
   line-height: 1.35;
   hyphens: auto;
 }

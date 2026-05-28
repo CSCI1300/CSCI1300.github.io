@@ -102,32 +102,18 @@ export const LECTURE_DATES_ISO = [
   "2026-07-17",
 ];
 
-/** Shared lecture topic by date (both sections unless overridden in LECTURE_LINKS). */
+/** Lecture topic by date (optional; blank dates show —). */
 export const LECTURE_TOPICS = {
+  "2026-05-26": "Intro to CSCI 1300 + Syllabus",
   "2026-06-19": "No class (Juneteenth)",
   "2026-07-03": "No class (Independence Day)",
 };
 
-/**
- * Per-day: { slides?, recording?, topic? } 
- * Keys must match LECTURES.tracks[].id (e.g. zach, amanda).
- */
-export const LECTURE_LINKS = {
-  zach: {},
-  amanda: {
-    "2026-05-26": {
-      topic: "Intro to CSCI 1300 + Syllabus",
-      slides: "/amanda/slides/05-26-26-%20Introduction.pdf",
-    },
-  },
-};
-
 export const LECTURES = {
-  panelSub: "M · T · Th · F · May 26 - July 17, 2026 · slides & recordings by section",
-  tracks: [
-    { id: "zach", label: "Section 300 — Zach" },
-    { id: "amanda", label: "Section 830 — Amanda" },
-  ],
+  panelSub: "M · T · Th · F · May 26 - July 17, 2026",
+  materialsLabel: "Slides & lecture recordings",
+  materialsHref:
+    "https://o365coloradoedu-my.sharepoint.com/:f:/g/personal/zaka5614_colorado_edu/IgBAZnQPxbw3R7oPXPuGvzEaAW1LoQvrlUCgX9sidzg_4Xw",
 };
 
 /**
