@@ -174,7 +174,7 @@ Your farmer has been in Pelican Town for a week and it is finally time to hang a
 
 Pierre's shop carves wooden signs that hold **exactly 20 characters**. Your farmer wants to know whether the farm name fits, how much space is left over, and how much it will cost.
 
-Declare a `string` variable for your farm name (pick any name, but keep it under 20 characters). Then:
+Declare a `string` variable for your farm name. Use a 'getline()' function to get the farm name from the user. Then:
 
 - **Characters Available:** 20
 - **Characters Used:** the length of your farm name
@@ -206,6 +206,12 @@ Characters Available: 20
 Characters Used: 12
 Characters Remaining: 8
 Sign Cost: 36
+```
+
+If the user gives a farm name that is longer than 20 characters, the program should print an error message (using cout) and exit (use a return statement to exit the program). Use this exact error message:
+
+```text
+Error: Farm name is too long. Please enter a name that is 20 characters or less.
 ```
 
 ---
@@ -267,11 +273,11 @@ Mining: skipped
 
 # Problem 3: The Traveling Merchant
 
-Once a week a mysterious merchant rolls into Pelican Town selling rare goods. Some items are priced in whole gold; others cost a fraction of a coin.
+Once a week a mysterious merchant rolls into Pelican Town selling rare goods. Some items are priced in whole gold; others cost a fraction of a coin. However, you don't know how much gold your farmer has. You will need to use 'cin' to get that information. You can assume that the user will enter a valid integer. 
 
 Use these exact values:
 
-- Farmer's Gold: 100
+- Farmer's Gold: *Results of a cin statement*
 - Rare Seed Cost: 1000 *(whole gold)*
 - Magic Fertilizer Cost Per Bag: 2.5 *(gold — this is a `float`)*
 - Bags of Fertilizer Wanted: 6
@@ -301,7 +307,7 @@ Bags Wanted:
 Fertilizer Total:
 ```
 
-Expected output:
+Example output:
 
 ```text
 --- Merchant Visit ---
@@ -316,6 +322,8 @@ You can afford the fertilizer.
 
 <<<HINT>>>
 
+- You may need to use a .ignore() function to empty the buffer after the getline() function from the previous problem.
+- Declare the Farmer Gold variable as an int, cin will convert the input to an int automatically. 
 - Declare the cost as a `float`: `float fertilizerCostPerBag = 2.5;`
 - When you multiply a `float` by an `int`, C++ promotes the result to a `float` automatically.
 - Use `>=` for "greater than or equal to" comparisons.
