@@ -1,18 +1,5 @@
 # Homework 2
 
-Handout for **Homework 2** will be filled in before this assignment opens.
-
-## Part A (recitation)
-
-_To be announced._
-
-## Part B (Gradescope)
-
-_To be announced._
-
-
-# Homework 2
-
 **Part A** (this handout) is due **during your recitation section**. Complete the string exercises below and submit your three source files as described in the **ACTION REQUIRED** note.
 
 **Part B** is submitted on **[Gradescope](https://www.gradescope.com/courses/1314704)** by **Tuesday, June 9th, 2026 at 11:59 PM Mountain Time**.
