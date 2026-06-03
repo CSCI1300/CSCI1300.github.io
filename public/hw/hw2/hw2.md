@@ -203,9 +203,9 @@ Example output:
 --- Farm Sign ---
 Farm Name: Sunridge Farm
 Characters Available: 20
-Characters Used: 12
-Characters Remaining: 8
-Sign Cost: 36
+Characters Used: 13
+Characters Remaining: 7
+Sign Cost: 39
 ```
 
 If the user gives a farm name that is longer than 20 characters, the program should print an error message (using cout) and exit (use a return statement to exit the program). Use this exact error message:
@@ -257,7 +257,7 @@ Energy Report:
 Not enough energy for all tasks today.
 Watering: scheduled
 Chopping: scheduled
-Mining: skipped
+Mining: scheduled
 ```
 
 ---
