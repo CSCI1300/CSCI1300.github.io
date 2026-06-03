@@ -2,7 +2,7 @@ import GithubSlugger from "github-slugger";
 import { splitHw1OsSections } from "./splitHw1OsSections.js";
 
 /**
- * Homework 1 — curated “On this page” with hierarchy under Part A and Part B.
+ * Homework 1 — curated “On this page” (Part B uses `#` headings; ids match `rehype-slug`).
  */
 const HW1_MAIN_TOC_TREE = [
   {
@@ -31,6 +31,42 @@ const HW1_MAIN_TOC_TREE = [
       { id: "problem-3-planning-the-harvest", title: "Problem 3: Planning the Harvest", level: 3, children: [] },
       { id: "problem-4-spending-energy-on-chores", title: "Problem 4: Spending Energy on Chores", level: 3, children: [] },
       { id: "problem-5-fixing-pierres-receipt", title: "Problem 5: Fixing Pierre's Receipt", level: 3, children: [] },
+      { id: "final-output-requirements", title: "Final Output Requirements", level: 3, children: [] },
+    ],
+  },
+];
+
+/**
+ * Homework 2 — curated “On this page” (Part B `#` problems + Part A `###` exercises).
+ */
+const HW2_MAIN_TOC_TREE = [
+  {
+    id: "part-a",
+    title: "Part A",
+    level: 2,
+    children: [
+      { id: "string-basics", title: "String Basics", level: 3, children: [] },
+      { id: "exercise-1--hw2a1cpp", title: "Exercise 1 — `hw2A1.cpp`", level: 3, children: [] },
+      { id: "exercise-2--hw2a2cpp", title: "Exercise 2 — `hw2A2.cpp`", level: 3, children: [] },
+      { id: "exercise-3--hw2a3cpp", title: "Exercise 3 — `hw2A3.cpp`", level: 3, children: [] },
+    ],
+  },
+  {
+    id: "part-b",
+    title: "Part B",
+    level: 2,
+    children: [
+      { id: "how-to-write-this-program", title: "How to Write This Program", level: 3, children: [] },
+      { id: "problem-1-the-farm-sign", title: "Problem 1: The Farm Sign", level: 3, children: [] },
+      { id: "problem-2-daily-energy-planner", title: "Problem 2: Daily Energy Planner", level: 3, children: [] },
+      { id: "problem-3-the-traveling-merchant", title: "Problem 3: The Traveling Merchant", level: 3, children: [] },
+      { id: "problem-4-season-crop-report", title: "Problem 4: Season Crop Report", level: 3, children: [] },
+      {
+        id: "problem-5-fixing-willys-weather-check",
+        title: "Problem 5: Fixing Willy's Weather Check",
+        level: 3,
+        children: [],
+      },
       { id: "final-output-requirements", title: "Final Output Requirements", level: 3, children: [] },
     ],
   },
@@ -99,6 +135,10 @@ export function extractHomeworkHeadingToc(markdown, hwNum) {
 
   if (hwNum === 1 && splitHw1OsSections(markdown)) {
     return HW1_MAIN_TOC_TREE;
+  }
+
+  if (hwNum === 2) {
+    return HW2_MAIN_TOC_TREE;
   }
 
   return nestHeadingTocTree(extractH2H3(markdown));
