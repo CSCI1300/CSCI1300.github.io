@@ -126,7 +126,7 @@ int main() {
 Example output:
 
 ```text
-Welcome to Grandpa's Farm!
+Welcome to Grandpa's Farm
 Sign length: 25
 ```
 
