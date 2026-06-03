@@ -260,15 +260,6 @@ Chopping: scheduled
 Mining: skipped
 ```
 
-<<<HINT>>>
-
-- Calculate the total task cost first: `int totalCost = waterCost + chopCost + mineCost;`
-- Compare `totalCost` with `startingEnergy` for the full-day check.
-- Write a **separate** `if / else` for each individual task — do not nest them inside each other.
-- 20 + 30 + 40 = 90, which exceeds 80, but each task on its own is under 80.
-
-<<<END_HINT>>>
-
 ---
 
 # Problem 3: The Traveling Merchant
@@ -320,17 +311,6 @@ The Rare Seed is out of your budget.
 You can afford the fertilizer.
 ```
 
-<<<HINT>>>
-
-- You may need to use a .ignore() function to empty the buffer after the getline() function from the previous problem.
-- Declare the Farmer Gold variable as an int, cin will convert the input to an int automatically. 
-- Declare the cost as a `float`: `float fertilizerCostPerBag = 2.5;`
-- When you multiply a `float` by an `int`, C++ promotes the result to a `float` automatically.
-- Use `>=` for "greater than or equal to" comparisons.
-- 2.5 × 6 = 15.0, which prints as `15` (no decimal) unless you change the output format — no decimal is fine here.
-
-<<<END_HINT>>>
-
 ---
 
 # Problem 4: Season Crop Report
@@ -376,15 +356,6 @@ Season Name: Fall
 Best Crop: Pumpkin
 Good Time to Plant: Yes
 ```
-
-<<<HINT>>>
-
-- Use `if (season == 1)` ... `else if (season == 2)` ... and so on.
-- Inside each branch, set `string` variables such as `seasonName` and `bestCrop`.
-- Print those variables **after** the chain ends.
-- For the planting message, write a second `if / else` that checks `if (season == 4)` to handle the Winter case separately.
-
-<<<END_HINT>>>
 
 ---
 
@@ -441,19 +412,6 @@ You must include at least **two comments** explaining what you fixed. For exampl
 // Fixed: added missing semicolon after the weatherCode declaration.
 // Fixed: changed = to == in the if condition so it compares instead of assigns.
 ```
-
-<<<HINT>>>
-
-There are at least **five** bugs in the code. Look for:
-
-- A missing semicolon on a variable declaration
-- An `if` condition not wrapped in parentheses `( )`
-- An assignment operator `=` used where a comparison `==` is needed (this appears more than once)
-- A string value missing its quotation marks
-- A missing semicolon inside a code block
-- A missing closing brace `}` in the wrong place
-
-<<<END_HINT>>>
 
 ---
 
