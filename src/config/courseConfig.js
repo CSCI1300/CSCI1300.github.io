@@ -106,6 +106,11 @@ export const LECTURE_DATES_ISO = [
 export const LECTURE_TOPICS = {
   "2026-05-26": "Intro to CSCI 1300 + Syllabus",
   "2026-05-28": "Variables, Data Types, and Basic Operations",
+  "2026-05-29": "Expressions, arithmetic/logical operators, debugging basics",
+  "2026-06-01": "Strings: basics",
+  "2026-06-02": "More strings,IO, if-else",
+  "2026-06-04": "No class",
+  "2026-06-05": "Switch statements and intro to loops",
   "2026-06-19": "No class (Juneteenth)",
   "2026-07-03": "No class (Independence Day)",
 };
