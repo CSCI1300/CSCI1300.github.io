@@ -234,7 +234,7 @@ Use these exact values:
 
 **Step 2 — Individual task checks:** For each task separately, use `if / else` to print whether the task is scheduled or skipped:
 
-- If Starting Energy ≥ task cost: print `"<Task>: scheduled"`
+- If the remaining energy ≥ task cost: print `"<Task>: scheduled"`
 - Otherwise: print `"<Task>: skipped"`
 
 Print this exact section header:
@@ -257,7 +257,7 @@ Energy Report:
 Not enough energy for all tasks today.
 Watering: scheduled
 Chopping: scheduled
-Mining: scheduled
+Mining: skipped
 ```
 
 ---
