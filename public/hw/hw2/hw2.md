@@ -208,7 +208,7 @@ Characters Remaining: 7
 Sign Cost: 39
 ```
 
-If the user gives a farm name that is longer than 20 characters, the program should print an error message (using cout) and exit (use a return statement to exit the program). Use this exact error message:
+If the user gives a farm name that is longer than 20 characters, the program should print an error message (using cout). In this case, the only output for this problem will be the header followed by the error message. Use this exact error message:
 
 ```text
 Error: Farm name is too long. Please enter a name that is 20 characters or less.
@@ -218,7 +218,7 @@ Error: Farm name is too long. Please enter a name that is 20 characters or less.
 
 # Problem 2: Daily Energy Planner
 
-Every morning your farmer wakes up with a set amount of energy. Before heading out, they decide which tasks to tackle today.
+Every morning your farmer wakes up with a set amount of energy. Before heading out, they decide which tasks to tackle today. Your farmer will always water their crops first, then chop trees, then go mining. They won't move on to the next task unless they have enough energy to complete it. 
 
 Use these exact values:
 
@@ -234,7 +234,7 @@ Use these exact values:
 
 **Step 2 — Individual task checks:** For each task separately, use `if / else` to print whether the task is scheduled or skipped:
 
-- If Starting Energy ≥ task cost: print `"<Task>: scheduled"`
+- If the remaining energy ≥ task cost: print `"<Task>: scheduled"`
 - Otherwise: print `"<Task>: skipped"`
 
 Print this exact section header:
@@ -257,7 +257,7 @@ Energy Report:
 Not enough energy for all tasks today.
 Watering: scheduled
 Chopping: scheduled
-Mining: scheduled
+Mining: skipped
 ```
 
 ---
