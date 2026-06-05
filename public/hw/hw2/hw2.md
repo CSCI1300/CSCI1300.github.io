@@ -203,12 +203,12 @@ Example output:
 --- Farm Sign ---
 Farm Name: Sunridge Farm
 Characters Available: 20
-Characters Used: 12
-Characters Remaining: 8
-Sign Cost: 36
+Characters Used: 13
+Characters Remaining: 7
+Sign Cost: 39
 ```
 
-If the user gives a farm name that is longer than 20 characters, the program should print an error message (using cout) and exit (use a return statement to exit the program). Use this exact error message:
+If the user gives a farm name that is longer than 20 characters, the program should print an error message (using cout). In this case, the only output for this problem will be the header followed by the error message. Use this exact error message:
 
 ```text
 Error: Farm name is too long. Please enter a name that is 20 characters or less.
@@ -218,7 +218,7 @@ Error: Farm name is too long. Please enter a name that is 20 characters or less.
 
 # Problem 2: Daily Energy Planner
 
-Every morning your farmer wakes up with a set amount of energy. Before heading out, they decide which tasks to tackle today.
+Every morning your farmer wakes up with a set amount of energy. Before heading out, they decide which tasks to tackle today. Your farmer will always water their crops first, then chop trees, then go mining. They won't move on to the next task unless they have enough energy to complete it. 
 
 Use these exact values:
 
@@ -259,15 +259,6 @@ Watering: scheduled
 Chopping: scheduled
 Mining: skipped
 ```
-
-<<<HINT>>>
-
-- Calculate the total task cost first: `int totalCost = waterCost + chopCost + mineCost;`
-- Compare `totalCost` with `startingEnergy` for the full-day check.
-- Write a **separate** `if / else` for each individual task — do not nest them inside each other.
-- 20 + 30 + 40 = 90, which exceeds 80, but each task on its own is under 80.
-
-<<<END_HINT>>>
 
 ---
 
