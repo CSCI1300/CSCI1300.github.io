@@ -131,11 +131,13 @@ export const HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS = [1, 2];
 /**
  * Soft preview gate (client-side only): if homework N is **not** in `HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS`
  * but this map has a non-empty string for N, then `/hw/N?access=<that-string>` loads the handout.
- * Set `VITE_HW1_HANDOUT_ACCESS` in `.env` / CI before `npm run build` (value is baked into the bundle).
+ * Set `VITE_HW{N}_HANDOUT_ACCESS` in `.env` / CI before `npm run build` (value is baked into the bundle).
  * Leave empty (`""`) to disable URL preview for that homework entirely.
  */
 export const HOMEWORK_HANDOUT_PREVIEW_ACCESS = {
   1: import.meta.env.VITE_HW1_HANDOUT_ACCESS ?? "",
+  2: import.meta.env.VITE_HW2_HANDOUT_ACCESS ?? "",
+  3: import.meta.env.VITE_HW3_HANDOUT_ACCESS ?? "",
 };
 
 /** Each homework N in this list should have a handout file `public/hw/hw{N}/hw{N}.md` (same N as in "Homework N (Part …)"). */
