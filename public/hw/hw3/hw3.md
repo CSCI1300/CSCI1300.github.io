@@ -20,23 +20,31 @@ An `if` statement can be placed *inside* another `if` or `else` block. The inner
 
 Example:
 ```cpp
-int quality = 2;
-string type = "Fruit";
-
-if (quality >= 1) {
-    if (type == "Fruit") {
-        cout << "Accepted for the Pantry bundle!" << endl;
+if (condition) {
+    if (condition2) {
+        <body>
     } else {
-        cout << "Right quality, wrong type." << endl;
+        <body>
     }
 } else {
-    cout << "Quality too low." << endl;
+    <body>
 }
 ```
 
 ### Important Note on I/O
 
-You  will have a lot of I/O in all the following assignments. You will primarily be using `cin` and `getline()` to read input from the user. If you are getting strange behavior from your code, but no warnings/errors, try using `.ignore()` to clear the input buffer. Check out the lecture notes for more information on how to utilize `.ignore()`.
+You  will have a lot of I/O in all the following assignments. You will primarily be using `cin` and `getline()` to read input from the user. If you are getting strange behavior from your code, but no warnings/errors, try using `.ignore()` to clear the input buffer. 
+
+#### .ignore() And The Use Of Arguments
+
+`.ignore()` is an important function in I/O because it is used to clear the input buffer. When you use `cin`, it leaves a newline character in the buffer from when you hit "Enter" or "Return" on your keyboard. If you don't clear the buffer, the next `cin` will read the newline character instead of the user's input. This is exacerbated further if you provided `cin` with a multi-word input. The buffer will be filled with the space character as well as the additional words added in.
+
+`.ignore()` is a function that takes in two optional arguments. Arguments are the values that you add to function calls inside the () to define the exact expected behavior of the function. In the case of `.ignore()`, the two arguments are optional. This is the case when a function has default values for the arguments. In the case of `.ignore()`, the two arguments are the size of the buffer to clear and the *delimiter* to use. A delimiter is a character that indicates the end of the input. The default values for `.ignore()` are 1 (for maximum size of the buffer to clear) and '\n' (for the delimiter). If you want to clear the buffer entirely, you can use this long system argument: `.ignore(numeric_limits<streamsize>::max(), '\n')`. 
+
+Note: If your delimiter is found before the number of characters specified, the function will stop clearing the buffer at the delimiter. 
+
+Example:
+The buffer has "Hello World!\n" in it, and you want to get rid of everything up to the first space. You could use `cin.ignore(1000, ' ')` to get rid of everything up to the first space, unless a space isn't found before the 1000 characters, in which case the buffer will clear 1000 characters (or until the end of the buffer, if the buffer is less than 1000 characters long). After running that `.ignore()` example, the buffer will have "World!\n" in it.
 
 ---
 
@@ -47,7 +55,7 @@ The farmer is sorting through their crops to find donations for the Community Ce
 - Crop quality is **Silver (1) or better** (Gold = 2, Silver = 1, Normal = 0)
 - Crop type is **`"Vegetable"`**
 
-If quality is high enough but the type is wrong, print a different message than when quality itself is too low. There are three possible outcomes — make sure your nested `if/else` handles all three.
+If quality is high enough but the type is wrong, print a different message than when quality itself is too low. There are four possible outcomes — make sure your nested `if/else` handles all three.
 
 Print the following prompts and read each value from the user:
 
@@ -85,13 +93,14 @@ Enter the crop type: *Vegetable*
 Crop: Parsnip
 Quality: 2
 Type: Vegetable
-Bundle Status: Accepted — this crop meets all bundle requirements!
+Bundle Status: Accepted - this crop meets all bundle requirements!
 ```
 
 The other two possible `Bundle Status` messages are:
 
 ```text
-Bundle Status: Rejected — quality is too low.
+Bundle Status: Rejected - wrong crop type and quality is too low.
+Bundle Status: Rejected - quality is too low.
 Bundle Status: Rejected - wrong crop type for this bundle.
 ```
 
@@ -238,13 +247,26 @@ Collecting item 5... Energy remaining: 25
 Collection complete! You gathered 5 items.
 ```
 
-If you run out of energy, print the following message for every remaining item:
+If you run out of energy, print the following message and then stop the loop (you can use a `break` statement to do this):
 
 ```text
-Not enough energy to collect item.
+Not enough energy to collect more items.
 ```
 
-For example: If you wanted to collect 10 items, you would have to print `Not enough energy to collect item.` 4 times. Do not print the completion message in this case.
+Expected output (with sample input: 10):
+
+```text
+Enter the number of items to collect: 10
+--- Bundle Collection ---
+Collecting item 1... Energy remaining: 85
+Collecting item 2... Energy remaining: 70
+Collecting item 3... Energy remaining: 55
+Collecting item 4... Energy remaining: 40
+Collecting item 5... Energy remaining: 25
+Collecting item 6... Energy remaining: 10
+Not enough energy to collect more items.
+Collection complete! You gathered 6 items.
+```
 
 ---
 
