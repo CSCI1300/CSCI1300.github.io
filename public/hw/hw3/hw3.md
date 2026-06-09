@@ -511,7 +511,7 @@ Current Sales: 1540
 Sales Gap: 48460
 ```
 
-Note: ALl of the math and printing is happening in the `main` function, getAnnualTarget() just returns what the annual target is as an int. 
+Note: ALL of the math and printing is happening in the `main` function, getAnnualTarget() just returns what the annual target is as an int. 
 
 ---
 
