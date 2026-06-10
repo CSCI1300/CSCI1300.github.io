@@ -141,7 +141,7 @@ Each `case` ends with a `break` to stop execution from continuing into the next 
 
 ### Exercise 2 — `hw3A2.cpp`
 
-The Community Center has six rooms, each holding a different set of bundles. The farmer is assigned to repair one room each week. Print a prompt, read a room number from the user, and use a `switch` statement to look up its name.
+The Community Center has six rooms, each holding a different set of bundles. The farmer is assigned to repair one room each week. This week, we will be repairing the pantry by completing that bundle. However, the farmer may want to look up every room to plan ahead. Print a prompt, read a room number from the user, and use a `switch` statement to look up its name.
 
 Room reference:
 
@@ -171,13 +171,19 @@ Room Number:
 Room Name:
 ```
 
-Expected output (with sample input: 1):
+Those labels should be followed by this exact statement for this week:
+
+```text
+This week's goal: Repair the Pantry bundles!
+```
+
+Expected output (with sample input: 2):
 
 ```text
 Enter a room number (1-6): *1*
 --- Room Assignment ---
-Room Number: 1
-Room Name: Pantry
+Room Number: 2
+Room Name: Crafts Room
 This week's goal: Repair the Pantry bundles!
 ```
 
@@ -188,6 +194,7 @@ Enter a room number (1-6): *9*
 --- Room Assignment ---
 Room Number: 9
 No room found for that number.
+This week's goal: Repair the Pantry bundles!
 ```
 
 ---
