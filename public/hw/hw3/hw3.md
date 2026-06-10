@@ -290,6 +290,17 @@ for (int i = 0; i < name.length(); i++) {
 
 Combining this with `if / else` lets you inspect or count individual characters.
 
+**Note:** .length() returns a data type called `size_t`, which is very similar to `int`. However, since we are now using `-Werror -Wall -Wpedantic`, our compiler (and the autograder) won't like us trying to directly compare these two types of data. So, we must convert `name.length()` to an integer. You've done type conversions before, this is just a new one to add to the list of conversions to remember. 
+
+To convert `size_t` to `int` you use *static casting* with `static_cast<int>()`. The word `int` in there specifies to conver to integer, and whatever you put in the `()` is what needs to be converted. So, to fix the example above to work with our G++ flags and the autograder, we would change it to be:
+
+```cpp
+string name = "Pelican";
+for (int i = 0; i < static_cast<int>(name.length()); i++) {
+    cout << name[i] << endl;
+}
+```
+
 ---
 
 ### Exercise 4 — `hw3A4.cpp`
