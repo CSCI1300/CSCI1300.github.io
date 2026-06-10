@@ -33,18 +33,22 @@ if (condition) {
 
 ### Important Note on I/O
 
-You  will have a lot of I/O in all the following assignments. You will primarily be using `cin` and `getline()` to read input from the user. If you are getting strange behavior from your code, but no warnings/errors, try using `.ignore()` to clear the input buffer. 
+You will have a lot of I/O in all the following assignments. You will primarily be using `cin` and `getline()` to read input from the user. If you are getting strange behavior from your code, but no warnings/errors, try using `.ignore()` to clear the input buffer.
 
 #### .ignore() And The Use Of Arguments
 
-`.ignore()` is an important function in I/O because it is used to clear the input buffer. When you use `cin`, it leaves a newline character in the buffer from when you hit "Enter" or "Return" on your keyboard. If you don't clear the buffer, the next `cin` will read the newline character instead of the user's input. This is exacerbated further if you provided `cin` with a multi-word input. The buffer will be filled with the space character as well as the additional words added in.
+This most commonly matters when you use `cin >>` first and then use `getline()` afterward. The `cin >>` reads the value but leaves the newline in the input buffer, so the next `getline()` may read that leftover newline as an empty string. Another `cin >>` usually skips leading whitespace automatically, so the problem is less common when you read numbers or single words with `cin >>` back to back.
 
-`.ignore()` is a function that takes in two optional arguments. Arguments are the values that you add to function calls inside the () to define the exact expected behavior of the function. In the case of `.ignore()`, the two arguments are optional. This is the case when a function has default values for the arguments. In the case of `.ignore()`, the two arguments are the size of the buffer to clear and the *delimiter* to use. A delimiter is a character that indicates the end of the input. The default values for `.ignore()` are 1 (for maximum size of the buffer to clear) and '\n' (for the delimiter). If you want to clear the buffer entirely, you can use this long system argument: `.ignore(numeric_limits<streamsize>::max(), '\n')`. 
+`.ignore()` clears characters from the input buffer. It takes two optional arguments: how many characters to skip at most, and a *delimiter* character that stops the skip early. The defaults are `1` and `'\n'`. To clear through the next newline after a `cin >>`, a common pattern is:
 
-Note: If your delimiter is found before the number of characters specified, the function will stop clearing the buffer at the delimiter. 
+```cpp
+cin.ignore(1000, '\n');
+```
+
+Note: If the delimiter is found before the maximum number of characters, `.ignore()` stops at the delimiter.
 
 Example:
-The buffer has "Hello World!\n" in it, and you want to get rid of everything up to the first space. You could use `cin.ignore(1000, ' ')` to get rid of everything up to the first space, unless a space isn't found before the 1000 characters, in which case the buffer will clear 1000 characters (or until the end of the buffer, if the buffer is less than 1000 characters long). After running that `.ignore()` example, the buffer will have "World!\n" in it.
+The buffer has `"Hello World!\n"` in it, and you want to get rid of everything up to the first space. You could use `cin.ignore(1000, ' ')` to skip up to the first space. After that call, the buffer will have `"World!\n"` in it.
 
 ---
 
@@ -55,7 +59,7 @@ The farmer is sorting through their crops to find donations for the Community Ce
 - Crop quality is **Silver (1) or better** (Gold = 2, Silver = 1, Normal = 0)
 - Crop type is **`"Vegetable"`**
 
-If quality is high enough but the type is wrong, print a different message than when quality itself is too low. There are four possible outcomes — make sure your nested `if/else` handles all three.
+If quality is high enough but the type is wrong, print a different message than when quality itself is too low. There are four possible outcomes — make sure your nested `if/else` handles all four.
 
 Print the following prompts and read each value from the user:
 
@@ -180,6 +184,9 @@ This week's goal: Repair the Pantry bundles!
 If the room number does not match any case, print:
 
 ```text
+Enter a room number (1-6): *9*
+--- Room Assignment ---
+Room Number: 9
 No room found for that number.
 ```
 
@@ -429,13 +436,13 @@ Expected output:
 
 ```text
 --- Weekly Sales Review ---
-Day 0: 50 gold — below quota
-Day 1: 52 gold — below quota
-Day 2: 54 gold — met quota
-Day 3: 56 gold — met quota
-Day 4: 58 gold — met quota
-Day 5: 60 gold — met quota
-Day 6: 62 gold — met quota
+Day 0: 50 gold - below quota
+Day 1: 52 gold - below quota
+Day 2: 54 gold - met quota
+Day 3: 56 gold - met quota
+Day 4: 58 gold - met quota
+Day 5: 60 gold - met quota
+Day 6: 62 gold - met quota
 Days meeting quota: 5
 ```
 
@@ -574,20 +581,52 @@ Profit: 10500
 
 Joja has quietly set aside a fund to counteract the Community Center restoration effort. Morris will spend from this fund in campaign rounds until it runs dry. If there is not enough gold for a full round, spend whatever remains and print a partial round message.
 
-Print the following prompts and read each value from the user:
+Print the following prompt and read the starting fund from the user once:
 
 - `"Enter the starting opposition fund (gold): "` --> read into an `int` using `cin`
-- `"Enter the cost per campaign round (gold): "` --> read into an `int` using `cin`
 
-> **Note:** Use a **`while` loop** for this problem.
+You may assume the starting opposition fund is greater than or equal to 0.
 
-Print this exact section header:
+Then use a **while loop** to read the cost per round **until** the user enters a valid value. Each time through the loop:
+
+- Print `"Enter the cost per campaign round (gold): "` and read into an `int` using `cin`
+- If the cost is **less than or equal to 0**, print this exact message and **prompt again**:
+
+```text
+Invalid campaign cost.
+```
+
+- If the cost is **greater than 0**, stop asking and continue to the spending logic below.
+
+> **Note:** Use a **`while` loop** to drain the fund after you have a valid campaign cost.
+
+Print this exact section header **after** you have a valid cost and **before** the round-by-round spending output:
 
 ```text
 --- Opposition Fund ---
 ```
 
-Expected output (with sample inputs: fund 500, cost per round 80):
+> **Note:** Use a **`while` loop** for this problem.
+
+Expected output (with sample inputs: fund 500, cost 0, then cost 80):
+
+```text
+Enter the starting opposition fund (gold): 500
+Enter the cost per campaign round (gold): 0
+Invalid campaign cost.
+Enter the cost per campaign round (gold): 80
+--- Opposition Fund ---
+Round 1: spent 80 gold. Remaining: 420
+Round 2: spent 80 gold. Remaining: 340
+Round 3: spent 80 gold. Remaining: 260
+Round 4: spent 80 gold. Remaining: 180
+Round 5: spent 80 gold. Remaining: 100
+Round 6: spent 80 gold. Remaining: 20
+Round 7: spent 20 gold (partial round). Remaining: 0
+Total rounds of campaigning: 7
+```
+
+Expected output (with sample inputs: fund 500, cost per round 80 on the first try):
 
 ```text
 Enter the starting opposition fund (gold): 500
@@ -615,9 +654,9 @@ Tier rules:
 
 | Receptiveness Score | Result |
 | --- | --- |
-| Below 4 | Below threshold — skip |
-| 4 to 6 | Tier 1 — budget: 200 gold |
-| 7 or above | Tier 2 — budget: 400 gold |
+| Below 4 | Below threshold - skip |
+| 4 to 6 | Tier 1 - budget: 200 gold |
+| 7 or above | Tier 2 - budget: 400 gold |
 
 Print the following prompt and read the value from the user:
 
@@ -640,11 +679,11 @@ Expected output (with sample input: 5 neighborhoods):
 ```text
 Enter the number of neighborhoods: 5
 --- Ad Campaign ---
-Neighborhood 0: score 0 — below threshold, skipped
-Neighborhood 1: score 3 — below threshold, skipped
-Neighborhood 2: score 6 — Tier 1, budget: 200
-Neighborhood 3: score 9 — Tier 2, budget: 400
-Neighborhood 4: score 12 — Tier 2, budget: 400
+Neighborhood 0: score 0 - below threshold, skipped
+Neighborhood 1: score 3 - below threshold, skipped
+Neighborhood 2: score 6 - Tier 1, budget: 200
+Neighborhood 3: score 9 - Tier 2, budget: 400
+Neighborhood 4: score 12 - Tier 2, budget: 400
 Total campaign budget: 1000
 ```
 
