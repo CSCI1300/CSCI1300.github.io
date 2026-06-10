@@ -126,7 +126,7 @@ export const LECTURES = {
  * Homework numbers that show a clickable handout link on the Assignments tab. Others show plain
  * “Homework n” (not a link). Add numbers here to publish each handout.
  */
-export const HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS = [1, 2];
+export const HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS = [1, 2, 3];
 
 /**
  * Soft preview gate (client-side only): if homework N is **not** in `HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS`
