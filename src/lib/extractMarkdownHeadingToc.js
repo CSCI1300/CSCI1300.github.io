@@ -72,6 +72,54 @@ const HW2_MAIN_TOC_TREE = [
   },
 ];
 
+/**
+ * Homework 3 — curated “On this page” (Part B `#` problems + Part A `###` exercises only).
+ */
+const HW3_MAIN_TOC_TREE = [
+  {
+    id: "part-a",
+    title: "Part A",
+    level: 2,
+    children: [
+      { id: "exercise-1--hw3a1cpp", title: "Exercise 1 — `hw3A1.cpp`", level: 3, children: [] },
+      { id: "exercise-2--hw3a2cpp", title: "Exercise 2 — `hw3A2.cpp`", level: 3, children: [] },
+      { id: "exercise-3--hw3a3cpp", title: "Exercise 3 — `hw3A3.cpp`", level: 3, children: [] },
+      { id: "exercise-4--hw3a4cpp", title: "Exercise 4 — `hw3A4.cpp`", level: 3, children: [] },
+      { id: "exercise-5--hw3a5cpp", title: "Exercise 5 — `hw3A5.cpp`", level: 3, children: [] },
+    ],
+  },
+  {
+    id: "part-b",
+    title: "Part B",
+    level: 2,
+    children: [
+      { id: "problem-1-weekly-sales-review", title: "Problem 1: Weekly Sales Review", level: 3, children: [] },
+      {
+        id: "problem-2-the-quarterly-report-header",
+        title: "Problem 2: The Quarterly Report Header",
+        level: 3,
+        children: [],
+      },
+      { id: "problem-3-annual-sales-target", title: "Problem 3: Annual Sales Target", level: 3, children: [] },
+      { id: "problem-4-the-profit-calculator", title: "Problem 4: The Profit Calculator", level: 3, children: [] },
+      {
+        id: "problem-5-draining-the-opposition-fund",
+        title: "Problem 5: Draining the Opposition Fund",
+        level: 3,
+        children: [],
+      },
+      { id: "problem-6-targeted-ad-campaign", title: "Problem 6: Targeted Ad Campaign", level: 3, children: [] },
+      {
+        id: "problem-7-debugging-morriss-commission-calculator",
+        title: "Problem 7: Debugging Morris's Commission Calculator",
+        level: 3,
+        children: [],
+      },
+      { id: "final-output-requirements", title: "Final Output Requirements", level: 3, children: [] },
+    ],
+  },
+];
+
 const HEADING_H2_H3 = /^\s*(#{2,3})\s+(.+)$/;
 
 /** `##` and `###` only (outside fenced code), for nested TOC on other homework handouts. */
@@ -139,6 +187,10 @@ export function extractHomeworkHeadingToc(markdown, hwNum) {
 
   if (hwNum === 2) {
     return HW2_MAIN_TOC_TREE;
+  }
+
+  if (hwNum === 3) {
+    return HW3_MAIN_TOC_TREE;
   }
 
   return nestHeadingTocTree(extractH2H3(markdown));
