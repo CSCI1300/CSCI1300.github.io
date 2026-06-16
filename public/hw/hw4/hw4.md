@@ -551,43 +551,38 @@ Total flagged: 3
 ---
 
 # Problem 4: Price Analysis
-
-Morris is reviewing the price list for a product line and wants three numbers: the cheapest price, the most expensive price, and the average. The cheapest and most expensive should come back from a **single function** that hands back **both** results through reference parameters.
-
+ 
+Morris is reviewing the price list for a product line and wants three numbers: the cheapest price, the most expensive price, and the average.
+ 
 Read a count and that many prices into an array. Write the functions below and call them from `main`.
-
+ 
 Define these functions above `main`:
-
-- `int sumPrices(int prices[], int size)` — **returns** the sum of all prices.
-- `void priceRange(int prices[], int size, int &lowest, int &highest)` — fills `lowest` and `highest` with the smallest and largest prices in the array (using **reference parameters**).
-
+ 
+- `int sumPrices(int prices[], int size)` --> **returns** the sum of all prices.
+- `int lowestPrice(int prices[], int size)` --> **returns** the smallest price in the array.
+- `int highestPrice(int prices[], int size)` --> **returns** the largest price in the array.
 In `main`, compute the average as a decimal. Because the prices are `int`s, cast before dividing so you keep the fraction:
-
-```cpp
-double average = sumPrices(prices, size) / static_cast<double>(size);
-```
-
+ 
 Print the following prompts and read each value from the user:
-
+ 
 - `"Enter the number of products: "` --> read into an `int` using `cin`
 - `"Enter price for product N: "` --> read each value into the array using `cin`
-
 Print this exact section header:
-
+ 
 ```text
 --- Price Analysis ---
 ```
-
+ 
 Your output must include these exact labels:
-
+ 
 ```text
 Lowest price:
 Highest price:
 Average price:
 ```
-
+ 
 Expected output (with sample inputs: 4 products, prices 10 15 20 25):
-
+ 
 ```text
 Enter the number of products: 4
 Enter price for product 1: 10
