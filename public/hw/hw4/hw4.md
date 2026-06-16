@@ -417,27 +417,48 @@ Weekly customer goal met!
 
 # Problem 2: Slogan Analysis
 
-Morris is ordering a new banner for the storefront and wants to know how often a particular letter shows up in the campaign slogan — it changes the price of the lettering. Every report he prints starts with the company motto.
+Morris is ordering a new banner for the storefront and wants to know how often certain types of characters show up, as consonants, vowels, numbers, and punctuation are all priced differently. The currently slogan is "**JOJA: We have it all!**" and the new slogan can't be more than 10 gold more expensive than the current slogan.
 
-Write a **void function** named `printJojaMotto` that takes **no arguments** and prints exactly:
+Write a **bool function** named `withinBudget` that takes **two strings**:
 
-```text
-JOJA: We have it all.
+```cpp
+bool withinBudget(string originalSlogan, string newSlogan)
 ```
 
-Write a function named `countChar` that takes a `string` and a `char` and **returns** how many times that character appears in the string. Loop through the string by index. Remember that `.length()` returns a `size_t`, so compare your loop counter against `static_cast<int>(slogan.length())`.
+Write another function named `priceChar` that takes a `char` and returns an `int` with the price for that character to be added to a banner. Use the exact prices below:
+
+```text
+Consonants: 2 gold
+Vowels: 3 gold
+Numbers: 2 gold
+Punctuation: 4 gold
+Spaces: 0 gold
+```
+
+Note: You must account for all English characters, numbers 0-9, and the following punctuation marks: ! , : .
 
 Define these functions above `main`:
 
-- `void printJojaMotto()`
-- `int countChar(string text, char target)`
+- `int priceChar(char c)`
+- `bool withinBudget(string originalSlogan, string newSlogan)`
 
-In `main`, read the slogan and the letter, then print the header, call `printJojaMotto()`, and report the count. Because this `getline` follows the `cin >>` from Problem 1, clear the buffer first with `cin.ignore(1000, '\n')`.
+In `main`, read a in a new slogan from the user using `getline()` and compare it to the pre-existing slogan ("**JOJA: We have it all!**"). If the new slogan is out of budget (>10 gold more than the existing slogan), then continue to prompt the user for a new slogan, until one is given that is within budget. 
 
 Print the following prompts and read each value from the user:
 
-- `"Enter the campaign slogan: "` --> read a full line into a `string` using `getline`
-- `"Enter the letter to count: "` --> read into a `char` using `cin`
+- `"Enter a new campaign slogan: "` --> read a full line into a `string` using `getline`
+
+If the new slogan is within budget, print:
+
+```text
+The new slogan has been submitted for printing!
+```
+
+If the new slogan is out of budget, print the following and then continue to take input for a new slogan (using the same prompt as before):
+
+```text
+This new slogan is out of budget.
+```
 
 Print this exact section header:
 
@@ -448,18 +469,36 @@ Print this exact section header:
 Your output must include these exact labels:
 
 ```text
-Slogan:
+Previous Slogan: 
+Previous Slogan Cost: 
+New Slogan: 
+New Slogan Cost: 
 ```
 
-Expected output (with sample inputs: slogan `Joja Mart Saves`, letter `a`):
+Expected output (with sample inputs: `Joja Mart Saves`):
 
 ```text
-Enter the campaign slogan: Joja Mart Saves
-Enter the letter to count: a
+Enter a new campaign slogan: Joja Mart Saves
 --- Slogan Analysis ---
-JOJA: We have it all.
-Slogan: Joja Mart Saves
-Letter 'a' appears 3 times.
+Previous Slogan: JOJA: We have it all.
+Previous Slogan Cost: 45
+New Slogan: Joja Mart Saves
+New Slogan Cost: 31
+The new slogan has been submitted for printing!
+```
+
+Expected output (with sample inputs: `!!!!!!!!!!!!`, `Joja Mart Saves`):
+
+```text
+Enter a new campaign slogan: !!!!!!!!!!!!
+This new slogan is out of budget.
+Enter a new campaign slogan: Joja Mart Saves
+--- Slogan Analysis ---
+Previous Slogan: JOJA: We have it all.
+Previous Slogan Cost: 45
+New Slogan: Joja Mart Saves
+New Slogan Cost: 31
+The new slogan has been submitted for printing!
 ```
 
 ---
