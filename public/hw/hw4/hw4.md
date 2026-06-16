@@ -341,15 +341,11 @@ You will define and call functions throughout this assignment, including functio
 
 ### A reminder on input (`cin` and `getline`)
 
-Most problems read with `cin >>`. One problem reads a full line with `getline`. Remember that `cin >>` leaves the newline behind in the input buffer, so **before** a `getline` that follows a `cin >>`, clear the buffer with:
-
-```cpp
-cin.ignore(1000, '\n');
-```
+Most problems read with `cin >>`. One problem reads a full line with `getline`. Remember that `cin >>` leaves the newline behind in the input buffer, so **before** a `getline` that follows a `cin >>`, clear the buffer with `.ignore()`.
 
 ---
 
-You are still the Assistant to the Regional Manager of JojaMart Pelican Town, reporting to **Morris**. The Pantry reopening at the Community Center did not go unnoticed at JojaMart — Morris saw the foot traffic shift and was *not* pleased. But Morris is a numbers man before he is a sentimental one, and a setback is just data. This week he wants the operation tightened: customers counted, shelves audited, prices reviewed, and the week's profit trend laid bare. No grand moves yet — just a sharper, faster Joja machine. The takeover is still a long way off. For now, the reports come first, and Morris wants them done right.
+You are still the Assistant to the Regional Manager of JojaMart Pelican Town, reporting to **Morris**. The Pantry reopening at the Community Center did not go unnoticed at JojaMart. Morris saw the foot traffic shift and was *not* pleased. But Morris is a numbers man more than he is a sentimental one, and a setback is just data. This week he wants the operation tightened: customers counted, shelves audited, prices reviewed, and the week's profit trend laid bare. No grand moves yet, just a sharper, faster Joja machine. The takeover is still a long way off. For now, the reports come first, and Morris wants them done right.
 
 ---
 
@@ -363,18 +359,22 @@ Define these functions above `main`:
 
 - `int totalCustomers(int counts[], int size)` — **returns** the sum of all counts.
 - `int busiestDayIndex(int counts[], int size)` — **returns the index** of the largest count (you may assume no ties).
-- `int weeklyGoal()` — takes **no arguments** and **returns** the weekly customer goal, which is `400`.
+- `int getWeeklyGoal()` — takes **no arguments** and **returns** the weekly customer goal, through input from the user.
 
 > **Note:** Use a **`for` loop** to read and to walk the array.
 
-In `main`, after printing the total and the busiest day, compare the total to `weeklyGoal()` using `if / else`:
+In `main`, after printing the total and the busiest day, compare the total to `getWeeklyGoal()` using `if / else`:
 
 - If the total is **greater than or equal to** the goal: print `"Weekly customer goal met!"`
 - Otherwise: print `"Below weekly goal."`
 
 Print the following prompt and read each value from the user:
 
-- `"Enter customers for day N: "` --> read each value into the array using `cin` (N from 0 to 6)
+- `"Enter customers for {day}: "` --> read each value into the array using `cin` ({day} should be replaced with a string of the day, so if it's day 2 then you should print `Tuesday` here).
+
+`getWeeklyGoal()` should print the following prompt and read an integer value from the user:
+
+- `"Enter customer count target for this week: "` 
 
 Print this exact section header:
 
@@ -389,26 +389,27 @@ Total weekly customers:
 Busiest day:
 ```
 
-Expected output (with sample inputs: 40 55 48 62 70 90 85):
+Expected output (with sample inputs: 40 55 48 62 70 90 85 400):
 
 ```text
-Enter customers for day 0: 40
-Enter customers for day 1: 55
-Enter customers for day 2: 48
-Enter customers for day 3: 62
-Enter customers for day 4: 70
-Enter customers for day 5: 90
-Enter customers for day 6: 85
+Enter customers for Sunday: 40
+Enter customers for Monday: 55
+Enter customers for Tuesday: 48
+Enter customers for Wednesday: 62
+Enter customers for Thursday: 70
+Enter customers for Friday: 90
+Enter customers for Saturday: 85
+Enter customer count target for this week: 400
 --- Foot Traffic Report ---
-Day 0: 40 customers
-Day 1: 55 customers
-Day 2: 48 customers
-Day 3: 62 customers
-Day 4: 70 customers
-Day 5: 90 customers
-Day 6: 85 customers
+Sunday: 40 customers
+Monday: 55 customers
+Tuesday: 48 customers
+Wednesday: 62 customers
+Thursday: 70 customers
+Friday: 90 customers
+Saturday: 85 customers
 Total weekly customers: 450
-Busiest day: Day 5
+Busiest day: Friday
 Weekly customer goal met!
 ```
 
