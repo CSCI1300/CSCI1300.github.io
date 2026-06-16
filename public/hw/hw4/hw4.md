@@ -417,7 +417,7 @@ Weekly customer goal met!
 
 # Problem 2: Slogan Analysis
 
-Morris is ordering a new banner for the storefront and wants to know how often certain types of characters show up, as consonants, vowels, numbers, and punctuation are all priced differently. The currently slogan is "**JOJA: We have it all!**" and the new slogan can't be more than 10 gold more expensive than the current slogan.
+Morris is ordering a new banner for the storefront and wants to know how often certain types of characters show up, since consonants, vowels, numbers, and punctuation are all priced differently. The currently slogan is "**JOJA: We have it all!**" and the new slogan can't be more than 10 gold more expensive than the current slogan.
 
 Write a **bool function** named `withinBudget` that takes **two strings**:
 
@@ -442,13 +442,13 @@ Define these functions above `main`:
 - `int priceChar(char c)`
 - `bool withinBudget(string originalSlogan, string newSlogan)`
 
-In `main`, read a in a new slogan from the user using `getline()` and compare it to the pre-existing slogan ("**JOJA: We have it all!**"). If the new slogan is out of budget (>10 gold more than the existing slogan), then continue to prompt the user for a new slogan, until one is given that is within budget. 
+In `main`, read a in a new slogan from the user using `getline()` and compare it to the pre-existing slogan ("**JOJA: We have it all!**"). Use `priceChar` to do your comparison. If the new slogan is out of budget (>10 gold more than the existing slogan), then continue to prompt the user for a new slogan, until one is given that is within budget. Note: A slogan that is exactly 10 gold more than the current slogan is acceptable.
 
 Print the following prompts and read each value from the user:
 
-- `"Enter a new campaign slogan: "` --> read a full line into a `string` using `getline`
+- `"Enter a new campaign slogan: "` --> read a full line into a `string` using `getline()`
 
-If the new slogan is within budget, print:
+If the new slogan is within budget, print the following from main:
 
 ```text
 The new slogan has been submitted for printing!
