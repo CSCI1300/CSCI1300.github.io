@@ -335,23 +335,7 @@ For this assignment, you will write one complete C++ program in a file named:
 hw4b.cpp
 ```
 
-As in HW3, all of your functions must be **defined above `main()`**. Use this template:
-
-```cpp
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-// Define your functions here, above main()
-
-int main() {
-
-    // Write your homework code here
-
-    return 0;
-}
-```
+As in HW3, all of your functions must be **defined above `main()`**. 
 
 You will define and call functions throughout this assignment, including functions that take arrays as parameters and modify array elements.
 
