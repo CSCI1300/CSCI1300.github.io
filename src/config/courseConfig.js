@@ -111,8 +111,16 @@ export const LECTURE_TOPICS = {
   "2026-06-02": "More strings,IO, if-else",
   "2026-06-04": "No class",
   "2026-06-05": "Switch statements and intro to loops",
-  "2026-06-19": "No class (Juneteenth)",
-  "2026-07-03": "No class (Independence Day)",
+  "2026-06-08": "Review assignment, nested loops",
+  "2026-06-09": "Nested loops, loops with conditionals and strings",
+  "2026-06-11": "Functions: definition, parameters, return, scope",
+  "2026-06-12": "No class",
+  "2026-06-15": "Arrays, arrays + functions, pass-by-value vs pass-by-reference",
+  "2026-06-16": "Multi-dimensional arrays, references in functions",
+  "2026-06-18": "Exam review",
+  "2026-06-19": "No class",
+  "2026-06-22": "Exam",
+  "2026-07-03": "No class",
 };
 
 export const LECTURES = {
@@ -138,6 +146,7 @@ export const HOMEWORK_HANDOUT_PREVIEW_ACCESS = {
   1: import.meta.env.VITE_HW1_HANDOUT_ACCESS ?? "",
   2: import.meta.env.VITE_HW2_HANDOUT_ACCESS ?? "",
   3: import.meta.env.VITE_HW3_HANDOUT_ACCESS ?? "",
+  4: import.meta.env.VITE_HW4_HANDOUT_ACCESS ?? "",
 };
 
 /** Each homework N in this list should have a handout file `public/hw/hw{N}/hw{N}.md` (same N as in "Homework N (Part …)"). */
