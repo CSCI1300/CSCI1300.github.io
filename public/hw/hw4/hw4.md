@@ -363,7 +363,7 @@ Define these functions above `main`:
 
 > **Note:** Use a **`for` loop** to read and to walk the array.
 
-In `main`, after printing the total and the busiest day, compare the total to `getWeeklyGoal()` using `if / else`:
+After reading the seven daily customer counts, call `getWeeklyGoal()` and store the returned goal. Then print the report and compare the total to the goal.
 
 - If the total is **greater than or equal to** the goal: print `"Weekly customer goal met!"`
 - Otherwise: print `"Below weekly goal."`
