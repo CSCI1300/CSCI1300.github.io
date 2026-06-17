@@ -37,7 +37,7 @@ for (int i = 0; i < 5; i++) {
 
 **Fixed size:** An array's size must be a constant known when the program is compiled. You **cannot** write `int values[n];` where `n` is a number you read from the user. The compiler (with our `-Wall -Werror -Wpedantic` flags) will reject it.
 
-When you do not know in advance how many values the user will enter, declare an array large enough to hold the most you will ever need (a **maximum capacity**) and only use the first part of it. Just remember, you are taking up memory for all of those values, even the ones you don't use.:
+When you do not know in advance how many values the user will enter, declare an array large enough to hold the most you will ever need (a **maximum capacity**) and only use the first part of it. Just remember, you are taking up memory for all of those values, even the ones you don't use:
 
 ```cpp
 const int MAX_ITEMS = 100;     // capacity: more than enough
@@ -193,7 +193,7 @@ Value: 40 gold
 
 The Crafts Room **construction bundle** needs wood. The farmer heads into the forest and chops trees over several days, recording each day's haul. They want a running stockpile total that grows as each day is added. The farmer does this Monday through Saturday (six days total). 
 
-Read a daily wood amounts into an array. Write a function named `addToStockpile` that takes the running stockpile array and an amount, and adds the amount to the stockpile. In `main`, start the stockpile at `0`, loop through the array calling `addToStockpile` once per day, and print the running total after each day. You can't change or add more parameters to `addToStockpile`. 
+Read the daily wood amounts into an array. Write a function named `addToStockpile` that takes the running stockpile array and an amount, and adds the amount to the stockpile. In `main`, start the stockpile at `0`, loop through the array calling `addToStockpile` once per day, and print the running total after each day. You can't change or add more parameters to `addToStockpile`. 
 
 Define this function above `main`:
 
@@ -244,7 +244,7 @@ Total wood for the bundle: 95
 
 It is time to review the whole forage haul and see how close the Crafts Room bundle is to being filled. A foraged item is good enough for the bundle only if its value is **at least 20 gold**. The farmer wants two numbers at once: **how many** items qualify, and the **total value** of those qualifying items. The bundle is complete if there are enough items of adequate quality to have a total value of **100**.
 
-Read a count and that many values into an array (similar to problems 1 and 2). Then write a function named `analyzeHaul` that takes the array, its size, and a threshold. The count of qualifying items should be printed within that function, and their total value should be returned. In `main`, call then function after the array has been populated by the values.
+Read a count and that many values into an array (similar to problems 1 and 2). Then write a function named `analyzeHaul` that takes the array, its size, and a threshold. The count of qualifying items should be printed within that function, and their total value should be returned. In `main`, call the function after the array has been populated by the values.
 
 Define this function above `main`:
 
@@ -417,7 +417,7 @@ Weekly customer goal met!
 
 # Problem 2: Slogan Analysis
 
-Morris is ordering a new banner for the storefront and wants to know how often certain types of characters show up, since consonants, vowels, numbers, and punctuation are all priced differently. The currently slogan is "**JOJA: We have it all!**" and the new slogan can't be more than 10 gold more expensive than the current slogan.
+Morris is ordering a new banner for the storefront and wants to know how often certain types of characters show up, since consonants, vowels, numbers, and punctuation are all priced differently. The current slogan is "**JOJA: We have it all!**" and the new slogan can't be more than 10 gold more expensive than the current slogan.
 
 Write a **bool function** named `withinBudget` that takes **two strings**:
 
@@ -442,7 +442,7 @@ Define these functions above `main`:
 - `int priceChar(char c)`
 - `bool withinBudget(string originalSlogan, string newSlogan)`
 
-In `main`, read a in a new slogan from the user using `getline()` and compare it to the pre-existing slogan ("**JOJA: We have it all!**"). Use `priceChar` to do your comparison. If the new slogan is out of budget (>10 gold more than the existing slogan), then continue to prompt the user for a new slogan, until one is given that is within budget. Note: A slogan that is exactly 10 gold more than the current slogan is acceptable.
+In `main`, read in a new slogan from the user using `getline()` and compare it to the current slogan ("**JOJA: We have it all!**"). Use `priceChar` to do your comparison. If the new slogan is out of budget (>10 gold more than the existing slogan), then continue to prompt the user for a new slogan, until one is given that is within budget. Note: A slogan that is exactly 10 gold more than the current slogan is acceptable.
 
 Print the following prompts and read each value from the user:
 
