@@ -55,7 +55,7 @@ for (int i = 0; i < count; i++) {
 
 ### Arrays and Functions
 
-You can pass an entire array into a function, but it behaves differently than any normal argument you would pass to a function. Modifying an array parameter will modify that array everywhere in your code, scope is ignored. You also can't return an array, as an array is not a returnable data type. 
+You can pass an entire array into a function, but it behaves differently than any normal argument you would pass to a function. When an array is passed to a function, the function can modify the original array's elements. This is different from ordinary pass-by-value variables. You also can't return an array, as an array is not a returnable data type. 
 
 ```cpp
 int sumValues(int arr[], int sizeOfArr) {
@@ -98,7 +98,7 @@ We will continue to use **pass-by-value** in this class and in future homeworks,
 
 The farmer empties their backpack onto the Crafts Room table: a pile of foraged goods, each worth a different amount of gold. They want a quick tally of the whole haul.
 
-Read a count from the user (how many foraged items the farmer has), then read that many gold values per foraged good into an array. Write a function named `totalValue` that takes the array and its size and **returns** the sum of all values. In `main`, print each item, then print the total returned by your function.
+Read a count from the user (how many foraged items the farmer has), then read that many gold values per foraged good into an array. You may assume the count will be between 1 and 100. Write a function named `totalValue` that takes the array and its size and **returns** the sum of all values. In `main`, print each item, then print the total returned by your function.
 
 Define this function above `main`:
 
@@ -145,7 +145,7 @@ Total forage value: 80 gold
 
 One of those foraged items is worth far more than the rest. Before donating, the farmer wants to know **which** item in the pile is the most valuable so they can decide whether to sell it instead.
 
-Read a count and that many values into an array, exactly as in Exercise 1. Then write a function named `findBestIndex` that takes the array and its size and **returns the index** of the largest value. In `main`, use that index to report which item is best (numbered from 1) and its value.
+Read a count and that many values into an array, exactly as in Exercise 1. You may assume the count will be between 1 and 100. Then write a function named `findBestIndex` that takes the array and its size and **returns the index** of the largest value. In `main`, use that index to report which item is best (numbered from 1) and its value.
 
 Define this function above `main`:
 
@@ -195,10 +195,12 @@ The Crafts Room **construction bundle** needs wood. The farmer heads into the fo
 
 Read the daily wood amounts into an array. Write a function named `addToStockpile` that takes the running stockpile array and an amount, and adds the amount to the stockpile. In `main`, start the stockpile at `0`, loop through the array calling `addToStockpile` once per day, and print the running total after each day. You can't change or add more parameters to `addToStockpile`. 
 
+Use a one-element array for the stockpile, where stockpile[0] stores the running total.
+
 Define this function above `main`:
 
 ```cpp
-void addToStockpile(int[] stockpile, int amount)
+void addToStockpile(int stockpile[], int amount)
 ```
 
 Print the following prompts and read each value from the user:
@@ -242,24 +244,41 @@ Total wood for the bundle: 95
 
 ### Exercise 4 — `hw4A4.cpp`
 
-It is time to review the whole forage haul and see how close the Crafts Room bundle is to being filled. A foraged item is good enough for the bundle only if its value is **at least 20 gold**. The farmer wants two numbers at once: **how many** items qualify, and the **total value** of those qualifying items. The bundle is complete if there are enough items of adequate quality to have a total value of **100**.
+It is time to review the whole forage haul and see how close the Crafts Room bundle is to being filled. A foraged item is good enough for the bundle only if its value is **at least 20 gold**. The farmer wants to know two things: **how many** items qualify, and the **total value** of those qualifying items. The bundle is complete if the total value of the qualifying items is **at least 100 gold**.
 
-Read a count and that many values into an array (similar to problems 1 and 2). Then write a function named `analyzeHaul` that takes the array, its size, and a threshold. The count of qualifying items should be printed within that function, and their total value should be returned. In `main`, call the function after the array has been populated by the values.
+Read a count from the user, then read that many forage values into an array. You may assume the count will be between `1` and `100`.
+
+Write a function named `analyzeHaul` that takes the forage values array, its size, a threshold, and a results array. The function should use the results array to store both answers:
+
+* `results[0]` should store the number of accepted items
+* `results[1]` should store the total value of the accepted items
 
 Define this function above `main`:
 
 ```cpp
-void analyzeHaul(int values[], int size, int threshold)
+void analyzeHaul(int values[], int size, int threshold, int results[])
 ```
+
+Inside `analyzeHaul`:
+
+* Set `results[0]` to `0`
+* Set `results[1]` to `0`
+* Loop through the `values` array
+* If an item’s value is **greater than or equal to** the threshold:
+
+  * Increase `results[0]`
+  * Add that value to `results[1]`
+
+In `main`, call `analyzeHaul` after the array has been filled. Then use the results array to print the number of accepted items, the total accepted value, and whether the bundle was completed.
 
 Print the following prompts and read each value from the user:
 
-- `"Enter the number of forage items: "` --> read into an `int` using `cin`
-- `"Enter the value of forage item N: "` --> read each value into the array using `cin`
+* `"Enter the number of forage items: "` --> read into an `int` using `cin`
+* `"Enter the value of forage item N: "` --> read each value into the array using `cin`
 
 Use this exact value:
 
-- Threshold: `20`
+* Threshold: `20`
 
 Print this exact section header:
 
@@ -275,9 +294,9 @@ Total accepted value:
 Bundle completed:
 ```
 
-For `Bundle completed: ` you will print `true` if the total value of accepted items is >=100, and `false` if the value is <100.
+For `Bundle completed:`, print `true` if the total accepted value is greater than or equal to `100`. Otherwise, print `false`.
 
-Expected output (with sample inputs: 5 items, values 10 25 15 30 22):
+Expected output with sample inputs `5`, then `10 25 15 30 22`:
 
 ```text
 Enter the number of forage items: 5
@@ -292,9 +311,8 @@ Total accepted value: 77 gold
 Bundle completed: false
 ```
 
-(The values `25`, `30`, and `22` each meet the threshold of `20`: that is 3 items totaling 77 gold.)
+The values `25`, `30`, and `22` each meet the threshold of `20`. That means 3 items are accepted, with a total accepted value of 77 gold.
 
----
 
 <<<HW_ACTION>>>
 
@@ -302,8 +320,8 @@ Submit **Part A** on **[Gradescope](https://www.gradescope.com/courses/1314704)*
 
 - **`hw4A1.cpp`** — Array traversal + function returning a sum
 - **`hw4A2.cpp`** — Array search + function returning an index
-- **`hw4A3.cpp`** — Pass-by-reference: building a stockpile
-- **`hw4A4.cpp`** — Array + function with reference output parameters
+- **`hw4A3.cpp`** — Pass-by-reference: Modifying an array inside a function
+- **`hw4A4.cpp`** — Array input + array output results
 
 <<<END_HW_ACTION>>>
 
@@ -337,7 +355,7 @@ int main() {
 }
 ```
 
-You will define and call functions throughout this assignment, including functions that take arrays and functions that use reference parameters.
+You will define and call functions throughout this assignment, including functions that take arrays as parameters and modify array elements.
 
 ### A reminder on input (`cin` and `getline`)
 
@@ -434,8 +452,9 @@ Numbers: 2 gold
 Punctuation: 4 gold
 Spaces: 0 gold
 ```
+Treat uppercase and lowercase letters the same. For example, A and a are both vowels.
 
-Note: You must account for all English characters, numbers 0-9, and the following punctuation marks: ! , : .
+Note: You must account for uppercase letters, lowercase letters, digits 0-9, spaces, and the punctuation marks ! , : .
 
 Define these functions above `main`:
 
@@ -480,21 +499,21 @@ Expected output (with sample inputs: `Joja Mart Saves`):
 ```text
 Enter a new campaign slogan: Joja Mart Saves
 --- Slogan Analysis ---
-Previous Slogan: JOJA: We have it all.
+Previous Slogan: JOJA: We have it all!
 Previous Slogan Cost: 45
 New Slogan: Joja Mart Saves
 New Slogan Cost: 31
 The new slogan has been submitted for printing!
 ```
 
-Expected output (with sample inputs: `!!!!!!!!!!!!`, `Joja Mart Saves`):
+Expected output (with sample inputs: `!!!!!!!!!!!!!!`, `Joja Mart Saves`):
 
 ```text
-Enter a new campaign slogan: !!!!!!!!!!!!
+Enter a new campaign slogan: !!!!!!!!!!!!!!
 This new slogan is out of budget.
 Enter a new campaign slogan: Joja Mart Saves
 --- Slogan Analysis ---
-Previous Slogan: JOJA: We have it all.
+Previous Slogan: JOJA: We have it all!
 Previous Slogan Cost: 45
 New Slogan: Joja Mart Saves
 New Slogan Cost: 31
@@ -554,21 +573,27 @@ Total flagged: 3
  
 Morris is reviewing the price list for a product line and wants three numbers: the cheapest price, the most expensive price, and the average.
  
-Read a count and that many prices into an array. Write the functions below and call them from `main`.
+Read a count and that many prices into an array. You may assume the count will be between 1 and 100. Write the functions below and call them from `main`.
  
 Define these functions above `main`:
- 
-- `int sumPrices(int prices[], int size)` --> **returns** the sum of all prices.
-- `int lowestPrice(int prices[], int size)` --> **returns** the smallest price in the array.
-- `int highestPrice(int prices[], int size)` --> **returns** the largest price in the array.
+
+* `int sumPrices(int prices[], int size)` --> **returns** the sum of all prices.
+* `int lowestPrice(int prices[], int size)` --> **returns** the smallest price in the array.
+* `int highestPrice(int prices[], int size)` --> **returns** the largest price in the array.
+
 In `main`, compute the average as a decimal. Because the prices are `int`s, cast before dividing so you keep the fraction:
- 
+
+```cpp
+double average = static_cast<double>(sumPrices(prices, count)) / count;
+```
+
 Print the following prompts and read each value from the user:
- 
-- `"Enter the number of products: "` --> read into an `int` using `cin`
-- `"Enter price for product N: "` --> read each value into the array using `cin`
+
+* `"Enter the number of products: "` --> read into an `int` using `cin`
+* `"Enter price for product N: "` --> read each value into the array using `cin`
+
 Print this exact section header:
- 
+
 ```text
 --- Price Analysis ---
 ```
@@ -656,7 +681,7 @@ Requests processed: 3
 
 Morris wants to know whether business is actually trending up. He has the daily profit for several days and wants a count of the **growth days** — days where the profit was higher than the day before — plus a one-line verdict.
 
-Read a count and that many daily profits into an array. Write a function that counts the growth days by comparing each day to the one before it (start the comparison at index 1).
+Read a count and that many daily profits into an array. You may assume the count will be between 1 and 100. Write a function that counts the growth days by comparing each day to the one before it (start the comparison at index 1).
 
 Define this function above `main`:
 
@@ -706,7 +731,7 @@ Growth is stalling.
 
 # Problem 7: Debugging Morris's Stock Report
 
-It is late, and Morris tried to write a quick stock report before leaving — a function to total an array and another to double a year-end bonus. Nothing compiles. Help him fix it.
+It is late, and Morris tried to write a quick stock report before leaving. He wanted one function to total an array of stock values and another function to double a year-end bonus. Nothing compiles correctly. Help him fix it.
 
 Copy this broken code into your file **as comments**:
 
@@ -719,18 +744,33 @@ Copy this broken code into your file **as comments**:
 //     return total;
 // }
 //
-// void applyBonus(int bonus) {
+// void applyBonus(int bonus[]) {
 //     bonus = bonus * 2;
 // }
 //
 // int stock[3] = {10, 20, 30};
-// int bonus = 5;
+// int bonus[1] = {5};
 // applyBonus(bonus);
 // cout << "Total Stock: " << sumStock(stock, 3) << endl
-// cout << "Bonus: " << bonus << endl;
+// cout << "Bonus: " << bonus[0] << endl;
 ```
 
-Then write a **corrected version** underneath it. The array totaling and the bonus doubling should both work, and the bonus change must actually stick. Read nothing from the user for this problem — use the values shown.
+Then write a **corrected version** underneath it.
+
+Your corrected program should:
+
+* Fix the `sumStock` function so it correctly totals the stock array.
+* Fix the `applyBonus` function so it doubles the value stored in `bonus[0]`.
+* Use the given stock values: `10`, `20`, and `30`.
+* Use a one-element bonus array initialized to `5`.
+* Read nothing from the user for this problem.
+
+Define these functions above `main`:
+
+```cpp
+int sumStock(int stock[], int size)
+void applyBonus(int bonus[])
+```
 
 Print this exact section header:
 
@@ -757,9 +797,8 @@ You must include at least **two comments** explaining what you fixed. For exampl
 
 ```cpp
 // Fixed: added the missing comma and type in the function parameter list.
-// Fixed: changed the bonus parameter to pass-by-reference so the change persists.
+// Fixed: added a missing output label.
 ```
-
 ---
 
 # Final Output Requirements
