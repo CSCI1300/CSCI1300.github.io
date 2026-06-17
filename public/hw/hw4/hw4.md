@@ -193,9 +193,7 @@ Value: 40 gold
 
 The Crafts Room **construction bundle** needs wood. The farmer heads into the forest and chops trees over several days, recording each day's haul. They want a running stockpile total that grows as each day is added. The farmer does this Monday through Saturday (six days total). 
 
-Read the daily wood amounts into an array. Write a function named `addToStockpile` that takes the running stockpile array and an amount, and adds the amount to the stockpile. In `main`, start the stockpile at `0`, loop through the array calling `addToStockpile` once per day, and print the running total after each day. You can't change or add more parameters to `addToStockpile`. 
-
-Use a one-element array for the stockpile, where stockpile[0] stores the running total.
+Read the daily wood amounts into an array of size 6. Write a function named `addToStockpile` that takes the running stockpile array and an amount, and adds the amount to the stockpile corresponding to the correct day. Declare the array in `main()`. Loop through the array in `addToStockpile` every day, adding the `amount` of wood chopped that day to the array at the correct index. (Hint: the first 0 value in the array to appear should correspond to the correct day). Print the running total after each day. You can't change or add more parameters to `addToStockpile`. 
 
 Define this function above `main`:
 
