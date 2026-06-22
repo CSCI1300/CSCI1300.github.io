@@ -120,6 +120,44 @@ const HW3_MAIN_TOC_TREE = [
   },
 ];
 
+/**
+ * Homework 4 — curated “On this page” (Part B `#` problems + Part A `###` exercises only).
+ */
+const HW4_MAIN_TOC_TREE = [
+  {
+    id: "part-a",
+    title: "Part A",
+    level: 2,
+    children: [
+      { id: "exercise-1--hw4a1cpp", title: "Exercise 1 — `hw4A1.cpp`", level: 3, children: [] },
+      { id: "exercise-2--hw4a2cpp", title: "Exercise 2 — `hw4A2.cpp`", level: 3, children: [] },
+      { id: "exercise-3--hw4a3cpp", title: "Exercise 3 — `hw4A3.cpp`", level: 3, children: [] },
+      { id: "exercise-4--hw4a4cpp", title: "Exercise 4 — `hw4A4.cpp`", level: 3, children: [] },
+    ],
+  },
+  {
+    id: "part-b",
+    title: "Part B",
+    level: 2,
+    children: [
+      { id: "how-to-write-this-program", title: "How to Write This Program", level: 3, children: [] },
+      { id: "problem-1-weekly-foot-traffic", title: "Problem 1: Weekly Foot Traffic", level: 3, children: [] },
+      { id: "problem-2-slogan-analysis", title: "Problem 2: Slogan Analysis", level: 3, children: [] },
+      { id: "problem-3-inventory-audit", title: "Problem 3: Inventory Audit", level: 3, children: [] },
+      { id: "problem-4-price-analysis", title: "Problem 4: Price Analysis", level: 3, children: [] },
+      { id: "problem-5-restock-queue", title: "Problem 5: Restock Queue", level: 3, children: [] },
+      { id: "problem-6-profit-trend", title: "Problem 6: Profit Trend", level: 3, children: [] },
+      {
+        id: "problem-7-debugging-morriss-stock-report",
+        title: "Problem 7: Debugging Morris's Stock Report",
+        level: 3,
+        children: [],
+      },
+      { id: "final-output-requirements", title: "Final Output Requirements", level: 3, children: [] },
+    ],
+  },
+];
+
 const HEADING_H2_H3 = /^\s*(#{2,3})\s+(.+)$/;
 
 /** `##` and `###` only (outside fenced code), for nested TOC on other homework handouts. */
@@ -191,6 +229,10 @@ export function extractHomeworkHeadingToc(markdown, hwNum) {
 
   if (hwNum === 3) {
     return HW3_MAIN_TOC_TREE;
+  }
+
+  if (hwNum === 4) {
+    return HW4_MAIN_TOC_TREE;
   }
 
   return nestHeadingTocTree(extractH2H3(markdown));

@@ -4,6 +4,8 @@ import {
   HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS,
   HOMEWORK_HANDOUT_PREVIEW_ACCESS,
   OVERVIEW,
+  PROJECT_HANDOUT_LINK_ENABLED,
+  PROJECT_HANDOUT_PREVIEW_ACCESS,
 } from "../config/courseConfig.js";
 import HandoutMarkdown from "../components/HandoutMarkdown.jsx";
 import HwOsPick from "../components/HwOsPick.jsx";
@@ -25,6 +27,12 @@ function handoutFileUrl(num) {
   let base = import.meta.env.BASE_URL || "/";
   if (!base.endsWith("/")) base += "/";
   return `${base}hw/hw${num}/hw${num}.md`;
+}
+
+function projectHandoutFileUrl() {
+  let base = import.meta.env.BASE_URL || "/";
+  if (!base.endsWith("/")) base += "/";
+  return `${base}hw/project/final-proj.md`;
 }
 
 function HwHandoutLightbox({ src, alt, onClose }) {
@@ -156,14 +164,14 @@ function HwTocBranch({ nodes, isRoot }) {
   );
 }
 
-export default function HwMarkdownPage() {
+export default function HwMarkdownPage({ project = false }) {
   const { hwNum } = useParams();
-  const num = useMemo(() => parseHwNum(hwNum), [hwNum]);
+  const num = useMemo(() => (project ? null : parseHwNum(hwNum)), [project, hwNum]);
   const [phase, setPhase] = useState("loading");
   const [markdown, setMarkdown] = useState("");
   const [lightbox, setLightbox] = useState(null);
 
-  const valid = num != null;
+  const valid = project || num != null;
   const location = useLocation();
   const handoutLinkEnabled = useMemo(() => new Set(HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS), []);
 
@@ -173,12 +181,19 @@ export default function HwMarkdownPage() {
   }, [location.search]);
 
   const handoutUnlocked = useMemo(() => {
-    if (!valid || num == null) return false;
+    if (!valid) return false;
+    if (project) {
+      if (PROJECT_HANDOUT_LINK_ENABLED) return true;
+      const secret = PROJECT_HANDOUT_PREVIEW_ACCESS;
+      if (typeof secret !== "string" || secret.length === 0) return false;
+      return accessParam === secret;
+    }
+    if (num == null) return false;
     if (handoutLinkEnabled.has(num)) return true;
     const secret = HOMEWORK_HANDOUT_PREVIEW_ACCESS[num];
     if (typeof secret !== "string" || secret.length === 0) return false;
     return accessParam === secret;
-  }, [valid, num, handoutLinkEnabled, accessParam]);
+  }, [valid, project, num, handoutLinkEnabled, accessParam]);
 
   const tocTree = useMemo(() => {
     if (phase !== "ready" || !markdown) return [];
@@ -199,7 +214,9 @@ export default function HwMarkdownPage() {
     }
 
     if (!handoutUnlocked) {
-      const secret = HOMEWORK_HANDOUT_PREVIEW_ACCESS[num] ?? "";
+      const secret = project
+        ? PROJECT_HANDOUT_PREVIEW_ACCESS
+        : (HOMEWORK_HANDOUT_PREVIEW_ACCESS[num] ?? "");
       const previewConfigured = typeof secret === "string" && secret.length > 0;
       setPhase(previewConfigured ? "preview-locked" : "closed");
       setMarkdown("");
@@ -210,7 +227,7 @@ export default function HwMarkdownPage() {
     setPhase("loading");
     setMarkdown("");
 
-    fetch(handoutFileUrl(num))
+    fetch(project ? projectHandoutFileUrl() : handoutFileUrl(num))
       .then((res) => {
         if (!res.ok) throw new Error(res.status === 404 ? "not-found" : `http-${res.status}`);
         return res.text();
@@ -228,18 +245,18 @@ export default function HwMarkdownPage() {
     return () => {
       cancelled = true;
     };
-  }, [num, valid, handoutUnlocked, accessParam]);
+  }, [num, project, valid, handoutUnlocked, accessParam]);
 
   useEffect(() => {
     if (!valid) {
-      document.title = `Homework · ${DEFAULT_TITLE}`;
+      document.title = project ? `Final project · ${DEFAULT_TITLE}` : `Homework · ${DEFAULT_TITLE}`;
       return;
     }
-    document.title = `Homework ${num} · ${DEFAULT_TITLE}`;
+    document.title = project ? `Final project · ${DEFAULT_TITLE}` : `Homework ${num} · ${DEFAULT_TITLE}`;
     return () => {
       document.title = DEFAULT_TITLE;
     };
-  }, [num, valid]);
+  }, [num, project, valid]);
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
@@ -289,7 +306,7 @@ export default function HwMarkdownPage() {
     [setLightbox],
   );
 
-  const heading = num != null ? `Homework ${num}` : "Homework handout";
+  const heading = project ? "Final project" : num != null ? `Homework ${num}` : "Homework handout";
 
   return (
     <div className={`c1300-hw-handout-page${showRail ? " c1300-hw-handout-page--with-rail" : ""}`}>
@@ -324,14 +341,18 @@ export default function HwMarkdownPage() {
 
         {valid && phase === "closed" && (
           <p className="c1300-hw-handout-lede" role="status">
-            This homework handout is not linked on the Assignments page yet.
+            {project
+              ? "The final project handout is not linked on the Assignments page yet."
+              : "This homework handout is not linked on the Assignments page yet."}
           </p>
         )}
 
         {valid && phase === "preview-locked" && (
           <div className="c1300-hw-preview-locked">
             <p className="c1300-hw-handout-lede" role="status">
-              This handout is hidden on the Assignments tab. Enter the access code to view it.
+              {project
+                ? "This project handout is hidden on the Assignments tab. Enter the access code to view it."
+                : "This handout is hidden on the Assignments tab. Enter the access code to view it."}
             </p>
             {accessParam ? (
               <p className="c1300-hw-handout-lede c1300-hw-preview-locked__hint" role="status">
@@ -344,8 +365,9 @@ export default function HwMarkdownPage() {
 
         {valid && phase === "not-found" && (
           <p className="c1300-hw-handout-lede" role="status">
-            This handout is not posted yet. Check back after it is announced in class, or confirm the
-            homework number in the assignment schedule.
+            {project
+              ? "This project handout is not posted yet. Check back after it is announced in class."
+              : "This handout is not posted yet. Check back after it is announced in class, or confirm the homework number in the assignment schedule."}
           </p>
         )}
 
