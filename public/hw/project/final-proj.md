@@ -18,7 +18,7 @@ This project will get you familiar with:
    - Using conditionals, loops, arrays, and functions together
    - Creating a win/loss condition or multiple endings
 
-> **Warning:** You are not allowed to use global variables, pointers, or pass-by-reference for this assignment.
+> **Warning:** You may ONLY use concepts that have been taught in this class this summer. 
 
 
 ## Introduction
@@ -782,13 +782,7 @@ Your program must meet the following technical requirements.
 
 ## Not Allowed
 
-You may **not** use:
-
-- Global variables
-- Pointers
-- Pass-by-reference
-
-You should avoid advanced C++ features we have not covered in class.
+You may **not** use any concepts taught outside this class, including other languages, more advanced concepts, different versions of concepts we've taught (an example could be a library for expanding on arrays that we didn't teach) without instructor approval. If you wish to use something not taught in this class, you must get permission from Zachary Kaufman or Amanda Hernandez Sandate first. 
 
 ---
 
@@ -1162,3 +1156,7 @@ Recommended next steps:
 1. Visit Willy at the Beach to improve your fishing chance.
 2. Visit the Mines to search for Copper Ore.
 ```
+
+### Create Your Own EC Opportunity
+
+If you have an idea for an extension of your game that isn't listed here, reach out to the course staff (an Instructor or TA) with your idea. The course staff will decide on a point value for that idea if approved. 
