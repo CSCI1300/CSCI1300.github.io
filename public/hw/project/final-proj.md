@@ -1,4 +1,4 @@
-# Project 2: The Final Bundle
+# Final Project: The Final Bundle
 
 ## Overview
 
@@ -1094,8 +1094,6 @@ Estimated travel cost: 2 energy
 ```
 
 This could be implemented using a graph search algorithm such as **breadth-first search (BFS)** for an unweighted map.
-
-This feature is extra-credit worthy because it requires you to represent the map as more than printed ASCII art. The program must understand how locations are connected and use an algorithm to search those connections.
 
 ### Option 2: Weighted Route Planning (+5 points)
 
