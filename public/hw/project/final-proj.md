@@ -1068,6 +1068,12 @@ During your interview, you will run your program and walk through your code with
 
 Extra credit is for features that add meaningful complexity to the game, not just more printed text. To receive extra credit, the feature must be fully implemented and explained in your reflection or README.
 
+#### Max Amount of Extra Credit:
+
+On this project you may have a maximum of 11 points of extra credit (meaning, you can pick up to two of the extra credit opportunities below, all of which are worth five points except one which is worth six points). However, if you create your own extra credit option which is approved, you may complete that in addition to up to two of the pre-made extra credit options (or you may complete your own idea without any other extra credit options). 
+
+So, if you don't create your own extra credit idea, then your maximum extra credit is 11 points, or two of the pre-made options. If you do create your own extra credit idea which is approved, then you may complete that as well as a maximum of 11 points from the pre-made options, allowing you to go above 11 points. You may also do your own idea alone, or with only one other pre-made option.
+
 ### Option 1: Shortest Path or Map Recommendation Algorithm (+5 points)
 
 Add an algorithm that helps the player navigate the town map.
