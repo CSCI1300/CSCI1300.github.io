@@ -377,30 +377,13 @@ For this assignment, you will write one complete C++ program in a file named:
 hw5b.cpp
 ```
 
-As in HW3 and HW4, all of your functions must be **defined above `main()`**. This week introduces **one** new tool — the **vector** — alongside a broad review of everything from the past few weeks: functions, arrays, loops (`for`, `while`, and nested), `switch` statements, conditionals, strings, and input handling. Use this template:
-
-```cpp
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
-
-// Define your functions here, above main()
-
-int main() {
-
-    // Write your homework code here
-
-    return 0;
-}
-```
+As in HW3 and HW4, all of your functions must be **defined above `main()`**. This week introduces **one** new tool, the **vector**, alongside a broad review of everything from the past few weeks: functions, arrays, loops (`for`, `while`, and nested), `switch` statements, conditionals, strings, and input handling. 
 
 ---
 
 ## New this week: Vectors
 
-An **array** has a fixed size that must be known when the program is compiled. A **vector** is a more flexible cousin: it can **grow** as you add items, and it always **knows its own size**. You will use vectors constantly in your final project, so this assignment introduces them now.
+An **array** has a fixed size that must be known when the program is compiled. A **vector** is a more flexible cousin: it can **grow** as you add items, and it always **knows its own size**. You will likely use vectors in your final project, so this assignment will give you some practice with them.
 
 To use vectors, add `#include <vector>` at the top of your file.
 
@@ -413,7 +396,7 @@ vector<int> scores = {10, 20};  // a vector that starts with two values
 
 The `<int>` part says "a vector that holds ints." You could also have a `vector<string>`, a `vector<double>`, and so on.
 
-**Adding to a vector** with `.push_back()` — this appends a value to the end and grows the vector by one:
+**Adding to a vector** with `.push_back()` --> this appends a value to the end and grows the vector by one:
 
 ```cpp
 vector<int> sales;     // empty
@@ -436,7 +419,7 @@ for (int i = 0; i < static_cast<int>(sales.size()); i++) {
 }
 ```
 
-**Vectors and functions.** Unlike arrays, a vector **can** be passed by value and **can** be returned from a function. When you pass a vector by value, the function receives a **copy** (so changes inside the function do not affect the original — just like an ordinary `int`). A function can also build a brand-new vector and `return` it:
+**Vectors and functions.** Unlike arrays, a vector **can** be passed by value and **can** be returned from a function. When you pass a vector by value, the function receives a **copy** (so changes inside the function do not affect the original, just like an ordinary `int`). A function can also build a brand-new vector and `return` it:
 
 ```cpp
 int sumVector(vector<int> v) {            // takes a vector, returns an int
@@ -456,11 +439,9 @@ vector<int> makeDoubled(vector<int> v) {  // takes a vector, returns a vector
 }
 ```
 
-> **Reminder:** Because a vector passed by value is copied, a function written like the ones above reads from the vector or returns a new one. That is exactly what every problem below needs.
-
 ---
 
-You are still the Assistant to the Regional Manager of JojaMart Pelican Town, reporting to **Morris**. The Vault at the Community Center is filling up, and Morris has noticed gold flowing toward the restoration instead of toward Joja. He is not panicking — Morris never panics on paper — but he wants the numbers tighter than ever. This week is all about data: logging sales, ranking days, auditing regions, polishing the storefront message, and trimming the product list down to the winners. No bold moves, just a sharper machine. The real confrontation is still weeks away. For now, Morris wants clean reports, and he wants them to compile without a single warning.
+You are still the Assistant to the Regional Manager of JojaMart Pelican Town, reporting to **Morris**. The Vault at the Community Center is filling up, and Morris has noticed gold flowing toward the restoration instead of toward Joja. This week is all about data: logging sales, ranking days, auditing regions, polishing the storefront message, and trimming the product list down to the winners. No bold moves, just a sharper machine. The real confrontation is still weeks away. For now, Morris wants clean reports, and he wants them to compile without a single warning.
 
 ---
 
@@ -571,7 +552,7 @@ Use this exact value:
 Print the following prompts and read each value from the user:
 
 - `"Enter the number of regions: "` --> read into an `int` using `cin` (you may assume 1 to 100)
-- `"Enter sales for region R day D: "` --> read each value using `cin`
+- `"Enter sales for region R day D: "` --> read each value using `cin` (Replace R with the region number and D with the day (both starting at 1))
 
 Print this exact section header (after reading the number of regions, before the nested loop):
 
@@ -611,7 +592,7 @@ Grand total: 1100
 
 # Problem 4: Store Announcement
 
-Morris is updating the loudspeaker announcement that plays over the storefront, and he wants it printed in bold, attention-grabbing capitals.
+Morris is updating the sales announcement banner over the storefront, and he wants it printed in bold, attention-grabbing capitals.
 
 Read a full-line announcement from the user with `getline()`. Write a function that returns the announcement converted to **all uppercase**, leaving spaces and punctuation untouched. Convert each lowercase letter by walking the string character by character.
 
@@ -621,7 +602,7 @@ Define this function above `main`:
 
 > **Reminder on input:** because earlier problems read with `cin >>`, a newline is left behind in the input buffer. **Before** this problem's `getline`, clear it with `cin.ignore(1000, '\n');` so the announcement is not read as an empty line.
 
-> **Hint:** A lowercase letter (`'a'` to `'z'`) can be converted to its uppercase form by subtracting `32` from the character. You do not need any special library functions.
+> **Reminder:** You can do integer math on char variables to change their value (remember the ASCII table, search for one as a reference for this problem).
 
 Print the following prompt and read the value from the user:
 
@@ -655,9 +636,9 @@ Length: 13
 
 # Problem 5: Joja Terminal
 
-Morris wants a simple terminal he can use to manage the day's operating budget — spending on advertising or restocking, collecting membership fees, and checking the balance — until he closes it out.
+Morris wants a simple terminal he can use to manage the day's operating budget, such as spending on advertising or restocking, collecting membership fees, and checking the balance until he closes out the program.
 
-Display a menu and use a **`while` loop** that keeps running until the user chooses option `5`. Read the user's choice each time through the loop, and respond with `if / else if / else` (or a `switch`). Keep a running **budget** that starts from a value the user provides. Spending options may **not** drive the budget negative: if there is not enough budget for an action, refuse it and print a message instead.
+Display a menu and use a **`while` loop** that keeps running until the user chooses option `5`. Read the user's choice each time through the loop, and use `if / else if / else` (or a `switch`) to decide on the response. Keep a running **budget** that starts from a value the user provides. Spending options may **not** drive the budget negative: if there is not enough budget for an action, refuse it and print a message instead.
 
 Write this function and call it from inside your loop:
 
@@ -684,7 +665,7 @@ Action rules:
 | 5 | Print `Closing the Joja terminal.` (and the loop ends) |
 | anything else | Print `Invalid option.` |
 
-> **Note:** Use a **`while` loop** for this problem.
+> **Note:** Use a **`do while` loop** for this problem.
 
 Print the following prompts and read each value from the user:
 
@@ -745,6 +726,8 @@ Choose an option: 5
 Closing the Joja terminal.
 Final budget: 125 gold
 ```
+
+You may create additional functions for this problem if you would like to, but you are only required to include main() and printMenu().
 
 ---
 
@@ -829,20 +812,6 @@ Copy this broken code into your file **as comments**:
 
 Then write a **corrected version** underneath it.
 
-Your corrected program should:
-
-- Fix the `sumVector` function so it correctly totals the vector.
-- Build a vector containing the values `10`, `20`, and `30` using `.push_back()`.
-- Read nothing from the user for this problem.
-
-Define this function above `main`:
-
-```cpp
-int sumVector(vector<int> v)
-```
-
-> **Hint:** There are missing semicolons, and the loop has two problems with how it compares `i` to `v.size()` — think about both the comparison operator **and** the `size_t` vs `int` warning you learned about.
-
 Print this exact section header:
 
 ```text
@@ -862,11 +831,7 @@ Expected output:
 Sum: 60
 ```
 
-You must include at least **two comments** explaining what you fixed. For example (these are not the correct fixes, just an example of the format):
-
-```cpp
-// Fixed: added the missing semicolon after the total declaration.
-// Fixed: changed <= to < so the loop does not run past the end of the vector.
+You must include at least **two comments** explaining what you fixed. 
 ```
 
 ---
