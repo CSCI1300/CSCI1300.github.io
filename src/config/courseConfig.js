@@ -134,7 +134,7 @@ export const LECTURES = {
  * Homework numbers that show a clickable handout link on the Assignments tab. Others show plain
  * “Homework n” (not a link). Add numbers here to publish each handout.
  */
-export const HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS = [1, 2, 3, 4];
+export const HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS = [1, 2, 3, 4, 5];
 
 /**
  * Soft preview gate (client-side only): if homework N is **not** in `HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS`
@@ -147,6 +147,7 @@ export const HOMEWORK_HANDOUT_PREVIEW_ACCESS = {
   2: import.meta.env.VITE_HW2_HANDOUT_ACCESS ?? "",
   3: import.meta.env.VITE_HW3_HANDOUT_ACCESS ?? "",
   4: import.meta.env.VITE_HW4_HANDOUT_ACCESS ?? "",
+  5: import.meta.env.VITE_HW5_HANDOUT_ACCESS ?? "",
 };
 
 /**
