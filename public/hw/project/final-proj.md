@@ -66,6 +66,7 @@ No matter what theme you choose, your game must still include:
 - at least 4 locations
 - a player inventory
 - a limited resource
+- a time limit
 - a map or location display
 - a meaningful shortcut/tradeoff system (Joja-style)
 - a win/loss condition or multiple endings
@@ -408,18 +409,21 @@ Examples:
 
 ## 8. Resource Management
 
-Your game must include at least one limited resource.
+Your game must include at least one limited resource as well as a time limit.
 
 Possible limited resources include:
 
-- Days
-- Turns
 - Energy
 - Money
 - Friendship
 - Inventory space
 
-The player should have to make choices because of this resource.
+Possible time limits include:
+
+- Days left in the season
+- Max number of actions
+
+The player should have to make choices because of their limited resources.
 
 For example:
 
@@ -1026,6 +1030,7 @@ A minimum complete version of the project should include:
 - A map display
 - A menu system
 - A limited resource
+- A time limit
 - A JojaMart interaction or Joja shortcut system
 - A game loop
 - A win/loss condition
