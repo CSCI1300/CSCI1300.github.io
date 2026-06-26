@@ -154,7 +154,7 @@ export const HOMEWORK_HANDOUT_PREVIEW_ACCESS = {
  * Final project handout at `public/hw/project/final-proj.md`. When false, use
  * `/project?access=<VITE_PROJECT_HANDOUT_ACCESS>` for staff preview only.
  */
-export const PROJECT_HANDOUT_LINK_ENABLED = false;
+export const PROJECT_HANDOUT_LINK_ENABLED = true;
 export const PROJECT_HANDOUT_PREVIEW_ACCESS = import.meta.env.VITE_PROJECT_HANDOUT_ACCESS ?? "";
 
 /** Each homework N in this list should have a handout file `public/hw/hw{N}/hw{N}.md` (same N as in "Homework N (Part …)"). */

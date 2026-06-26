@@ -9,6 +9,7 @@ import {
   HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS,
   LATE_POLICY_SEGMENTS,
   LETTER_CUTOFFS,
+  PROJECT_HANDOUT_LINK_ENABLED,
 } from "../../config/courseConfig.js";
 import { formatAssignmentDate, formatAssignmentDue } from "../../lib/courseFormats.js";
 import { renderInlineParts } from "./renderInlineParts.jsx";
@@ -120,7 +121,15 @@ export default function AssignmentsPanel() {
             <tbody>
               {majorDateRows.map((row) => (
                 <tr key={row.name}>
-                  <td>{row.name}</td>
+                  <td>
+                    {row.name === "Final project" && PROJECT_HANDOUT_LINK_ENABLED ? (
+                      <Link className="c1300-lecture-link" to="/project">
+                        {row.name}
+                      </Link>
+                    ) : (
+                      row.name
+                    )}
+                  </td>
                   <td>{row.dueIso ? formatAssignmentDue(row.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
                   <td className="c1300-assign-note">{row.note ?? "—"}</td>
                 </tr>
