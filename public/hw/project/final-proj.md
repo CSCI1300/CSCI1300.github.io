@@ -1168,4 +1168,6 @@ Recommended next steps:
 
 ### Create Your Own EC Opportunity
 
-If you have an idea for an extension of your game that isn't listed here, reach out to the course staff (an Instructor or TA) with your idea. The course staff will decide on a point value for that idea if approved. 
+If you have an idea for an extension of your game that isn't listed here, submit your proposal using the QR code below. Course staff will review your idea and decide on a point value if it is approved.
+
+![Extra Credit Plan Submission](/hw/project/QR.png)
