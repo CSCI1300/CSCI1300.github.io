@@ -14,13 +14,15 @@ export default function HwOsPick({
   mdComponents,
   windowsSlugPrefix = "hw-os-win-",
   macSlugPrefix = "hw-os-mac-",
+  windowsPanelId,
+  macPanelId,
 }) {
   const winLabel = windowsSummary ?? "Windows";
   const macLabel = macSummary ?? "Mac";
 
   return (
     <div className="c1300-hw-os-pick" role="group" aria-label={groupLabel}>
-      <details className="c1300-hw-os-pick__panel">
+      <details id={windowsPanelId} className="c1300-hw-os-pick__panel">
         <summary className="c1300-hw-os-pick__summary">{winLabel}</summary>
         <div className="c1300-hw-os-pick__body">
           <HandoutMarkdown
@@ -30,7 +32,7 @@ export default function HwOsPick({
           />
         </div>
       </details>
-      <details className="c1300-hw-os-pick__panel">
+      <details id={macPanelId} className="c1300-hw-os-pick__panel">
         <summary className="c1300-hw-os-pick__summary">{macLabel}</summary>
         <div className="c1300-hw-os-pick__body">
           <HandoutMarkdown

@@ -158,7 +158,112 @@ const HW4_MAIN_TOC_TREE = [
   },
 ];
 
+/**
+ * Homework 5 — curated “On this page” (Part B `#` problems + Part A setup steps).
+ */
+const HW5_MAIN_TOC_TREE = [
+  {
+    id: "part-a",
+    title: "Part A",
+    level: 2,
+    children: [
+      { id: "step-1--create-a-github-account", title: "Step 1 — Create a GitHub account", level: 3, children: [] },
+      {
+        id: "step-2--install-git",
+        title: "Step 2 — Install Git",
+        level: 3,
+        collapsible: true,
+        children: [
+          { id: "hw5-git-win", title: "Windows", level: 4, children: [] },
+          { id: "hw5-git-mac", title: "Mac", level: 4, children: [] },
+        ],
+      },
+      { id: "step-3--tell-git-who-you-are", title: "Step 3 — Tell Git who you are", level: 3, children: [] },
+      {
+        id: "step-4--create-an-ssh-key-and-link-it-to-github",
+        title: "Step 4 — Create an SSH key and link it to GitHub",
+        level: 3,
+        collapsible: true,
+        children: [
+          { id: "hw5-ssh-win", title: "Windows", level: 4, children: [] },
+          { id: "hw5-ssh-mac", title: "Mac", level: 4, children: [] },
+        ],
+      },
+      { id: "step-5--create-a-repository-on-github", title: "Step 5 — Create a repository on GitHub", level: 3, children: [] },
+      {
+        id: "step-6--clone-your-repository-to-your-computer",
+        title: "Step 6 — Clone your repository to your computer",
+        level: 3,
+        children: [],
+      },
+      {
+        id: "step-7--the-two-c-exercises",
+        title: "Step 7 — The two C++ exercises",
+        level: 3,
+        children: [
+          { id: "exercise-1--hw5a1cpp", title: "Exercise 1 — `hw5A1.cpp`", level: 4, children: [] },
+          { id: "exercise-2--hw5a2cpp", title: "Exercise 2 — `hw5A2.cpp`", level: 4, children: [] },
+        ],
+      },
+      { id: "step-8--commit-and-push-your-work", title: "Step 8 — Commit and push your work", level: 3, children: [] },
+    ],
+  },
+  {
+    id: "part-b",
+    title: "Part B",
+    level: 2,
+    children: [
+      { id: "how-to-write-this-program", title: "How to Write This Program", level: 3, children: [] },
+      { id: "new-this-week-vectors", title: "New this week: Vectors", level: 3, children: [] },
+      { id: "problem-1-daily-sales-log", title: "Problem 1: Daily Sales Log", level: 3, children: [] },
+      { id: "problem-2-best-sales-day", title: "Problem 2: Best Sales Day", level: 3, children: [] },
+      { id: "problem-3-regional-sales", title: "Problem 3: Regional Sales", level: 3, children: [] },
+      { id: "problem-4-store-announcement", title: "Problem 4: Store Announcement", level: 3, children: [] },
+      { id: "problem-5-joja-terminal", title: "Problem 5: Joja Terminal", level: 3, children: [] },
+      { id: "problem-6-high-performers", title: "Problem 6: High Performers", level: 3, children: [] },
+      {
+        id: "problem-7-debugging-morriss-stock-tally",
+        title: "Problem 7: Debugging Morris's Stock Tally",
+        level: 3,
+        children: [],
+      },
+      { id: "final-output-requirements", title: "Final Output Requirements", level: 3, children: [] },
+    ],
+  },
+];
+
 const HEADING_H2_H3 = /^\s*(#{2,3})\s+(.+)$/;
+const HEADING_H1_H2 = /^\s*(#{1,2})\s+(.+)$/;
+
+/** `#` and `##` only (outside fenced code), for final project handout sidebar. */
+function extractH1H2(markdown) {
+  if (!markdown || typeof markdown !== "string") return [];
+  const slugger = new GithubSlugger();
+  const lines = markdown.split(/\r?\n/);
+  const items = [];
+  let inFence = false;
+
+  for (const line of lines) {
+    const trimmed = line.trimStart();
+    if (trimmed.startsWith("```")) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+
+    const m = HEADING_H1_H2.exec(line);
+    if (!m) continue;
+
+    const level = m[1].length;
+    const title = m[2].trim().replace(/\s+#+\s*$/, "").trim();
+    if (!title) continue;
+
+    const id = slugger.slug(title);
+    items.push({ level, title, id });
+  }
+
+  return items;
+}
 
 /** `##` and `###` only (outside fenced code), for nested TOC on other homework handouts. */
 function extractH2H3(markdown) {
@@ -235,5 +340,19 @@ export function extractHomeworkHeadingToc(markdown, hwNum) {
     return HW4_MAIN_TOC_TREE;
   }
 
+  if (hwNum === 5) {
+    return HW5_MAIN_TOC_TREE;
+  }
+
   return nestHeadingTocTree(extractH2H3(markdown));
+}
+
+/**
+ * Final project handout — nest `#` sections with their `##` subsections in the sidebar.
+ * @param {string} markdown
+ * @returns {{ id: string, title: string, level: number, children: object[] }[]}
+ */
+export function extractProjectHeadingToc(markdown) {
+  if (!markdown || typeof markdown !== "string") return [];
+  return nestHeadingTocTree(extractH1H2(markdown));
 }

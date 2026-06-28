@@ -1,3 +1,13 @@
+<<<HW_WARNING>>>
+
+No global variables on this project.
+
+Use only the C++ we taught in CSCI 1300 this summer. If your code uses global variables or concepts we did not cover, you will receive an automatic zero.
+
+Libraries are allowed. Check with an instructor before you add an external library or use a feature you are not sure about.
+
+<<<END_HW_WARNING>>>
+
 # Final Project: The Final Bundle
 
 ## Overview
@@ -17,9 +27,6 @@ This project will get you familiar with:
    - Managing player choices
    - Using conditionals, loops, arrays, and functions together
    - Creating a win/loss condition or multiple endings
-
-> **Warning:** You may ONLY use concepts that have been taught in this class this summer. 
-
 
 ## Introduction
 
@@ -65,8 +72,8 @@ No matter what theme you choose, your game must still include:
 - at least 4 meaningful characters
 - at least 4 locations
 - a player inventory
-- a limited resource
-- a time limit
+- a time limit (required)
+- at least one additional limited resource beyond time (energy, money, friendship, inventory space, etc.)
 - a map or location display
 - a meaningful shortcut/tradeoff system (Joja-style)
 - a win/loss condition or multiple endings
@@ -81,7 +88,7 @@ Your game should center around this main objective:
 
 > **Complete the final Community Center bundle before the season ends.**
 
-The player should have a limited amount of time, such as a certain number of days, turns, or actions. During the game, the player should be able to:
+The player must always have a **limited amount of time** (such as a certain number of days, turns, or actions). **In addition**, the player must manage **at least one more limited resource** beyond time. During the game, the player should be able to:
 
 - Visit different locations in the valley
 - Talk to characters
@@ -107,7 +114,9 @@ Will you complete the final bundle and restore the Community Center?
 
 # Required Game Features
 
-Your project must include all of the following features.
+**All 11 sections below (1–11) are required.** They describe what your game must include: gameplay, design, and player experience.
+
+Your code must also follow the **Object-Oriented Programming Requirements** and **General Programming Requirements** sections later in this handout. Those sections cover class design and general C++ standards, not game features.
 
 ## 1. Single-Player Game
 
@@ -409,21 +418,22 @@ Examples:
 
 ## 8. Resource Management
 
-Your game must include at least one limited resource as well as a time limit.
+Your game must include **time** as a limited resource **and at least one additional limited resource** beyond time.
 
-Possible limited resources include:
+**Time (required)** — the player must face a time limit, such as:
+
+- Days left in the season
+- A fixed number of turns
+- A maximum number of actions per day or per game
+
+**At least one more limited resource (required)** — choose at least one other resource the player must spend, earn, or manage. Examples include:
 
 - Energy
 - Money
 - Friendship
 - Inventory space
 
-Possible time limits include:
-
-- Days left in the season
-- Max number of actions
-
-The player should have to make choices because of their limited resources.
+The player should have to make choices because of these limits — time alone is not enough.
 
 For example:
 
@@ -553,6 +563,8 @@ You are encouraged to include multiple endings based on player choices.
 ---
 
 # Object-Oriented Programming Requirements
+
+These requirements are **separate from sections 1–11**, but they are still **required**. They describe how your project must use classes and objects.
 
 Your project must use classes and objects.
 
@@ -764,11 +776,13 @@ The `Game` class is a good place to manage the main game loop.
 
 ---
 
-# Technical Requirements
+# General Programming Requirements
 
-Your program must meet the following technical requirements.
+These are **general coding requirements** for your C++ program. They are **required**, but they are **not** part of the numbered game features (1–11). Think of sections 1–11 as *what your game does*. this section is *how your program is built*.
 
-## Required
+Your program must meet the following standards.
+
+## C++ and program standards
 
 - Use C++
 - Use at least **3 classes**
@@ -813,6 +827,22 @@ You may include:
 - A Joja route or Joja shortcut
 - Junimo hints
 - A season countdown
+
+---
+
+# Example Projects (Download)
+
+Two sample terminal games are available below each with a Mac and Windows build. Download and run locally to see the kind of experience your project should aim for. These are **demos only** , not starter code. Your submitted project must be your own work.
+
+**Note:** These examples are from previous semesters, when the theme and exact requirements varied (for example, some included multiplayer features). Your project must follow **this** handout. Still, the general outline is the same, and the game loop should look very similar to what you see in these demos.
+
+**Example 1**
+- **Mac:** [ProjectExampleMac](/hw/project/ProjectExampleMac)
+- **Windows:** [ProjectExample1Windows.exe](/hw/project/ProjectExample1Windows.exe)
+
+**Example 2**
+- **Mac:** [ProjectExample2Mac](/hw/project/ProjectExample2Mac)
+- **Windows:** [ProjectExample2Windows.exe](/hw/project/ProjectExample2Windows.exe)
 
 ---
 
@@ -1008,7 +1038,7 @@ A good order is:
 8. Add characters
 9. Add character interactions
 10. Add quests or rewards
-11. Add energy, money, or days
+11. Add a time limit and at least one additional limited resource (energy, money, etc.)
 12. Add JojaMart tradeoffs
 13. Add win/loss conditions
 14. Improve formatting and user interface
@@ -1029,8 +1059,8 @@ A minimum complete version of the project should include:
 - An inventory
 - A map display
 - A menu system
-- A limited resource
-- A time limit
+- A time limit (required)
+- At least one additional limited resource beyond time (required)
 - A JojaMart interaction or Joja shortcut system
 - A game loop
 - A win/loss condition

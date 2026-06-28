@@ -320,6 +320,32 @@
   text-decoration: underline;
 }
 
+.c1300-hw-toc__details {
+  margin: 0;
+}
+
+.c1300-hw-toc__details > .c1300-hw-toc__sublist {
+  margin-top: 0.35rem;
+}
+
+.c1300-hw-toc__summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+.c1300-hw-toc__summary::-webkit-details-marker {
+  display: none;
+}
+
+.c1300-hw-toc__summary-link {
+  text-decoration: none;
+}
+
+.c1300-hw-toc__summary-link:hover {
+  text-decoration: underline;
+}
+
 .c1300-hw-handout-doc {
   min-width: 0;
 }
@@ -635,6 +661,52 @@
   border-left: 3px solid #cbd5e1;
   color: #475569;
   font-size: 0.92rem;
+}
+
+/* Critical warning callout — `<<<HW_WARNING>>>` … `<<<END_HW_WARNING>>>` */
+.c1300-hw-markdown__body .c1300-hw-callout--warning,
+.c1300-hw-os-pick__body .c1300-hw-callout--warning {
+  margin: 0 0 1.35rem;
+  padding: 1.1rem 1.15rem 1.15rem;
+  border: 3px solid #c62828;
+  border-radius: 10px;
+  background: #ffebee;
+  box-shadow: 0 0 0 1px rgba(198, 40, 40, 0.15);
+  color: #7f0000;
+}
+
+.c1300-hw-callout__warning-label {
+  margin: 0 0 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b71c1c;
+}
+
+.c1300-hw-callout__body--warning {
+  font-size: 1.02rem;
+  line-height: 1.55;
+  font-weight: 400;
+  color: #7f0000;
+}
+
+.c1300-hw-markdown__body .c1300-hw-callout--warning .c1300-hw-callout__body--warning p,
+.c1300-hw-markdown__body .c1300-hw-callout--warning .c1300-hw-callout__body--warning li {
+  color: #7f0000;
+}
+
+.c1300-hw-markdown__body .c1300-hw-callout--warning .c1300-hw-callout__body--warning strong {
+  color: #b71c1c;
+}
+
+.c1300-hw-markdown__body .c1300-hw-callout--warning .c1300-hw-callout__body--warning a {
+  color: #b71c1c;
+  font-weight: 700;
+}
+
+.c1300-hw-markdown__body .c1300-hw-callout--warning .c1300-hw-callout__body--warning a:hover {
+  color: #7f0000;
 }
 
 /* Student action callout — `<<<HW_ACTION>>>` … `<<<END_HW_ACTION>>>` (HandoutMarkdown.jsx + handoutActionCalloutStyles.js; shell = inline styles) */

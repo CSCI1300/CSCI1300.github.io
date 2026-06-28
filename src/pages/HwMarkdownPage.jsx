@@ -10,7 +10,8 @@ import {
 import HandoutMarkdown from "../components/HandoutMarkdown.jsx";
 import HwOsPick from "../components/HwOsPick.jsx";
 import { splitHw1OsSections } from "../lib/splitHw1OsSections.js";
-import { extractHomeworkHeadingToc } from "../lib/extractMarkdownHeadingToc.js";
+import { splitHw5OsSections } from "../lib/splitHw5OsSections.js";
+import { extractHomeworkHeadingToc, extractProjectHeadingToc } from "../lib/extractMarkdownHeadingToc.js";
 import "../styles/hw-markdown.css";
 
 const DEFAULT_TITLE = "CSCI 1300: Starting Computing";
@@ -156,12 +157,44 @@ function HwTocBranch({ nodes, isRoot }) {
     <ul className={listClass}>
       {nodes.map((n) => (
         <li key={n.id}>
-          <a href={`#${n.id}`}>{n.title}</a>
-          {n.children.length > 0 ? <HwTocBranch nodes={n.children} /> : null}
+          {n.collapsible && n.children.length > 0 ? (
+            <details className="c1300-hw-toc__details">
+              <summary className="c1300-hw-toc__summary">
+                <a
+                  href={`#${n.id}`}
+                  className="c1300-hw-toc__summary-link"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {n.title}
+                </a>
+              </summary>
+              <HwTocBranch nodes={n.children} />
+            </details>
+          ) : (
+            <>
+              <a href={`#${n.id}`}>{n.title}</a>
+              {n.children.length > 0 ? <HwTocBranch nodes={n.children} /> : null}
+            </>
+          )}
         </li>
       ))}
     </ul>
   );
+}
+
+function openHandoutHashTarget(hash) {
+  const id = hash.replace(/^#/, "").trim();
+  if (!id) return;
+  const el = document.getElementById(id);
+  if (!el) return;
+  document.querySelectorAll(".c1300-hw-toc__details").forEach((details) => {
+    if (details.contains(el)) details.open = true;
+  });
+  if (el.tagName === "DETAILS") {
+    el.open = true;
+    return;
+  }
+  el.closest("details")?.setAttribute("open", "");
 }
 
 export default function HwMarkdownPage({ project = false }) {
@@ -197,8 +230,9 @@ export default function HwMarkdownPage({ project = false }) {
 
   const tocTree = useMemo(() => {
     if (phase !== "ready" || !markdown) return [];
+    if (project) return extractProjectHeadingToc(markdown);
     return extractHomeworkHeadingToc(markdown, num);
-  }, [markdown, phase, num]);
+  }, [markdown, phase, num, project]);
 
   const showRail = phase === "ready" && tocTree.length > 0;
 
@@ -206,6 +240,19 @@ export default function HwMarkdownPage({ project = false }) {
     if (num !== 1 || !markdown) return null;
     return splitHw1OsSections(markdown);
   }, [num, markdown]);
+
+  const hw5Split = useMemo(() => {
+    if (num !== 5 || !markdown) return null;
+    return splitHw5OsSections(markdown);
+  }, [num, markdown]);
+
+  useEffect(() => {
+    if (phase !== "ready") return;
+    openHandoutHashTarget(location.hash);
+    const onHash = () => openHandoutHashTarget(window.location.hash);
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, [phase, location.hash, markdown]);
 
   useEffect(() => {
     if (!valid) {
@@ -410,6 +457,36 @@ export default function HwMarkdownPage({ project = false }) {
                       macSlugPrefix="hw1-dbg-mac-"
                     />
                     <HandoutMarkdown markdown={hw1Split.suffix} mdComponents={mdComponents} />
+                  </>
+                ) : hw5Split ? (
+                  <>
+                    <HandoutMarkdown markdown={hw5Split.preamble} mdComponents={mdComponents} />
+                    <HwOsPick
+                      groupLabel="Install Git"
+                      windowsSummary="Windows"
+                      macSummary="Mac"
+                      windowsMd={hw5Split.gitWindows}
+                      macMd={hw5Split.gitMac}
+                      mdComponents={mdComponents}
+                      windowsSlugPrefix="hw5-git-win-"
+                      macSlugPrefix="hw5-git-mac-"
+                      windowsPanelId="hw5-git-win"
+                      macPanelId="hw5-git-mac"
+                    />
+                    <HandoutMarkdown markdown={hw5Split.beforeSsh} mdComponents={mdComponents} />
+                    <HwOsPick
+                      groupLabel="Create an SSH key"
+                      windowsSummary="Windows"
+                      macSummary="Mac"
+                      windowsMd={hw5Split.sshWindows}
+                      macMd={hw5Split.sshMac}
+                      mdComponents={mdComponents}
+                      windowsSlugPrefix="hw5-ssh-win-"
+                      macSlugPrefix="hw5-ssh-mac-"
+                      windowsPanelId="hw5-ssh-win"
+                      macPanelId="hw5-ssh-mac"
+                    />
+                    <HandoutMarkdown markdown={hw5Split.suffix} mdComponents={mdComponents} />
                   </>
                 ) : (
                   <HandoutMarkdown markdown={markdown} mdComponents={mdComponents} />

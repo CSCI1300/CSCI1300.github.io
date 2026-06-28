@@ -354,12 +354,12 @@ git push
 
 <<<HW_ACTION>>>
 
-Submit **Part A** on **[Gradescope](https://www.gradescope.com/courses/1314704)**. Open the **Homework 5 (A)** item and:
+Submit **Part A** on **[Gradescope](https://www.gradescope.com/courses/1314704)**. Open the **Homework 5 (A)** item and submit **only the link** to your **`csci1300_hw5`** GitHub repository.
 
-- Upload your two source files (names must match **exactly**; no screenshots):
-  - **`hw5A1.cpp`** — Vault funding total (array + function returning a sum)
-  - **`hw5A2.cpp`** — Vault savings plan (while loop + function returning a count)
-- Make sure both files have been **committed and pushed** to your `hw5-version-control` GitHub repository.
+Push these two source files to GitHub (names must match **exactly**; do not upload them on Gradescope):
+
+- **`hw5A1.cpp`** — Vault funding total (array + function returning a sum)
+- **`hw5A2.cpp`** — Vault savings plan (while loop + function returning a count)
 
 During recitation, be ready to show your TA your GitHub repository page with both files pushed.
 
