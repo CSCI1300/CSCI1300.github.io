@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
+  CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS,
   HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS,
   HOMEWORK_HANDOUT_PREVIEW_ACCESS,
   OVERVIEW,
@@ -225,6 +226,10 @@ export default function HwMarkdownPage({ project = false, projectCheckpoint = fa
   const valid = project || checkpoint != null || num != null;
   const location = useLocation();
   const handoutLinkEnabled = useMemo(() => new Set(HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS), []);
+  const checkpointLinkEnabled = useMemo(
+    () => new Set(CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS),
+    [],
+  );
 
   const accessParam = useMemo(() => {
     const q = new URLSearchParams(location.search);
@@ -233,8 +238,14 @@ export default function HwMarkdownPage({ project = false, projectCheckpoint = fa
 
   const handoutUnlocked = useMemo(() => {
     if (!valid) return false;
-    if (project || checkpoint != null) {
+    if (project) {
       if (PROJECT_HANDOUT_LINK_ENABLED) return true;
+      const secret = PROJECT_HANDOUT_PREVIEW_ACCESS;
+      if (typeof secret !== "string" || secret.length === 0) return false;
+      return accessParam === secret;
+    }
+    if (checkpoint != null) {
+      if (checkpointLinkEnabled.has(checkpoint)) return true;
       const secret = PROJECT_HANDOUT_PREVIEW_ACCESS;
       if (typeof secret !== "string" || secret.length === 0) return false;
       return accessParam === secret;
@@ -244,7 +255,7 @@ export default function HwMarkdownPage({ project = false, projectCheckpoint = fa
     const secret = HOMEWORK_HANDOUT_PREVIEW_ACCESS[num];
     if (typeof secret !== "string" || secret.length === 0) return false;
     return accessParam === secret;
-  }, [valid, project, checkpoint, num, handoutLinkEnabled, accessParam]);
+  }, [valid, project, checkpoint, num, handoutLinkEnabled, checkpointLinkEnabled, accessParam]);
 
   const tocTree = useMemo(() => {
     if (phase !== "ready" || !markdown) return [];

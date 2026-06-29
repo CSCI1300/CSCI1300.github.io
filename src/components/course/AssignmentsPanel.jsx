@@ -6,6 +6,7 @@ import {
   EXTRA_CREDIT_NOTE,
   GRADE_BREAKDOWN,
   GRADING_INTERVIEWS_PLACEHOLDER,
+  CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS,
   HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS,
   LATE_POLICY_SEGMENTS,
   LETTER_CUTOFFS,
@@ -45,6 +46,7 @@ export default function AssignmentsPanel() {
   const homeworkRows = buildHomeworkRows(ASSIGNMENT_SCHEDULE);
   const majorDateRows = buildMajorDateRows(ASSIGNMENT_SCHEDULE);
   const handoutLinkEnabled = new Set(HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS);
+  const checkpointLinkEnabled = new Set(CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS);
 
   return (
     <div className="content-panel">
@@ -127,8 +129,9 @@ export default function AssignmentsPanel() {
               {majorDateRows.map((row) => {
                 const checkpointNum = getCheckpointNumber(row.name);
                 const projectLink =
-                  PROJECT_HANDOUT_LINK_ENABLED &&
-                  (row.name === "Final project" || checkpointNum != null);
+                  row.name === "Final project"
+                    ? PROJECT_HANDOUT_LINK_ENABLED
+                    : checkpointNum != null && checkpointLinkEnabled.has(checkpointNum);
                 const projectHref =
                   row.name === "Final project" ? "/project" : `/project/checkpoint/${checkpointNum}`;
 
@@ -139,6 +142,13 @@ export default function AssignmentsPanel() {
                       <Link className="c1300-lecture-link" to={projectHref}>
                         {row.name}
                       </Link>
+                    ) : checkpointNum != null ? (
+                      <span
+                        className="c1300-hw-handout-muted"
+                        title="Assignment not released yet"
+                      >
+                        {row.name}
+                      </span>
                     ) : (
                       row.name
                     )}
