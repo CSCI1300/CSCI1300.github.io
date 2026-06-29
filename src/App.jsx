@@ -24,6 +24,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Csci1300Page />} />
       <Route path="/project" element={<HwMarkdownPage project />} />
+      <Route path="/project/checkpoint/:checkpointNum" element={<HwMarkdownPage projectCheckpoint />} />
       <Route path="/hw/:hwNum" element={<HwMarkdownPage />} />
       <Route path="/hw/:hwNum/:part" element={<HwLegacyPartRedirect />} />
       <Route path="*" element={<Navigate to="/" replace />} />

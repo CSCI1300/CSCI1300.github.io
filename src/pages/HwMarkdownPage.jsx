@@ -30,10 +30,24 @@ function handoutFileUrl(num) {
   return `${base}hw/hw${num}/hw${num}.md`;
 }
 
+function parseCheckpointNum(raw) {
+  if (raw == null || String(raw).trim() === "") return null;
+  const n = Number.parseInt(String(raw), 10);
+  if (!Number.isFinite(n) || n < 1 || n > 3) return null;
+  if (String(n) !== String(raw).trim()) return null;
+  return n;
+}
+
 function projectHandoutFileUrl() {
   let base = import.meta.env.BASE_URL || "/";
   if (!base.endsWith("/")) base += "/";
   return `${base}hw/project/final-proj.md`;
+}
+
+function projectCheckpointFileUrl(checkpointNum) {
+  let base = import.meta.env.BASE_URL || "/";
+  if (!base.endsWith("/")) base += "/";
+  return `${base}hw/project/checkpoint-${checkpointNum}.md`;
 }
 
 function HwHandoutLightbox({ src, alt, onClose }) {
@@ -197,14 +211,18 @@ function openHandoutHashTarget(hash) {
   el.closest("details")?.setAttribute("open", "");
 }
 
-export default function HwMarkdownPage({ project = false }) {
-  const { hwNum } = useParams();
-  const num = useMemo(() => (project ? null : parseHwNum(hwNum)), [project, hwNum]);
+export default function HwMarkdownPage({ project = false, projectCheckpoint = false }) {
+  const { hwNum, checkpointNum } = useParams();
+  const num = useMemo(() => (project || projectCheckpoint ? null : parseHwNum(hwNum)), [project, projectCheckpoint, hwNum]);
+  const checkpoint = useMemo(
+    () => (projectCheckpoint ? parseCheckpointNum(checkpointNum) : null),
+    [projectCheckpoint, checkpointNum],
+  );
   const [phase, setPhase] = useState("loading");
   const [markdown, setMarkdown] = useState("");
   const [lightbox, setLightbox] = useState(null);
 
-  const valid = project || num != null;
+  const valid = project || checkpoint != null || num != null;
   const location = useLocation();
   const handoutLinkEnabled = useMemo(() => new Set(HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS), []);
 
@@ -215,7 +233,7 @@ export default function HwMarkdownPage({ project = false }) {
 
   const handoutUnlocked = useMemo(() => {
     if (!valid) return false;
-    if (project) {
+    if (project || checkpoint != null) {
       if (PROJECT_HANDOUT_LINK_ENABLED) return true;
       const secret = PROJECT_HANDOUT_PREVIEW_ACCESS;
       if (typeof secret !== "string" || secret.length === 0) return false;
@@ -226,13 +244,13 @@ export default function HwMarkdownPage({ project = false }) {
     const secret = HOMEWORK_HANDOUT_PREVIEW_ACCESS[num];
     if (typeof secret !== "string" || secret.length === 0) return false;
     return accessParam === secret;
-  }, [valid, project, num, handoutLinkEnabled, accessParam]);
+  }, [valid, project, checkpoint, num, handoutLinkEnabled, accessParam]);
 
   const tocTree = useMemo(() => {
     if (phase !== "ready" || !markdown) return [];
-    if (project) return extractProjectHeadingToc(markdown);
+    if (project || checkpoint != null) return extractProjectHeadingToc(markdown);
     return extractHomeworkHeadingToc(markdown, num);
-  }, [markdown, phase, num, project]);
+  }, [markdown, phase, num, project, checkpoint]);
 
   const showRail = phase === "ready" && tocTree.length > 0;
 
@@ -261,9 +279,10 @@ export default function HwMarkdownPage({ project = false }) {
     }
 
     if (!handoutUnlocked) {
-      const secret = project
-        ? PROJECT_HANDOUT_PREVIEW_ACCESS
-        : (HOMEWORK_HANDOUT_PREVIEW_ACCESS[num] ?? "");
+      const secret =
+        project || checkpoint != null
+          ? PROJECT_HANDOUT_PREVIEW_ACCESS
+          : (HOMEWORK_HANDOUT_PREVIEW_ACCESS[num] ?? "");
       const previewConfigured = typeof secret === "string" && secret.length > 0;
       setPhase(previewConfigured ? "preview-locked" : "closed");
       setMarkdown("");
@@ -274,7 +293,13 @@ export default function HwMarkdownPage({ project = false }) {
     setPhase("loading");
     setMarkdown("");
 
-    fetch(project ? projectHandoutFileUrl() : handoutFileUrl(num))
+    fetch(
+      checkpoint != null
+        ? projectCheckpointFileUrl(checkpoint)
+        : project
+          ? projectHandoutFileUrl()
+          : handoutFileUrl(num),
+    )
       .then((res) => {
         if (!res.ok) throw new Error(res.status === 404 ? "not-found" : `http-${res.status}`);
         return res.text();
@@ -292,18 +317,26 @@ export default function HwMarkdownPage({ project = false }) {
     return () => {
       cancelled = true;
     };
-  }, [num, project, valid, handoutUnlocked, accessParam]);
+  }, [num, project, checkpoint, valid, handoutUnlocked, accessParam]);
 
   useEffect(() => {
     if (!valid) {
-      document.title = project ? `Final project · ${DEFAULT_TITLE}` : `Homework · ${DEFAULT_TITLE}`;
+      document.title = project
+        ? `Final project · ${DEFAULT_TITLE}`
+        : checkpoint != null
+          ? `Final project checkpoint ${checkpoint} · ${DEFAULT_TITLE}`
+          : `Homework · ${DEFAULT_TITLE}`;
       return;
     }
-    document.title = project ? `Final project · ${DEFAULT_TITLE}` : `Homework ${num} · ${DEFAULT_TITLE}`;
+    document.title = project
+      ? `Final project · ${DEFAULT_TITLE}`
+      : checkpoint != null
+        ? `Final project checkpoint ${checkpoint} · ${DEFAULT_TITLE}`
+        : `Homework ${num} · ${DEFAULT_TITLE}`;
     return () => {
       document.title = DEFAULT_TITLE;
     };
-  }, [num, project, valid]);
+  }, [num, project, checkpoint, valid]);
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
@@ -353,7 +386,13 @@ export default function HwMarkdownPage({ project = false }) {
     [setLightbox],
   );
 
-  const heading = project ? "Final project" : num != null ? `Homework ${num}` : "Homework handout";
+  const heading = project
+    ? "Final project"
+    : checkpoint != null
+      ? `Final project checkpoint ${checkpoint}`
+      : num != null
+        ? `Homework ${num}`
+        : "Homework handout";
 
   return (
     <div className={`c1300-hw-handout-page${showRail ? " c1300-hw-handout-page--with-rail" : ""}`}>
@@ -388,7 +427,7 @@ export default function HwMarkdownPage({ project = false }) {
 
         {valid && phase === "closed" && (
           <p className="c1300-hw-handout-lede" role="status">
-            {project
+            {project || checkpoint != null
               ? "The final project handout is not linked on the Assignments page yet."
               : "This homework handout is not linked on the Assignments page yet."}
           </p>
@@ -397,7 +436,7 @@ export default function HwMarkdownPage({ project = false }) {
         {valid && phase === "preview-locked" && (
           <div className="c1300-hw-preview-locked">
             <p className="c1300-hw-handout-lede" role="status">
-              {project
+              {project || checkpoint != null
                 ? "This project handout is hidden on the Assignments tab. Enter the access code to view it."
                 : "This handout is hidden on the Assignments tab. Enter the access code to view it."}
             </p>
@@ -412,7 +451,7 @@ export default function HwMarkdownPage({ project = false }) {
 
         {valid && phase === "not-found" && (
           <p className="c1300-hw-handout-lede" role="status">
-            {project
+            {project || checkpoint != null
               ? "This project handout is not posted yet. Check back after it is announced in class."
               : "This handout is not posted yet. Check back after it is announced in class, or confirm the homework number in the assignment schedule."}
           </p>

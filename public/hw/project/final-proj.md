@@ -1072,6 +1072,23 @@ For this project, you will use **GitHub** to track your work and submit your fin
 
 You are expected to create a GitHub repository for your project and regularly push your code as you work. Your GitHub repository should show the development of your project over time through multiple commits. Do not wait until the end to upload all of your code at once.
 
+### Project checkpoints
+
+Submit on Gradescope for each checkpoint (not source files):
+
+- Your **public GitHub repository link**
+- The **commit link** for the version you want graded (GitHub → **Commits** → open the commit → copy the page URL)
+
+Checkpoint handouts:
+
+- [Checkpoint 1 — Repository and README](/project/checkpoint/1) — due July 1, 2026
+- [Checkpoint 2 — Class skeleton and game loop](/project/checkpoint/2) — due July 8, 2026
+- [Checkpoint 3 — Major progress toward complete game](/project/checkpoint/3) — due July 12, 2026
+
+Checkpoint 3 is for progress; your interview is when the full requirements must be met.
+
+Use the **same repository** for all checkpoints and the final submission.
+
 Your final submission will be a link to your GitHub repository.
 
 Your repository should include:
@@ -1087,17 +1104,17 @@ Your repository should include:
   * any extra credit features you attempted
 * Clear commit history showing progress throughout the project
 
-Your final GitHub repository link should be submitted on Gradescope by the deadline.
+Your final GitHub repository link should be submitted on Gradescope by the deadline on **July 17**. This is your final code snapshot; **your grade is based on your interview**, not a separate autograder run after that date.
 
 ## Interview Grading
 
-This project will be graded through an **interview-style grading session** with a TA or instructor.
+This project will be graded through an **interview-style grading session** with a TA or instructor. Interviews are scheduled **July 13–17**.
 
 You will sign up for an interview slot using the link below:
 
 **Interview Sign-Up Link:** `[link to be added]`
 
-During your interview, you will run your program and walk through your code with the TA or instructor. You should be prepared to explain how your project works, how your classes are designed, and how your code implements the required game features.If you attempted any extra credit features, you may present them during your interview.
+Your game must be **complete when your interview begins** — not necessarily on July 13. You may keep working until the start of **your** signed-up slot. During the session, you will demo your program and walk through your code. You should be prepared to explain how your project works, how your classes are designed, and how your code implements the required game features. If you attempted any extra credit features, you may present them during your interview.
 
 ## Extra Credit Opportunities
 

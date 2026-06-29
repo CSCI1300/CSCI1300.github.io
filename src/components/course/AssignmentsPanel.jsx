@@ -32,6 +32,11 @@ function buildHomeworkRows(schedule) {
   return [...byHomework.values()].sort((a, b) => a.number - b.number);
 }
 
+function getCheckpointNumber(name) {
+  const match = name.match(/^(?:Final project )?checkpoint (\d+)$/i);
+  return match ? Number(match[1]) : null;
+}
+
 function buildMajorDateRows(schedule) {
   return schedule.filter((row) => !/^Homework\s+\d+\s+\(Part [AB]\)$/i.test(row.name));
 }
@@ -119,11 +124,19 @@ export default function AssignmentsPanel() {
               </tr>
             </thead>
             <tbody>
-              {majorDateRows.map((row) => (
+              {majorDateRows.map((row) => {
+                const checkpointNum = getCheckpointNumber(row.name);
+                const projectLink =
+                  PROJECT_HANDOUT_LINK_ENABLED &&
+                  (row.name === "Final project" || checkpointNum != null);
+                const projectHref =
+                  row.name === "Final project" ? "/project" : `/project/checkpoint/${checkpointNum}`;
+
+                return (
                 <tr key={row.name}>
                   <td>
-                    {row.name === "Final project" && PROJECT_HANDOUT_LINK_ENABLED ? (
-                      <Link className="c1300-lecture-link" to="/project">
+                    {projectLink ? (
+                      <Link className="c1300-lecture-link" to={projectHref}>
                         {row.name}
                       </Link>
                     ) : (
@@ -133,7 +146,8 @@ export default function AssignmentsPanel() {
                   <td>{row.dueIso ? formatAssignmentDue(row.dueIso) : <span className="c1300-lecture-tba">TBA</span>}</td>
                   <td className="c1300-assign-note">{row.note ?? "—"}</td>
                 </tr>
-              ))}
+              );
+              })}
             </tbody>
           </table>
         </div>
