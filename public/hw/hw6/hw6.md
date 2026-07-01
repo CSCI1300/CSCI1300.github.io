@@ -1,7 +1,5 @@
 # Homework 6
 
-Handout for **Homework 6** will be filled in before this assignment opens.
-
 ## Part A
 
 This lab introduces the biggest new idea of the course: classes and objects. Up until now, your data (variables, arrays, vectors) and your behavior (functions) have lived separately. A class lets you bundle them together: a single type that carries its own data and the functions that operate on that data. You will use classes constantly in your final project, so this week we start building that muscle.
