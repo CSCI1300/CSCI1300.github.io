@@ -14,16 +14,16 @@ Here is a small class that models a single villager. Read it top to bottom:
  
 ```cpp
 class Villager {
-private:
-    string name;     // member variables: each Villager has its own
-    int friendship;
- 
-public:
-    string getName() {           // a member function (this one is a getter)
-        return name;
-    }
-    int getFriendship() {
-        return friendship;
+    private:
+        string name;     // member variables: each Villager has its own
+        int friendship;
+    
+    public:
+        string getName() {           // a member function (this one is a getter)
+            return name;
+        }
+        int getFriendship() {
+            return friendship;
     }
 };   // <-- a class definition ends with a semicolon!
 ```
@@ -39,18 +39,18 @@ How do the member variables get their starting values? Through a **constructor**
  
 ```cpp
 class Villager {
-private:
-    string name;
-    int friendship;
- 
-public:
-    Villager(string n, int f) {   // constructor
-        name = n;
-        friendship = f;
-    }
- 
-    string getName() { return name; }
-    int getFriendship() { return friendship; }
+    private:
+        string name;
+        int friendship;
+    
+    public:
+        Villager(string n, int f) {   // constructor
+            name = n;
+            friendship = f;
+        }
+    
+        string getName() { return name; }
+        int getFriendship() { return friendship; }
 };
 ```
  
