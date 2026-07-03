@@ -335,9 +335,9 @@ Every constructor and mutator below receives untrusted input. Use these exact ru
 
 If a constructor receives an invalid value, store the exact default value listed in that class's constructor section instead of the invalid value.
 
-#### Mutator rules
+#### Mutator (setter) rules
 
-A mutator that adds to existing state either applies the change and returns `true`, or rejects the change, leaves the object unchanged, and returns `false`.
+A mutator that adds to existing state either applies the change and returns `true`, or rejects the change, leaves the object unchanged, and returns `false`. Mutators are also often called "setters".
 
 For example, if a cashier already has `10` logged hours, then `logHours(-3)` returns `false` and the cashier still has `10` logged hours.
 
@@ -382,7 +382,7 @@ private:
     static int nextID;
 
 public:
-    Employee(string name, double hourlyWage);
+    Employee(string n, double hW);
     bool logHours(int hours);
     double calculatePay();
     int getID();
@@ -433,7 +433,7 @@ private:
     double tipsCollected;
 
 public:
-    Cashier(string name, double hourlyWage);
+    Cashier(string n, double hW);
     bool logShift(int items);
     bool addTips(double amount);
     double calculatePay();
@@ -475,7 +475,7 @@ private:
     int teamSize;
 
 public:
-    Manager(string name, double hourlyWage, int teamSize);
+    Manager(string n, double hW, int tS);
     bool awardBonus(double amount);
     double calculatePay();
     bool qualifiesForPromotion();
@@ -483,7 +483,7 @@ public:
 };
 ```
 
-**Constructor.** Calls the `Employee` constructor. This manager starts with `0.0` bonus awarded. If `teamSize` is negative, store `0`.
+**Constructor.** Calls the `Employee` constructor. This manager starts with `0.0` bonus awarded. If `tS` is negative, store `0`.
 
 **`awardBonus(double amount)`.** If `amount` is negative, return `false` and leave `bonus` unchanged. Otherwise, add `amount` to `bonus` and return `true`.
 
