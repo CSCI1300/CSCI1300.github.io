@@ -628,7 +628,7 @@ This class does **not** follow the Validation Policy above; you may assume `plan
 
 `P` is 1-indexed, counted within whichever string actually extends to that position. If there are no discrepancies at all, `detectDiscrepancies()` returns an empty vector.
 
-**Examples:**
+**Examples:** 
 
 ```cpp
 ScheduleAudit a1("MEM", "AAMEMAA");
