@@ -161,7 +161,7 @@ export const PROJECT_HANDOUT_PREVIEW_ACCESS = import.meta.env.VITE_PROJECT_HANDO
  * Checkpoint numbers that show a clickable handout link on the Assignments tab. Others show plain
  * “Checkpoint n” (not a link). Add numbers here to publish each checkpoint handout.
  */
-export const CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS = [1];
+export const CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS = [1, 2, 3];
 
 /** Each homework N in this list should have a handout file `public/hw/hw{N}/hw{N}.md` (same N as in "Homework N (Part …)"). */
 export const ASSIGNMENT_SCHEDULE = [
