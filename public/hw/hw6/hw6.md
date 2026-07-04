@@ -392,15 +392,41 @@ public:
 };
 ```
 
-**Constructor.** `hoursWorked` starts at `0`. If `name` is empty, store `"Unknown"`. If `hourlyWage` is negative, store `0.0`.
+**Constructor.** `hoursWorked` starts at `0`. If `name` is empty, store `"Unknown"`. If `hourlyWage` is negative, store `0.0`. Each new employee also needs a unique ID — see **Employee IDs** below.
 
-**Employee IDs.** `nextID` is shared across *every* `Employee`, `Cashier`, and `Manager` ever constructed; it does not reset per type. The first employee created anywhere in the program gets ID `1000`; every one after that gets the next integer, in construction order.
+#### Employee IDs and `static` member variables
 
-Because `nextID` is shared by all employees, it must be declared as `static` in `Employee.h`. In `Employee.cpp`, define and initialize it once:
+Every employee needs a unique `employeeID`, but the *counter* that hands out those IDs should not belong to any one employee. If `nextID` were a normal member variable like `name` or `hoursWorked`, every object would get its own copy, and they could not share a single running count.
+
+A **`static` member variable** belongs to the **class as a whole**, not to any single object. There is only one `nextID` in the entire program, shared by every `Employee`, `Cashier`, and `Manager` ever constructed. It does not reset per type. The first employee created anywhere gets ID `1000`; every one after that gets the next integer, in construction order.
+
+In your constructor (in `Employee.cpp`), use `nextID` like this: copy its current value into `employeeID`, then increment `nextID` so the next employee gets the next number.
+
+```cpp
+Employee::Employee(string n, double hW) {
+    // ... set name, hourlyWage, hoursWorked ...
+    employeeID = nextID;
+    nextID++;
+}
+```
+
+**Where to put `nextID`:** because it is a `static` data member, you declare it in one file and define it in another.
+
+1. **In `Employee.h`** , inside the class, alongside the other `private:` members, add the declaration:
+
+```cpp
+static int nextID;
+```
+
+This tells the compiler the variable exists. It does **not** allocate storage or set a starting value.
+
+2. **In `Employee.cpp`** , at file scope (outside any function), define and initialize it **once**:
 
 ```cpp
 int Employee::nextID = 1000;
 ```
+
+This is where the single shared copy actually lives. Do not put this line in the header, and do not repeat it in `Cashier.cpp` or `Manager.cpp` — `Cashier` and `Manager` inherit `nextID` from `Employee`, but only `Employee.cpp` owns the definition.
 
 Example:
 
