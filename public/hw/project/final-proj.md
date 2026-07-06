@@ -1112,9 +1112,13 @@ This project will be graded through an **interview-style grading session** with 
 
 You will sign up for an interview slot using the link below:
 
-**Interview Sign-Up Link:** `[link to be added]`
+**Interview Sign-Up Link:** [Interview sign-up sheet](https://o365coloradoedu-my.sharepoint.com/:x:/g/personal/zaka5614_colorado_edu/IQCoz0203VaETpD6keVFTO-GAQwvIbj4nljUFeBlVLAcqk4?e=3pwIcN)
 
-Your game must be **complete when your interview begins** — not necessarily on July 13. You may keep working until the start of **your** signed-up slot. During the session, you will demo your program and walk through your code. You should be prepared to explain how your project works, how your classes are designed, and how your code implements the required game features. If you attempted any extra credit features, you may present them during your interview.
+Sign-up closes **Friday, July 11 at 11:59 PM Mountain Time**. Add your name only to an **open** slot. Do not overwrite or erase another student's name.
+
+If you miss your scheduled interview, you will receive a **0** on the final project.
+
+Your game must be **complete when your interview begins**. You may keep working until the start of **your** signed-up slot. During the session, you will demo your program and walk through your code. You should be prepared to explain how your project works, how your classes are designed, and how your code implements the required game features. If you attempted any extra credit features, you may present them during your interview.
 
 ## Extra Credit Opportunities
 

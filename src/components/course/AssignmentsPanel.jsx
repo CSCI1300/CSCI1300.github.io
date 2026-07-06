@@ -5,7 +5,7 @@ import {
   ASSIGNMENTS,
   EXTRA_CREDIT_NOTE,
   GRADE_BREAKDOWN,
-  GRADING_INTERVIEWS_PLACEHOLDER,
+  GRADING_INTERVIEWS_PARTS,
   CHECKPOINT_HANDOUT_LINK_ENABLED_NUMBERS,
   HOMEWORK_HANDOUT_LINK_ENABLED_NUMBERS,
   LATE_POLICY_SEGMENTS,
@@ -194,7 +194,7 @@ export default function AssignmentsPanel() {
         </section>
         <section className="c1300-card" aria-labelledby="interview">
           <h2 id="interview">Grading interviews</h2>
-          <p>{GRADING_INTERVIEWS_PLACEHOLDER}</p>
+          <p>{renderInlineParts(GRADING_INTERVIEWS_PARTS)}</p>
         </section>
       </div>
 

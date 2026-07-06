@@ -279,7 +279,14 @@ export const LATE_POLICY_SEGMENTS = [
   " of the on-time score. After that, late work needs prior instructor approval.",
 ];
 
-export const GRADING_INTERVIEWS_PLACEHOLDER = "[TBA]";
+export const INTERVIEW_SIGNUP_URL =
+  "https://o365coloradoedu-my.sharepoint.com/:x:/g/personal/zaka5614_colorado_edu/IQCoz0203VaETpD6keVFTO-GAQwvIbj4nljUFeBlVLAcqk4?e=3pwIcN";
+
+export const GRADING_INTERVIEWS_PARTS = [
+  "Final project grading uses interview sessions July 15-17. Sign up for a slot on the ",
+  { link: { href: INTERVIEW_SIGNUP_URL, label: "interview sign-up sheet" } },
+  ". Your game must be complete when your interview begins.",
+];
 
 export const EXTRA_CREDIT_NOTE = "Extra credit may be offered during the term.";
 
