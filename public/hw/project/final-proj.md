@@ -1064,6 +1064,7 @@ A minimum complete version of the project should include:
 - A JojaMart interaction or Joja shortcut system
 - A game loop
 - A win/loss condition
+- Comments throughout the project explaining important parts of your code
 
 
 ## Submission Requirements
