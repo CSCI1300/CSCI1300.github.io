@@ -1,0 +1,4 @@
+Wood 5 2.50
+Copper 20 4.00
+Battery 3 12.00
+Coal 50 1.25
