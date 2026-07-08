@@ -52,7 +52,7 @@ Type:
 Value:
 ```
 
-Expected output (with sample inputs: Iron, Rare, 50, then Gold, Precious, 100):
+Expected output (with sample inputs: Iron, Rare, 50, Gold, Precious, 100):
 
 ```text
 Enter an ore name: Iron
@@ -235,32 +235,72 @@ You've already covered this in lecture, so here's just the syntax you'll need.
 **Reading:**
 
 ```cpp
-ifstream fin("warehouse.txt");
-if (!fin.is_open()) {
+ifstream inFile("warehouse.txt");
+if (!inFile.is_open()) {
     cout << "Error: could not open warehouse.txt" << endl;
     return 1;
 }
 
+string line;
 string name;
 int quantity;
 double price;
-while (fin >> name >> quantity >> price) {
-    // one line's worth of values is now in name, quantity, price
+while (getline(inFile, line)) {
+    // Input handling logic
 }
-fin.close();
+inFile.close();
 ```
 
-`fin >> a >> b >> c` behaves just like `cin >> a >> b >> c`, except it pulls from the file instead of the keyboard. Used as the condition of a `while` loop, it returns `false` once there's nothing left to read, so the loop naturally stops at the end of the file.
 
 **Writing:**
 
 ```cpp
-ofstream fout("audit_report.txt");
-fout << "Total Inventory Value: $" << total << endl;
-fout.close();
+ofstream outFile("audit_report.txt");
+outFile << "Total Inventory Value: $" << total << endl;
+outFile.close();
 ```
 
-`fout <<` behaves just like `cout <<`, except it writes to the file instead of the screen.
+### Splitting a Line with `.find()` and `.substr()`
+
+Once you have a full line as a `string` (via `getline(inFile, line)`), you need to pull the three space-separated values back out of it.
+
+**`.find(target, start)`** searches a string for `target` and returns the **index** where it starts. Search starts at index `0` by default, but you can pass a second argument to start searching partway through the string which can be useful once you've already found the first space and want the *next* one.
+
+```cpp
+string line = "Copper 20 4.00";
+int firstSpace = line.find(' ');        // 6 (index of the space after "Copper")
+```
+
+**`.substr(start, length)`** returns a **new string** containing `length` characters beginning at index `start`. If you leave off `length`, it grabs everything from `start` to the end of the string.
+
+```cpp
+string word = line.substr(0, 6);        // "Copper"  (6 characters starting at index 0)
+string rest = line.substr(7);           // "20 4.00" (everything from index 7 onward)
+```
+
+Putting those together to split a full line into its three fields:
+
+```cpp
+string line;
+getline(inFile, line);
+
+int space1 = line.find(' ');
+string name = line.substr(0, space1);
+
+int space2 = line.find(' ', space1 + 1);          // start searching *after* the first space
+string quantityStr = line.substr(space1 + 1, space2 - space1 - 1);
+string priceStr = line.substr(space2 + 1);
+```
+
+At this point `quantityStr` and `priceStr` are still `string`s (e.g. `"20"` and `"4.00"`), not numbers. Two conversion functions turn them into the types you actually need:
+
+- **`stoi(s)`** — converts a `string` to an `int`.
+- **`stod(s)`** — converts a `string` to a `double`.
+
+```cpp
+int quantity = stoi(quantityStr);
+double price = stod(priceStr);
+```
 
 ---
 
