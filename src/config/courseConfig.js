@@ -280,7 +280,7 @@ export const LATE_POLICY_SEGMENTS = [
 ];
 
 export const INTERVIEW_SIGNUP_URL =
-  "https://o365coloradoedu-my.sharepoint.com/:x:/g/personal/zaka5614_colorado_edu/IQCoz0203VaETpD6keVFTO-GAQwvIbj4nljUFeBlVLAcqk4?e=3pwIcN";
+  "https://o365coloradoedu-my.sharepoint.com/:x:/g/personal/zaka5614_colorado_edu/IQCoz0203VaETpD6keVFTO-GASV0BCYfiknrsKEs5RAn3LI?e=ECBnA6";
 
 export const GRADING_INTERVIEWS_PARTS = [
   "Final project grading uses interview sessions July 15-17. Sign up for a slot on the ",
