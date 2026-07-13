@@ -207,6 +207,8 @@ Submit **Part A** on **[Gradescope](https://www.gradescope.com/courses/1314704)*
 ## Part B
 ---
 
+**Download:** [`warehouse.txt`](/hw/hw7/warehouse.txt): place this file in the same folder as your `hw7b.cpp` program.
+
 # How to Write This Program
 
 For this assignment, you will write one complete C++ program in a file named:
@@ -306,7 +308,7 @@ double price = stod(priceStr);
 
 ### The Task — `hw7b.cpp`
 
-**Input file:** A file named `warehouse.txt` is provided with this assignment — download it and place it in the same folder as your program. Each line has three values separated by spaces: a one-word product name, an integer quantity, and a decimal price.
+**Input file:** [`warehouse.txt`](/hw/hw7/warehouse.txt) is provided with this assignment. download it and place it in the same folder as your program. Each line has three values separated by spaces: a one-word product name, an integer quantity, and a decimal price.
 
 ```text
 Wood 5 2.50
